@@ -129,12 +129,6 @@ class NaiveCube(object):
 
         self.set_cube(configuration)
 
-    def to_cubie_cube(self):
-        pass
-
-    def from_cubie_cube(self, fc):
-        pass
-
     @staticmethod
     def _from_facelet_to_color(configuration):
         return configuration.replace('D', 'w').replace('U', 'y').replace('R', 'g').replace('B', 'o').replace('F', 'r').replace('L', 'b')
