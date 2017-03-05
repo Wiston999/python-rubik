@@ -9,9 +9,10 @@ class WhiteCrossSolver(Solver):
         # Use sorted edges notation
         for edge in ['DF', 'DR', 'DL', 'BD']:
             cubie = self.cube.cubies[edge]
-            center_color = self.cube.cubies[edge.strip(
-                'D')].facings[edge.strip('D')]
+            center_color = self.cube.cubies[edge.strip('D')].facings[edge.strip('D')]
             cubie_position = self.cube.search_by_colors('W', str(center_color))
-            print cubie_position
+            # If cubie not in position
+            if cubie_position != edge:
+                
 
         return solution

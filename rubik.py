@@ -39,7 +39,7 @@ if __name__ == '__main__':
             print "SOLVED!"
         elif m.upper() == 'Q':
             print "Bye"
-            p.stop()
+            # p.stop()
             break
         else:
             print "Invalid move, try one of R, L, B, F, U, D, SH, S"
