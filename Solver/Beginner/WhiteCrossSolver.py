@@ -105,18 +105,14 @@ class WhiteCrossSolver(Solver):
                     step_solution.append("B'")
                     step_solution.append("U'")
                     step_solution.append("B")
-            
+
             print "Applying", step_solution
             for m in step_solution:
                 self.cube.move(Move(m))
             solution.extend(step_solution)
 
             # Second goal is to place the cubie on the top over its place
-            print self.cube.cubies['FU'].facings['U'] != 'W'
-            print self.cube.cubies['FU'].facings['F'] != color
             while self.cube.cubies['FU'].facings['U'] != 'W' and self.cube.cubies['FU'].facings['F'] != color:
-                print "FACING", self.cube.cubies['FU'], self.cube.cubies['FU'].facings['U'], self.cube.cubies['FU'].facings['F']
-                print "Moving U"
                 solution.append('U')
                 self.cube.move(Move('U'))
             # Third goal will be a F2 movement
