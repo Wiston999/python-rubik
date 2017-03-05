@@ -13,6 +13,6 @@ class WhiteCrossSolver(Solver):
             cubie_position = self.cube.search_by_colors('W', str(center_color))
             # If cubie not in position
             if cubie_position != edge:
-                
+                pass
 
         return solution
