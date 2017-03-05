@@ -104,6 +104,7 @@ class WhiteCrossSolver(Solver):
                         solution.append("B'")
                         solution.append("U'")
                         solution.append("B")
+                print solution
                 # Second goal is to place the cubie on the top over its place
 
                 # Third goal will be a F2 movement
