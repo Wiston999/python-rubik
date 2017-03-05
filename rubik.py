@@ -22,12 +22,12 @@ if __name__ == '__main__':
 
     while True:
         m = raw_input('Input move: ')
-        if re.match("[RLBFUD]'?2?", m, re.I):
+        if re.match("[RLBFUDXYZ]'?2?", m, re.I):
             c.move(Move(m))
             tp.pprint()
         elif m.upper() == 'SH':
             print "Shuffling"
-            print c.shuffle()
+            c.shuffle()
         elif m.upper() == 'S':
             print "Solving"
             solution = solver.solution()
@@ -42,4 +42,4 @@ if __name__ == '__main__':
             # p.stop()
             break
         else:
-            print "Invalid move, try one of R, L, B, F, U, D, SH, S"
+            print "Invalid move, try one of R, L, B, F, U, D, X, Y, Z, SH, S"

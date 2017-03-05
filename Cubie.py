@@ -20,7 +20,19 @@ class Sticker(object):
     def __repr__(self):
         return self.color.upper()
 
+    def __str__(self):
+        return self.__repr__()
 
+    def __eq__(self, o):
+        if isinstance(o, basestring):
+            return o.upper() == self.color.upper()
+        elif isintance(o, Sticker):
+            return o.color.upper() == self.color.upper()
+        else:
+            raise TypeError("Don't know how to compare Sticker with %s" % o.__class__.__name__)
+    
+    def __ne__(self, o):
+        return not(o == self)
 class Cubie(object):
     FACINGS = 'FBRLUD'
     COLORS = 'ROGBYW'
