@@ -103,9 +103,9 @@ class Cube(object):
         ('FR', 'R'), ('R', 'R'), ('BR', 'R'),
         ('FRD', 'R'), ('DR', 'R'), ('BRD', 'R'),
         # BACK
-        ('BLU', 'B'), ('BU', 'B'), ('BRU', 'B'),
-        ('BL', 'B'), ('B', 'B'), ('BR', 'B'),
-        ('BLD', 'B'), ('BD', 'B'), ('BRD', 'B'),
+        ('BRU', 'B'), ('BU', 'B'), ('BLU', 'B'),
+        ('BR', 'B'), ('B', 'B'), ('BL', 'B'),
+        ('BRD', 'B'), ('BD', 'B'), ('BLD', 'B'),
         # DOWN
         ('FLD', 'D'), ('FD', 'D'), ('FRD', 'D'),
         ('DL', 'D'), ('D', 'D'), ('DR', 'D'),
@@ -253,7 +253,7 @@ class Cube(object):
         self.__reset_cube()
         random.seed(seed)
         sequence = []
-        for i in range(random.randint(10, 15)):
+        for i in range(random.randint(100, 150)):
             m = Move(random.choice(Cubie.FACINGS) + random.choice(" 2'"))
             sequence.append(m)
             self.move(m)
