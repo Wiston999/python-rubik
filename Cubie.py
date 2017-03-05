@@ -260,6 +260,13 @@ class Cube(object):
 
         return sequence
 
+    def search_by_colors(self, *args):
+        for key, cubie in self.cubies.items():
+            cubie_colors = tuple([str(c) for c in cubie.facings.values()])
+            if args == cubie_colors:
+                return key
+        return None
+
 
 # Build Cube Axis MOVES
 Cube.MOVES['X'].extend(Cube.move_changes(Move("R")))

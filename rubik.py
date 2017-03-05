@@ -12,14 +12,13 @@ from Move import Move
 
 if __name__ == '__main__':
     c = Cube(3)
-    p = OpenGLPrinter(c)
+    # p = OpenGLPrinter(c)
     tp = TtyPrinter(c, True)
-    # c.set_cube('owyryyygwwgbrbbbbgryrrroygbbrrggbwbrgogwowgyyowoywooow')
-    # c.shuffle()
+    c.shuffle()
     tp.pprint()
-    p.pprint()
+    # p.pprint()
 
-    solver = KociembaSolver(c)
+    solver = WhiteCrossSolver(c)
 
     while True:
         m = raw_input('Input move: ')
