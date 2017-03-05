@@ -33,7 +33,7 @@ if __name__ == '__main__':
             solution = solver.solution()
             print "Solution:", ' '.join(solution)
             for m in solution:
-                time.sleep(1)
+                # time.sleep(1)
                 c.move(Move(m))
             tp.pprint()
             print "SOLVED!"
