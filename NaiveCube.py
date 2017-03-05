@@ -7,7 +7,7 @@ from CubieCube import CubieCube
 from CoordCube import CoordCube
 
 
-class Cube(object):
+class NaiveCube(object):
     DEFAULT_COLORS = {
         'F': 'r',
         'B': 'o',
@@ -79,21 +79,21 @@ class Cube(object):
         }
 
         self.MOVE_FUNCTIONS = {
-            'F': [Cube.reverseLine, Cube.straightLine, Cube.reverseLine, Cube.straightLine],
-            'B': [Cube.straightLine, Cube.reverseLine, Cube.straightLine, Cube.reverseLine],
-            'L': [Cube.reverseLine, Cube.straightLine, Cube.straightLine, Cube.reverseLine],
-            'R': [Cube.straightLine, Cube.reverseLine, Cube.reverseLine, Cube.straightLine],
-            'U': [Cube.straightLine, Cube.straightLine, Cube.straightLine, Cube.straightLine],
-            'D': [Cube.straightLine, Cube.straightLine, Cube.straightLine, Cube.straightLine]
+            'F': [NaiveCube.reverseLine,  NaiveCube.straightLine, NaiveCube.reverseLine,  NaiveCube.straightLine],
+            'B': [NaiveCube.straightLine, NaiveCube.reverseLine,  NaiveCube.straightLine, NaiveCube.reverseLine],
+            'L': [NaiveCube.reverseLine,  NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.reverseLine],
+            'R': [NaiveCube.straightLine, NaiveCube.reverseLine,  NaiveCube.reverseLine,  NaiveCube.straightLine],
+            'U': [NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine],
+            'D': [NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine]
         }
 
         self.REVERSE_MOVE_FUNCTIONS = {
-            'F': [Cube.straightLine, Cube.reverseLine, Cube.straightLine, Cube.reverseLine],
-            'B': [Cube.reverseLine, Cube.straightLine, Cube.reverseLine, Cube.straightLine],
-            'L': [Cube.straightLine, Cube.straightLine, Cube.reverseLine, Cube.reverseLine],
-            'R': [Cube.reverseLine, Cube.reverseLine, Cube.straightLine, Cube.straightLine],
-            'U': [Cube.straightLine, Cube.straightLine, Cube.straightLine, Cube.straightLine],
-            'D': [Cube.straightLine, Cube.straightLine, Cube.straightLine, Cube.straightLine]
+            'F': [NaiveCube.straightLine, NaiveCube.reverseLine,  NaiveCube.straightLine, NaiveCube.reverseLine],
+            'B': [NaiveCube.reverseLine,  NaiveCube.straightLine, NaiveCube.reverseLine,  NaiveCube.straightLine],
+            'L': [NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.reverseLine,  NaiveCube.reverseLine],
+            'R': [NaiveCube.reverseLine,  NaiveCube.reverseLine,  NaiveCube.straightLine, NaiveCube.straightLine],
+            'U': [NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine],
+            'D': [NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine, NaiveCube.straightLine]
         }
 
         self.solved()

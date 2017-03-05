@@ -1,4 +1,3 @@
-
 from Solver.Kociemba.Enums import Corner, Edge
 
 class DupedEdge(Exception): pass
