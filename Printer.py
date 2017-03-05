@@ -5,7 +5,6 @@ try:
 except ImportError as e:
     print "Unable to open OpenGL, OpenGLPrinter won't be available:", e
 
-from Cube import Cube
 import time
 import math
 import threading
@@ -25,7 +24,15 @@ class bcolors:
 
 class Printer(object):
     def __init__(self, cube):
-        self.cube = cube
+        self._cube = cube
+
+    @property
+    def cube(self):
+        '''
+        Initial implementation worked with NaiveCube, this hack the whole class accesses to self.cube
+        to work the same way as before
+        '''
+        return self._cube.to_naive_cube()
 
     def pprint(self):
         pass

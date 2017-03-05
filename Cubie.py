@@ -4,6 +4,7 @@ Cubie: Implements a Cube and movements at Cubie level
 import random
 from copy import deepcopy
 from Move import Move
+from NaiveCube import NaiveCube
 
 
 class Sticker(object):
@@ -183,8 +184,10 @@ class Cube(object):
         ]
     }
 
-    def __init__(self):
+    def __init__(self, size=3):
         self.__reset_cube()
+        # It currently has no sense
+        self.size = size
 
     def __reset_cube(self):
         self.cubies = {}
@@ -205,16 +208,20 @@ class Cube(object):
     def __t_key(key):
         return ''.join(sorted(key))
 
-    def from_naive_cube(self, configuration):
-        for i, color in enumerate(configuration):
+    def from_naive_cube(self, cube):
+        for i, color in enumerate(cube.get_cube()):
             cube_map = self.CUBE_MAP[i]
+            cube_map[0] = self.__t_key(cube_map[0])
             self.cubies[cube_map[0]].facings[cube_map[1]] = Sticker(color)
 
     def to_naive_cube(self):
         configuration = ''
         for cubie, face in self.CUBE_MAP:
+            cubie = self.__t_key(cubie)
             configuration += self.cubies[cubie].facings[face].color
-        return configuration
+        nc = NaiveCube(self.size)
+        nc.set_cube(configuration)
+        return nc
 
     @staticmethod
     def move_changes(move):
@@ -224,8 +231,6 @@ class Cube(object):
         if move.counterclockwise:
             changes = [(c1, c0) for c0, c1 in changes]
 
-        if move.double:
-            changes *= 2
         return changes
 
     def move(self, move):
@@ -235,18 +240,25 @@ class Cube(object):
             c_t_origin = self.__t_key(c_origin)
             origin_cubie = original_cubies[c_t_origin] if c_t_origin in original_cubies else self.cubies[c_t_origin]
             dest_cubie = self.cubies[self.__t_key(c_dest)]
-            original_cubies[c_dest] = deepcopy(dest_cubie)
+            original_cubies[self.__t_key(c_dest)] = deepcopy(dest_cubie)
 
             for i, origin_facing in enumerate(c_origin):
                 dest_facing = c_dest[i]
                 dest_cubie.facings[dest_facing] = origin_cubie.facings[origin_facing]
 
+        if move.double:
+            self.move(Move(move.face))
+
     def shuffle(self, seed=None):
         self.__reset_cube()
         random.seed(seed)
-        for _ in range(random.randint(100, 150)):
-            m = Move(random.choice(Cubie.COLORS) + random.choice(" 2'"))
+        sequence = []
+        for i in range(random.randint(10, 15)):
+            m = Move(random.choice(Cubie.FACINGS) + random.choice(" 2'"))
+            sequence.append(m)
             self.move(m)
+
+        return sequence
 
 
 # Build Cube Axis MOVES

@@ -20,7 +20,7 @@ if __name__ == '__main__':
     tp.pprint()
     p.pprint()
 
-    solver = WhiteCrossSolver(c)
+    solver = KociembaSolver(c)
 
     sys.exit(1)
     while True:
@@ -33,7 +33,7 @@ if __name__ == '__main__':
             c.shuffle()
         elif m.upper() == 'S':
             print "Solving"
-            solution = solver.solution(maxDepth=23)
+            solution = solver.solution()
             print "Solution:", ' '.join(solution)
             for m in solution:
                 time.sleep(1)
