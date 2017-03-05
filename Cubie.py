@@ -54,6 +54,12 @@ class Cubie(object):
     def color_to_facing(color):
         return Cubie.FACINGS[Cubie.COLORS.index(color.upper())]
 
+    def color_facing(self, c):
+        for facing, color in self.facings.items():
+            if str(color) == c:
+                return facing
+
+        return None
 
 class Center(Cubie):
     def __init__(self, **kwargs):
