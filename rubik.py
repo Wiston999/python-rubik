@@ -3,12 +3,11 @@ import os
 import re
 import time
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from Cube import Cube
 from Move import Move
 from Printer import TtyPrinter, OpenGLPrinter
 from Solver.Kociemba import KociembaSolver
 from Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
-from Cubie import Cube as CubieCube
+from Cubie import Cube
 from Move import Move
 
 if __name__ == '__main__':
@@ -16,13 +15,12 @@ if __name__ == '__main__':
     p = OpenGLPrinter(c)
     tp = TtyPrinter(c, True)
     # c.set_cube('owyryyygwwgbrbbbbgryrrroygbbrrggbwbrgogwowgyyowoywooow')
-    c.shuffle()
+    # c.shuffle()
     tp.pprint()
     p.pprint()
 
     solver = KociembaSolver(c)
 
-    sys.exit(1)
     while True:
         m = raw_input('Input move: ')
         if re.match("[RLBFUD]'?2?", m, re.I):
@@ -30,7 +28,7 @@ if __name__ == '__main__':
             tp.pprint()
         elif m.upper() == 'SH':
             print "Shuffling"
-            c.shuffle()
+            print c.shuffle()
         elif m.upper() == 'S':
             print "Solving"
             solution = solver.solution()
