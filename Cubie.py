@@ -23,10 +23,18 @@ class Sticker(object):
     def __str__(self):
         return self.__repr__()
 
+    def __cmp__(self, o):
+        if isinstance(o, basestring):
+            return cmp(self.color.upper(), o.upper())
+        elif isinstance(o, Sticker):
+            return cmp(self.color.upper(), o.color.upper())
+        else:
+            raise TypeError("Don't know how to compare Sticker with %s" % o.__class__.__name__)
+    
     def __eq__(self, o):
         if isinstance(o, basestring):
             return o.upper() == self.color.upper()
-        elif isintance(o, Sticker):
+        elif isinstance(o, Sticker):
             return o.color.upper() == self.color.upper()
         else:
             raise TypeError("Don't know how to compare Sticker with %s" % o.__class__.__name__)
