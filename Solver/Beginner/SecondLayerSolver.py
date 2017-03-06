@@ -16,7 +16,7 @@ class SecondLayerSolver(Solver):
         success = success and self.cube.cubies['BR'].facings['B'] == back_color and self.cube.cubies['BR'].facings['R'] == right_color
 
         return success
-        
+
     def move(self, move, solution):
         solution.append(move)
         self.cube.move(Move(move))
