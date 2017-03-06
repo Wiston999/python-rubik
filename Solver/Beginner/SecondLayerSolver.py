@@ -1,7 +1,6 @@
 from .. import Solver
 from Move import Move
 from Cubie import Sticker
-from Printer import TtyPrinter
 
 class SecondLayerSolver(Solver):
     def is_solved(self):
@@ -24,7 +23,6 @@ class SecondLayerSolver(Solver):
 
     def solution(self):
         solution = []
-        pprint = TtyPrinter(self.cube, True)
         # Place FR and FL
         # front_color = self.cube.cubies['F'].facings['F']
         # right_color = self.cube.cubies['R'].facings['R']
@@ -41,10 +39,9 @@ class SecondLayerSolver(Solver):
             if self.is_solved():
                 break
 
-            if round > 3:
+            if round > 6:
                 # We have made a full round to the cube and haven't found a well cubie to place 
                 # and cube isn't solved yet
-                print "RONDA"
                 break
             current_cubie = self.cube.cubies['FU']
             # If not yellow on FL, we place it
@@ -53,9 +50,6 @@ class SecondLayerSolver(Solver):
                 round = 0
                 front_color = current_cubie.facings['F']
                 correct_face = self.cube.search_by_colors(front_color)
-
-                print "Front color is", front_color
-                print "Correct face is", correct_face
 
                 if correct_face == 'L':
                     self.move("U", solution)
@@ -69,7 +63,6 @@ class SecondLayerSolver(Solver):
                 
                 # Right now we are able to use the F2L or F2R algorithms
                 if self.cube.cubies['FU'].facings['U'] == self.cube.cubies['R'].facings['R']:
-                    print "F2R"
                     # F2R: U R U' R' U' F' U F
                     self.move("U", solution)
                     self.move("R", solution)
@@ -80,7 +73,6 @@ class SecondLayerSolver(Solver):
                     self.move("U", solution)
                     self.move("F", solution)
                 else:
-                    print "F2L"
                     # F2L: U' L' U L U F U' F'
                     self.move("U'", solution)
                     self.move("L'", solution)
@@ -90,7 +82,24 @@ class SecondLayerSolver(Solver):
                     self.move("F", solution)
                     self.move("U'", solution)
                     self.move("F'", solution)
-            pprint.pprint()
-            raw_input()
+            # There is a Yellow in FU and FR is bad placed / oriented
+            else:
+                front_color = self.cube.cubies['F'].facings['F']
+                right_color = self.cube.cubies['R'].facings['R']
+                move_fr = self.cube.cubies['FR'].facings['F'] != front_color
+                move_fr = move_fr or self.cube.cubies['FR'].facings['R'] != right_color
+                move_fr = move_fr and self.cube.cubies['FR'].color_facing('Y') is None
+
+                # Apply F2R
+                if move_fr:
+                    self.move("U", solution)
+                    self.move("R", solution)
+                    self.move("U'", solution)
+                    self.move("R'", solution)
+                    self.move("U'", solution)
+                    self.move("F'", solution)
+                    self.move("U", solution)
+                    self.move("F", solution)
+
             self.move("Y", solution)
         return solution
