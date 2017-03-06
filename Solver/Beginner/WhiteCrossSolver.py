@@ -1,6 +1,5 @@
 from .. import Solver
 from Move import Move
-from Cubie import Sticker
 
 class WhiteCrossSolver(Solver):
     def solution(self):
