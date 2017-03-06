@@ -5,7 +5,7 @@ from . import WhiteFaceSolver
 
 class BeginnerSolver(Solver):
     def solution(self):
-        cube = copy.deepcopy(self.cube.get_cube())
+        cube = copy.deepcopy(self.cube)
         solution = WhiteCrossSolver.WhiteCrossSolver(cube).solution()
-        solution += WhiteFaceSolver.WhiteFaceSolver(cube).solution()
-        return []
+        # solution += WhiteFaceSolver.WhiteFaceSolver(cube).solution()
+        return solution

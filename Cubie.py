@@ -33,6 +33,7 @@ class Sticker(object):
     
     def __ne__(self, o):
         return not(o == self)
+
 class Cubie(object):
     FACINGS = 'FBRLUD'
     COLORS = 'ROGBYW'
@@ -280,7 +281,6 @@ class Cube(object):
 
     def search_by_colors(self, *args):
         args = sorted(args)
-        print "Searching", args
         for key, cubie in self.cubies.items():
             cubie_colors = tuple([str(c) for c in cubie.facings.values()])
             if args == sorted(cubie_colors):
