@@ -12,4 +12,6 @@ class WhiteFaceSolver(Solver):
 
             print "Colors (F)", front_color, "(R)", right_color
 
+            solution.append('Y')
+            self.cube.move(Move('Y'))
         return solution
