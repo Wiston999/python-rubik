@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from Move import Move
 from Printer import TtyPrinter, OpenGLPrinter
 from Solver.Kociemba import KociembaSolver
-from Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
+from Solver.Beginner import BeginnerSolver
 from Cubie import Cube
 from Move import Move
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     tp.pprint()
     # p.pprint()
 
-    solver = WhiteCrossSolver(c)
+    solver = BeginnerSolver(c)
 
     while True:
         m = raw_input('Input move: ')

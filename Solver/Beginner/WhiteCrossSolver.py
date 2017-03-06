@@ -5,12 +5,9 @@ from Cubie import Sticker
 class WhiteCrossSolver(Solver):
     def solution(self):
         solution = []
-        # Use sorted edges notation
         for color in 'RGOB':
             cubie_position = self.cube.search_by_colors('W', color)
             step_solution = []
-            # If cubie not in position
-            # if cubie_position != 'DF':
             orig_cubie = self.cube.cubies[cubie_position]
             white_facing = orig_cubie.color_facing('W')
             color_facing = orig_cubie.color_facing(color)
