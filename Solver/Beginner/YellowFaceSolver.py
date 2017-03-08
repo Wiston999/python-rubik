@@ -7,7 +7,11 @@ class YellowFaceSolver(Solver):
             self.move(move, solution)
 
     def apply_corner_place_algorithm(self, solution):
-        for move in ["U", "R", "U'", "L'"] * 2:
+        for move in ["U", "R", "U'", "L'", "U", "R'", "U'", "L"]:
+            self.move(move, solution)
+    
+    def apply_corner_orient_algorithm(self, solution):
+        for move in ["R'", "D'", "R", "D"]:
             self.move(move, solution)
 
     def edges_are_placed(self):
@@ -26,9 +30,8 @@ class YellowFaceSolver(Solver):
     def corner_is_placed(self, corner):
         corner = self.cube.cubies[corner]
         related_edges = ''.join(corner.faces).replace('U', '')
-
         for edge in related_edges:
-            if self.cube.cubies[edge+'U'].facings[edge] != corner.facings[edge]:
+            if self.cube.cubies[edge+'U'].facings[edge] not in corner.colors:
                 return False
 
         return True
@@ -66,10 +69,17 @@ class YellowFaceSolver(Solver):
             # If no placed corners, perform algorithm and 1 corner will be placed
             else:
                 self.apply_corner_place_algorithm(solution)
-        
 
         # Orient corners
-
+        for i in range(4):
+            # Get corner at FRU
+            corner = self.cube.cubies['FRU']
+            while corner.facings['U'] != 'Y':
+                # Apply corner orientation algorithm
+                self.apply_corner_orient_algorithm(solution)
+            self.move("U", solution)
+        
         # Finally, align the top layer
-
+        while self.cube.cubies['F'].facings['F'] != self.cube.cubies['FU'].facings['F']:
+            self.move("U", solution)
         return solution
