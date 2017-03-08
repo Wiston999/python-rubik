@@ -4,6 +4,7 @@ from . import WhiteCrossSolver
 from . import WhiteFaceSolver
 from . import SecondLayerSolver
 from . import YellowCrossSolver
+from . import YellowFaceSolver
 
 class BeginnerSolver(Solver):
     def solution(self):
@@ -12,4 +13,5 @@ class BeginnerSolver(Solver):
         solution += WhiteFaceSolver.WhiteFaceSolver(cube).solution()
         solution += SecondLayerSolver.SecondLayerSolver(cube).solution()
         solution += YellowCrossSolver.YellowCrossSolver(cube).solution()
+        solution += YellowFaceSolver.YellowFaceSolver(cube).solution()
         return solution
