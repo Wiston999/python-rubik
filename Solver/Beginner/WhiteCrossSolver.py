@@ -10,6 +10,7 @@ class WhiteCrossSolver(Solver):
             orig_cubie = self.cube.cubies[cubie_position]
             white_facing = orig_cubie.color_facing('W')
             color_facing = orig_cubie.color_facing(color)
+            print "Putting", white_facing, color_facing
             # First goal is to put white sticker on top face
             if white_facing == 'D':
                 step_solution.append("%s2" % color_facing)
@@ -35,11 +36,11 @@ class WhiteCrossSolver(Solver):
                     step_solution.append("L")
             elif white_facing == 'B':
                 if color_facing == 'U':
-                    step_solution.append("B'")
-                    step_solution.append("L")
-                    step_solution.append("U")
-                    step_solution.append("L'")
                     step_solution.append("B")
+                    step_solution.append("L")
+                    step_solution.append("U'")
+                    step_solution.append("L'")
+                    step_solution.append("B'")
                 elif color_facing == 'D':
                     step_solution.append("B")
                     step_solution.append("R'")
@@ -99,6 +100,7 @@ class WhiteCrossSolver(Solver):
             solution.extend(step_solution)
 
             # Second goal is to place the cubie on the top over its place
+            print "Placing on top", color
             while self.cube.cubies['FU'].facings['U'] != 'W' or self.cube.cubies['FU'].facings['F'] != color:
                 solution.append('U')
                 self.cube.move(Move('U'))

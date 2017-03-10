@@ -17,7 +17,7 @@ if __name__ == '__main__':
     tp = TtyPrinter(c, True)
     c.shuffle()
     nc = NaiveCube()
-    nc.set_cube("YRGYYRGRBBGRGBGYGYWYRORYOYBYWWOGWWBBOBOBOWRORGBORWOGWW")
+    nc.set_cube("OYOYYOGRRBRRGBWRGGWBBRRBYWBWYGOGBOWBWGWYOWYRGOBYOWOYGR")
     c.from_naive_cube(nc)
     # p.pprint()
     tp.pprint()
