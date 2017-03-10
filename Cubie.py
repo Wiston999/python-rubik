@@ -114,29 +114,29 @@ class Cube(object):
 
     CUBE_MAP = [
         # UP
-        ('BLU', 'U'), ('BU', 'U'), ('BRU', 'U'),
-        ('UL', 'U'), ('U', 'U'), ('UR', 'U'),
-        ('FLU', 'U'), ('FU', 'U'), ('FRU', 'U'),
+        ['BLU', 'U'], ['BU', 'U'], ['BRU', 'U'],
+        ['UL', 'U' ], ['U', 'U' ], ['UR', 'U' ],
+        ['FLU', 'U'], ['FU', 'U'], ['FRU', 'U'],
         # LEFT
-        ('BLU', 'L'), ('UL', 'L'), ('FLU', 'L'),
-        ('BL', 'L'), ('L', 'L'), ('FL', 'L'),
-        ('BLD', 'L'), ('DL', 'L'), ('FLD', 'L'),
+        ['BLU', 'L'], ['UL', 'L'], ['FLU', 'L'],
+        ['BL', 'L' ], ['L', 'L' ], ['FL', 'L' ],
+        ['BLD', 'L'], ['DL', 'L'], ['FLD', 'L'],
         # FRONT
-        ('FLU', 'F'), ('FU', 'F'), ('FRU', 'F'),
-        ('FL', 'F'), ('F', 'F'), ('FR', 'F'),
-        ('FLD', 'F'), ('FD', 'F'), ('FRD', 'F'),
+        ['FLU', 'F'], ['FU', 'F'], ['FRU', 'F'],
+        ['FL', 'F' ], ['F', 'F' ], ['FR', 'F' ],
+        ['FLD', 'F'], ['FD', 'F'], ['FRD', 'F'],
         # RIGHT
-        ('FRU', 'R'), ('UR', 'R'), ('BRU', 'R'),
-        ('FR', 'R'), ('R', 'R'), ('BR', 'R'),
-        ('FRD', 'R'), ('DR', 'R'), ('BRD', 'R'),
+        ['FRU', 'R'], ['UR', 'R'], ['BRU', 'R'],
+        ['FR', 'R' ], ['R', 'R' ], ['BR', 'R' ],
+        ['FRD', 'R'], ['DR', 'R'], ['BRD', 'R'],
         # BACK
-        ('BRU', 'B'), ('BU', 'B'), ('BLU', 'B'),
-        ('BR', 'B'), ('B', 'B'), ('BL', 'B'),
-        ('BRD', 'B'), ('BD', 'B'), ('BLD', 'B'),
+        ['BRU', 'B'], ['BU', 'B'], ['BLU', 'B'],
+        ['BR', 'B' ], ['B', 'B' ], ['BL', 'B' ],
+        ['BRD', 'B'], ['BD', 'B'], ['BLD', 'B'],
         # DOWN
-        ('FLD', 'D'), ('FD', 'D'), ('FRD', 'D'),
-        ('DL', 'D'), ('D', 'D'), ('DR', 'D'),
-        ('BLD', 'D'), ('BD', 'D'), ('BRD', 'D'),
+        ['FLD', 'D'], ['FD', 'D'], ['FRD', 'D'],
+        ['DL', 'D' ], ['D', 'D' ], ['DR', 'D' ],
+        ['BLD', 'D'], ['BD', 'D'], ['BRD', 'D'],
     ]
 
     MOVES = {

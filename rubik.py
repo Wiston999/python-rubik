@@ -8,6 +8,7 @@ from Printer import TtyPrinter, OpenGLPrinter
 from Solver.Kociemba import KociembaSolver
 from Solver.Beginner import BeginnerSolver
 from Cubie import Cube
+from NaiveCube import NaiveCube
 from Move import Move
 
 if __name__ == '__main__':
@@ -15,9 +16,12 @@ if __name__ == '__main__':
     # p = OpenGLPrinter(c)
     tp = TtyPrinter(c, True)
     c.shuffle()
-    tp.pprint()
+    nc = NaiveCube()
+    nc.set_cube("YRGYYRGRBBGRGBGYGYWYRORYOYBYWWOGWWBBOBOBOWRORGBORWOGWW")
+    c.from_naive_cube(nc)
     # p.pprint()
-
+    tp.pprint()
+    
     solver = BeginnerSolver(c)
 
     while True:
