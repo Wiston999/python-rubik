@@ -1,7 +1,11 @@
 from .. import Solver
 from Move import Move
 
+
 class WhiteFaceSolver(Solver):
+    '''
+    This solves the down face with the white color
+    '''
     def solution(self):
         solution = []
         # There are 4 down-corners
@@ -43,8 +47,8 @@ class WhiteFaceSolver(Solver):
                     step_solution.append("U'")
                 # else is already at FRU
 
-            for m in step_solution:
-                self.cube.move(Move(m))
+            for move in step_solution:
+                self.cube.move(Move(move))
             # Cubie is at FRU, place it at DRU with correct orientation
             solution.extend(step_solution)
             step_solution = []
@@ -56,11 +60,12 @@ class WhiteFaceSolver(Solver):
             elif self.cube.cubies['FRU'].color_facing('W') == 'U':
                 step_solution.extend(["R", "U2", "R'", "U'", "R", "U", "R"])
 
-            for m in step_solution:
-                self.cube.move(Move(m))
+            for move in step_solution:
+                self.cube.move(Move(move))
             solution.extend(step_solution)
             # Cubie is placed, move to next
 
             solution.append('Y')
             self.cube.move(Move('Y'))
+
         return solution
