@@ -15,44 +15,24 @@ class WhiteFaceSolver(Solver):
             goal_cubie_obj = self.cube.cubies[goal_cubie]
             if goal_cubie == 'DFR':
                 if goal_cubie_obj.color_facing('W') == 'F':
-                    step_solution.append("R")
-                    step_solution.append("U'")
-                    step_solution.append("R'")
+                    step_solution.extend(["R", "U'", "R'"])
                 elif goal_cubie_obj.color_facing('W') == 'R':
-                    step_solution.append("R")
-                    step_solution.append("U")
-                    step_solution.append("R'")
-                    step_solution.append("U'")
+                    step_solution.extend(["R", "U", "R'", "U'"])
             elif goal_cubie == 'DFL':
                 if goal_cubie_obj.color_facing('W') == 'F':
-                    step_solution.append("L'")
-                    step_solution.append("U")
-                    step_solution.append("L")
-                    step_solution.append("U'")
+                    step_solution.extend(["L'", "U", "L", "U'"])
                 elif goal_cubie_obj.color_facing('W') in ['L', 'D']:
-                    step_solution.append("L'")
-                    step_solution.append("U'")
-                    step_solution.append("L")
+                    step_solution.extend(["L'", "U'", "L"])
             elif goal_cubie == 'BDL':
                 if goal_cubie_obj.color_facing('W') in ['B', 'D']:
-                    step_solution.append("B'")
-                    step_solution.append("U2")
-                    step_solution.append("B")
+                    step_solution.extend(["B'", "U2", "B"])
                 elif goal_cubie_obj.color_facing('W') == 'L':
-                    step_solution.append("B'")
-                    step_solution.append("U")
-                    step_solution.append("B")
-                    step_solution.append("U2")
+                    step_solution.extend(["B'", "U", "B", "U2"])
             elif goal_cubie == 'BDR':
                 if goal_cubie_obj.color_facing('W') in ['B', 'D']:
-                    step_solution.append("B")
-                    step_solution.append("U")
-                    step_solution.append("B'")
+                    step_solution.extend(["B", "U", "B'"])
                 elif goal_cubie_obj.color_facing('W') == 'R':
-                    step_solution.append("B")
-                    step_solution.append("U'")
-                    step_solution.append("B'")
-                    step_solution.append("U")
+                    step_solution.extend(["B", "U'", "B'", "U"])
             else:
                 # Cubie is in upper face, place it on FRU
                 if goal_cubie == 'BRU':
@@ -70,21 +50,11 @@ class WhiteFaceSolver(Solver):
             step_solution = []
 
             if self.cube.cubies['FRU'].color_facing('W') == 'F':
-                step_solution.append("F'")
-                step_solution.append("U'")
-                step_solution.append("F")
+                step_solution.extend(["F'", "U'", "F"])
             elif self.cube.cubies['FRU'].color_facing('W') == 'R':
-                step_solution.append("R")
-                step_solution.append("U")
-                step_solution.append("R'")
+                step_solution.extend(["R", "U", "R'"])
             elif self.cube.cubies['FRU'].color_facing('W') == 'U':
-                step_solution.append("R")
-                step_solution.append("U2")
-                step_solution.append("R'")
-                step_solution.append("U'")
-                step_solution.append("R")
-                step_solution.append("U")
-                step_solution.append("R'")
+                step_solution.extend(["R", "U2", "R'", "U'", "R", "U", "R"])
 
             for m in step_solution:
                 self.cube.move(Move(m))
