@@ -1,4 +1,5 @@
 import copy
+from Move import Move
 from .. import Solver
 from . import WhiteCrossSolver
 from . import WhiteFaceSolver
@@ -18,4 +19,4 @@ class BeginnerSolver(Solver):
         solution += YellowCrossSolver.YellowCrossSolver(cube).solution()
         print "YellowCross"
         solution += YellowFaceSolver.YellowFaceSolver(cube).solution()
-        return solution
+        return [Move(m) for m in solution]
