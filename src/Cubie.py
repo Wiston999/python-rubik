@@ -15,7 +15,7 @@ class Sticker(object):
             raise ValueError("Color %s is not one of %s" %
                              (color, ', '.join(self.COLOURS)))
 
-        self.color = color
+        self.color = color.lower()
 
     def __repr__(self):
         return self.color.upper()
