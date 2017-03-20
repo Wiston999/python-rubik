@@ -1,5 +1,4 @@
 from Face import Face
-from Cube import Cube
 from Move import Move
 
 import math
