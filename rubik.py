@@ -22,7 +22,7 @@ if __name__ == '__main__':
     p.pprint()
     tp.pprint()
 
-    solver = BeginnerSolver(c)
+    solver = KociembaSolver(c)
 
     while True:
         m = raw_input('Input move: ')

@@ -1,4 +1,4 @@
-import Cubie
+import rubik.Cubie as Cubie
 import unittest
 
 class TestSticker(unittest.TestCase):

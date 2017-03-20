@@ -1,5 +1,5 @@
-from .Solver.Kociemba.Enums import Facelet, Color, Edge, Corner
-from .CubieCube import CubieCube
+from Solver.Kociemba.Enums import Facelet, Color, Edge, Corner
+from CubieCube import CubieCube
 
 class FaceCube(object):
 	'''Cube on the facelet level'''
