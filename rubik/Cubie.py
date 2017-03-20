@@ -3,8 +3,8 @@ Cubie: Implements a Cube and movements at Cubie level
 '''
 import random
 from copy import deepcopy
-from Move import Move
-from NaiveCube import NaiveCube
+from .Move import Move
+from .NaiveCube import NaiveCube
 
 
 class Sticker(object):

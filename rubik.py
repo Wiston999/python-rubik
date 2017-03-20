@@ -3,13 +3,13 @@ import os
 import re
 import time
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from Move import Move
-from Printer import TtyPrinter, OpenGLPrinter
-from Solver.Kociemba import KociembaSolver
-from Solver.Beginner import BeginnerSolver
-from Cubie import Cube
-from NaiveCube import NaiveCube
-from Move import Move
+from rubik.Move import Move
+from rubik.Printer import TtyPrinter, OpenGLPrinter
+from rubik.Solver.Kociemba import KociembaSolver
+from rubik.Solver.Beginner import BeginnerSolver
+from rubik.Cubie import Cube
+from rubik.NaiveCube import NaiveCube
+from rubik.Move import Move
 
 if __name__ == '__main__':
     c = Cube(3)
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     p.pprint()
     tp.pprint()
 
-    solver = KociembaSolver(c)
+    solver = BeginnerSolver(c)
 
     while True:
         m = raw_input('Input move: ')

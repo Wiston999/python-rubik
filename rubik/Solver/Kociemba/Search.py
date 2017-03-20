@@ -3,9 +3,9 @@ __author__ = 'Victor'
 import time
 
 from Enums import Color
-import FaceCube
-import CoordCube
-from CubieCube import DupedEdge
+import rubik.FaceCube as FaceCube
+import rubik.CoordCube as CoordCube
+from rubik.CubieCube import DupedEdge
 
 
 class DupedFacelet(Exception):

@@ -2,7 +2,9 @@ try:
     from OpenGL.GL import *
     from OpenGL.GLU import *
     from OpenGL.GLUT import *
+    OPENGLENABLED = True
 except ImportError as e:
+    OPENGLENABLED = False
     print "Unable to open OpenGL, OpenGLPrinter won't be available:", e
 
 import time

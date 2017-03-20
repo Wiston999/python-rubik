@@ -1,5 +1,5 @@
 import copy
-from Move import Move
+from rubik.Move import Move
 from .. import Solver
 from . import WhiteCrossSolver
 from . import WhiteFaceSolver

@@ -1,6 +1,6 @@
 from .. import Solver
-from Move import Move
-from Cubie import Sticker
+from rubik.Move import Move
+from rubik.Cubie import Sticker
 
 class SecondLayerSolver(Solver):
     def is_solved(self):
