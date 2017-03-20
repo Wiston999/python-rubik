@@ -2,9 +2,9 @@ __author__ = 'Victor'
 
 import time
 
-from Enums import Color
-from src import FaceCube 
-from src import CoordCube
+from src.Enums import Color
+import src.FaceCube as FaceCube
+import src.CoordCube as CoordCube
 from src.CubieCube import DupedEdge
 
 
