@@ -141,7 +141,8 @@ class OpenGLPrinter(Printer):
         self.fov = 45
         self.zNear = 0.1
         self.zFar = 50.0
-        super(OpenGLPrinter, self).__init__(cube)
+        if OPENGLENABLED:
+            super(OpenGLPrinter, self).__init__(cube)
         self.display = (800, 600)
         self.alfa = 45.0
         self.beta = 45.0
@@ -153,8 +154,9 @@ class OpenGLPrinter(Printer):
             glutLeaveMainLoop()
 
     def pprint(self):
-        self.thread = threading.Thread(target=self._pprint)
-        self.thread.start()
+        if OPENGLENABLED:
+            self.thread = threading.Thread(target=self._pprint)
+            self.thread.start()
 
     def _pprint(self):
         glutInit()
