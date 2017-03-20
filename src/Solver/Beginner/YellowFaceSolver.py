@@ -1,5 +1,5 @@
 from .. import Solver
-from rubik.Move import Move
+from src.Move import Move
 
 class YellowFaceSolver(Solver):
     def apply_edges_algorithm(self, solution):

@@ -1,5 +1,5 @@
 from .. import Solver
-from rubik.Move import Move
+from src.Move import Move
 
 class YellowCrossSolver(Solver):
     def apply_algorithm(self, solution):

@@ -1,6 +1,6 @@
 import os
 
-from rubik.CubieCube import CubieCube
+from src.CubieCube import CubieCube
 
 class CoordCube(object):
 	'''Representation of the cube on the coordinate level'''

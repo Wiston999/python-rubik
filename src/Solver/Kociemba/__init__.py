@@ -1,4 +1,4 @@
-from rubik.Move import Move
+from src.Move import Move
 from .. import Solver
 from . import Search
 

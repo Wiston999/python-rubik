@@ -2,14 +2,13 @@ import sys
 import os
 import re
 import time
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from rubik.Move import Move
-from rubik.Printer import TtyPrinter, OpenGLPrinter
-from rubik.Solver.Kociemba import KociembaSolver
-from rubik.Solver.Beginner import BeginnerSolver
-from rubik.Cubie import Cube
-from rubik.NaiveCube import NaiveCube
-from rubik.Move import Move
+from src.Move import Move
+from src.Printer import TtyPrinter, OpenGLPrinter
+from src.Solver.Kociemba import KociembaSolver
+from src.Solver.Beginner import BeginnerSolver
+from src.Cubie import Cube
+from src.NaiveCube import NaiveCube
+from src.Move import Move
 
 if __name__ == '__main__':
     c = Cube(3)
