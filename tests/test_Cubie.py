@@ -160,32 +160,18 @@ class TestCube(unittest.TestCase):
         with self.assertRaises(ValueError):
             Cubie.Cube.move_changes(1)
 
-    def test_move_R(self):
-        pass
+    def test_move(self):
+        cr = Cubie.Cube()
+        for m, implications in Cubie.Cube.MOVES:
+            c = Cubie.Cube()
+            c.move(Move(m))
+            for orig, dest in implications:
+                or_cubie = cr.cubies[Cubie.Cube._t_key(orig)]
+                dest_cubie = c.cubies[Cubie.Cube._t_key(dest)]
+                for i in range(len(dest)):
+                    self.assertEqual(or_cubie.facings[orig[i]], dest_cubie.facings[dest[i]])
 
-    def test_move_L(self):
-        pass
 
-    def test_move_D(self):
-        pass
-
-    def test_move_U(self):
-        pass
-
-    def test_move_F(self):
-        pass
-
-    def test_move_B(self):
-        pass
-
-    def test_move_X(self):
-        pass
-
-    def test_move_Y(self):
-        pass
-
-    def test_move_Z(self):
-        pass
 
     def test_search_by_colors(self):
         c = Cubie.Cube()

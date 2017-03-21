@@ -80,8 +80,8 @@ class Cubie(object):
         for facing, color in self.facings.items():
             if color == c:
                 return facing
-
         return None
+
 
 class Center(Cubie):
     def __init__(self, **kwargs):
