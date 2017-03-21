@@ -48,6 +48,7 @@ class Cubie(object):
 
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
+            key = key.upper()
             if key not in self.FACINGS:
                 raise ValueError("Face %s is not one of %s" %
                                  (key, ', '.join(list(self.FACINGS))))
@@ -77,7 +78,7 @@ class Cubie(object):
 
     def color_facing(self, c):
         for facing, color in self.facings.items():
-            if str(color) == c:
+            if color == c:
                 return facing
 
         return None
@@ -105,10 +106,10 @@ class Corner(Cubie):
 
 class Cube(object):
     CUBIES = [
-        'FLU', 'FU', 'FRU', 'FL', 'F', 'FR', 'FLD', 'FD', 'FRD',
-        'BLU', 'BU', 'BRU', 'BL', 'B', 'BR', 'BLD', 'BD', 'BRD',
-        'UL', 'L', 'DL',
-        'UR', 'R', 'DR',
+        'FLU', 'FU', 'FRU', 'FL', 'F', 'FR', 'DFL', 'DF', 'DFR',
+        'BLU', 'BU', 'BRU', 'BL', 'B', 'BR', 'BDL', 'BD', 'BDR',
+        'LU', 'L', 'DL',
+        'RU', 'R', 'DR',
         'D', 'U'
     ]
 
@@ -220,7 +221,7 @@ class Cube(object):
         self.cubies = {}
         for cubie in self.CUBIES:
             # Sorting the key allows to access the dict in an unified manner
-            cubie = self.__t_key(cubie)
+            cubie = self._t_key(cubie)
             if len(cubie) == 3:
                 self.cubies[cubie] = Corner(
                     **dict([(face, Cubie.facing_to_color(face)) for face in cubie]))
@@ -232,19 +233,19 @@ class Cube(object):
                     **dict([(face, Cubie.facing_to_color(face)) for face in cubie]))
 
     @staticmethod
-    def __t_key(key):
+    def _t_key(key):
         return ''.join(sorted(key))
 
     def from_naive_cube(self, cube):
         for i, color in enumerate(cube.get_cube()):
             cube_map = self.CUBE_MAP[i]
-            cube_map[0] = self.__t_key(cube_map[0])
+            cube_map[0] = self._t_key(cube_map[0])
             self.cubies[cube_map[0]].facings[cube_map[1]] = Sticker(color)
 
     def to_naive_cube(self):
         configuration = ''
         for cubie, face in self.CUBE_MAP:
-            cubie = self.__t_key(cubie)
+            cubie = self._t_key(cubie)
             configuration += self.cubies[cubie].facings[face].color
         nc = NaiveCube(self.size)
         nc.set_cube(configuration)
@@ -264,10 +265,10 @@ class Cube(object):
         changes = Cube.move_changes(move)
         original_cubies = {}
         for c_origin, c_dest in changes:
-            c_t_origin = self.__t_key(c_origin)
+            c_t_origin = self._t_key(c_origin)
             origin_cubie = original_cubies[c_t_origin] if c_t_origin in original_cubies else self.cubies[c_t_origin]
-            dest_cubie = self.cubies[self.__t_key(c_dest)]
-            original_cubies[self.__t_key(c_dest)] = deepcopy(dest_cubie)
+            dest_cubie = self.cubies[self._t_key(c_dest)]
+            original_cubies[self._t_key(c_dest)] = deepcopy(dest_cubie)
 
             for i, origin_facing in enumerate(c_origin):
                 dest_facing = c_dest[i]
