@@ -291,6 +291,7 @@ class Cube(object):
     def search_by_colors(self, *args):
         args = sorted(args)
         for key, cubie in self.cubies.items():
+            print key, cubie, args
             cubie_colors = tuple([str(c) for c in cubie.facings.values()])
             if args == sorted(cubie_colors):
                 return key
