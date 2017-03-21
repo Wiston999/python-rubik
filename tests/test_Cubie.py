@@ -197,7 +197,7 @@ class TestCube(unittest.TestCase):
 
         for cubie in c.cubies:
             colors = [Cubie.Cubie.facing_to_color(f) for f in list(cubie)]
-            self.assertEqual(c.search_by_colors(colors), cubie)
+            self.assertEqual(c.search_by_colors(*colors), cubie)
 
 if __name__ == '__main__':
     unittest.main()
