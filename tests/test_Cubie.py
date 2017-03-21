@@ -162,15 +162,24 @@ class TestCube(unittest.TestCase):
 
     def test_move(self):
         cr = Cubie.Cube()
-        for m, implications in Cubie.Cube.MOVES:
+        for m, implications in Cubie.Cube.MOVES.items():
             c = Cubie.Cube()
-            c.move(Move(m))
+            c.move(Move.Move(m))
+            moved_cubies = set()
             for orig, dest in implications:
+                moved_cubies.add(Cubie.Cube._t_key(orig))
                 or_cubie = cr.cubies[Cubie.Cube._t_key(orig)]
                 dest_cubie = c.cubies[Cubie.Cube._t_key(dest)]
                 for i in range(len(dest)):
                     self.assertEqual(or_cubie.facings[orig[i]], dest_cubie.facings[dest[i]])
-
+            
+            # Check the rest of cubies aren't moved
+            for cubie in Cubie.Cube.CUBIES:
+                if cubie not in moved_cubies:
+                    or_cubie = cr.cubies[Cubie.Cube._t_key(cubie)]
+                    dest_cubie = c.cubies[Cubie.Cube._t_key(cubie)]
+                    for i in range(len(cubie)):
+                        self.assertEqual(or_cubie.facings[cubie[i]], dest_cubie.facings[cubie[i]])
 
 
     def test_search_by_colors(self):
