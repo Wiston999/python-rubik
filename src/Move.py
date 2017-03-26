@@ -7,7 +7,7 @@ class Move(object):
         if not re.match("[fblrudxyz]'?2?", move, re.I):
             raise ValueError("Invalid move format, must be [face]' or [face]2, got %s" % move)
 
-        self.raw = move
+        self.raw = move.upper()
 
     @property
     def face(self):
@@ -41,7 +41,7 @@ class Move(object):
 
     @property
     def clockwise(self):
-        return not self.counterclockwise
+        return not self.counterclockwise and not self.double
 
     @clockwise.setter
     def clockwise(self, value):
@@ -52,7 +52,7 @@ class Move(object):
 
     def __eq__(self, move):
         if isinstance(move, (str, unicode)):
-            return self.raw == move
+            return self.raw == move.upper()
         elif isinstance(move, Move):
             return self.raw == move.raw
         else:
