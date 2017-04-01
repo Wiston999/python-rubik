@@ -6,8 +6,7 @@ class WhiteFaceSolver(Solver):
     '''
     This solves the down face with the white color
     '''
-    @staticmethod
-    def first_step(goal_cubie):
+    def first_step(self, goal_cubie):
         solution = []
         goal_cubie_obj = self.cube.cubies[goal_cubie]
         if goal_cubie == 'DFR':
@@ -30,14 +29,13 @@ class WhiteFaceSolver(Solver):
                 solution = ["B", "U", "B'"]
             elif goal_cubie_obj.color_facing('W') == 'R':
                 solution = ["B", "U'", "B'", "U"]
-        else:
-            # Cubie is in upper face, place it on FRU
-            if goal_cubie == 'BRU':
-                solution = ["U"]
-            elif goal_cubie == 'BLU':
-                solution = ["U2"]
-            elif goal_cubie == 'FLU':
-                solution = ["U'"]
+        # Cubie is in upper face, place it on FRU
+        elif goal_cubie == 'BRU':
+            solution = ["U"]
+        elif goal_cubie == 'BLU':
+            solution = ["U2"]
+        elif goal_cubie == 'FLU':
+            solution = ["U'"]
         return solution
 
     @staticmethod
@@ -61,10 +59,8 @@ class WhiteFaceSolver(Solver):
 
             goal_cubie = self.cube.search_by_colors('W', front_color, right_color)
 
-            step_solution = WhiteFaceSolver.first_step(goal_cubie)
+            step_solution = self.first_step(goal_cubie)
             
-                # else is already at FRU
-
             for move in step_solution:
                 self.cube.move(Move(move))
             # Cubie is at FRU, place it at DRU with correct orientation

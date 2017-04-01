@@ -3,6 +3,9 @@ from src.Cubie import Cube
 from src.Solver import Beginner
 from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
 from src.Solver.Beginner.WhiteFaceSolver import WhiteFaceSolver
+from src.Solver.Beginner.SecondLayerSolver import SecondLayerSolver
+from src.Solver.Beginner.YellowFaceSolver import YellowFaceSolver
+import timeout_decorator
 import unittest
 
 class TestWhiteCrossSolver(unittest.TestCase):
@@ -47,7 +50,33 @@ class TestWhiteCrossSolver(unittest.TestCase):
 
 class TestWhiteFaceSolver(unittest.TestCase):
     def test_first_step(self):
-        pass
+        goals = [
+            'DFR',
+            'DFL',
+            'BDL',
+            'BDR',
+            'BRU',
+            'BLU',
+            'FLU',
+        ]
+
+        for goal in goals:
+            c = Cube()
+            solver = WhiteFaceSolver(c)
+            # Muahaha at that range
+            for i in range(1 if goal == 'DFR' else 0, 3):
+                c.cubies[goal].facings[goal[i % 3]] = 'W'
+                c.cubies[goal].facings[goal[(i + 1) % 3]] = 'Y'
+                c.cubies[goal].facings[goal[(i + 2) % 3]] = 'O'
+            
+                steps = solver.first_step(goal)
+                
+                for s in steps:
+                    c.move(Move(s))
+
+                self.assertIn('W', c.cubies['FRU'].colors, "%s --> %d" %(goal, i))
+                self.assertIn('Y', c.cubies['FRU'].colors, "%s --> %d" %(goal, i))
+                self.assertIn('O', c.cubies['FRU'].colors, "%s --> %d" %(goal, i))
 
     def test_second_step(self):
         # Case 1
@@ -87,8 +116,48 @@ class TestWhiteFaceSolver(unittest.TestCase):
         self.assertEqual(c.cubies['DFR'].facings['F'], 'Y')
         self.assertEqual(c.cubies['DFR'].facings['R'], 'O')
 
+class TestSecondLayerSolver(unittest.TestCase):
+    def test_is_solved(self):
+        c = Cube()
+        solver = SecondLayerSolver(c)
+        self.assertTrue(solver.is_solved())
+    
+    # Dunno how to test the solution function
+
+class TestYellowFaceSolver(unittest.TestCase):
+    def test_edges_are_placed(self):
+        c = Cube()
+        solver = YellowFaceSolver(c)
+        for _ in range(4):
+            c.move(Move('U'))
+            self.assertTrue(solver.edges_are_placed())
+
+    def test_corner_is_placed(self):
+        c = Cube()
+        solver = YellowFaceSolver(c)
+        for _ in range(4):
+            c.move(Move('U'))
+            for corner in ['FRU', 'FLU', 'BRU', 'BLU']:
+                self.assertTrue(solver.corner_is_placed(corner))
+            self.assertTrue(solver.placed_corners())
+
+        for corner in ['FRU', 'FLU', 'BRU', 'BLU']:
+            c = Cube()
+            solver = YellowFaceSolver(c)
+            c.cubies[corner].facings[corner[0]] = 'W'
+            self.assertFalse(solver.corner_is_placed(corner))
 
 class TestBeginnerSolver(unittest.TestCase):
-    def test_solution(self):
-        pass
+    @timeout_decorator.timeout(10)
+    def _test_solution(self, c):
+        solver = Beginner.BeginnerSolver(c)
+        return solver.solution()
 
+    def test_solution(self):
+        for _ in range(100):
+            c = Cube()
+            cr = Cube()
+            c.shuffle()
+            solution = self._test_solution(c)
+            for cubie in cr.cubies.items():
+                self.assertEqual(cr.cubies[cubie], c.cubies[cubie])

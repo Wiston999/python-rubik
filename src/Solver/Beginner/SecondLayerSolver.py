@@ -23,15 +23,6 @@ class SecondLayerSolver(Solver):
 
     def solution(self):
         solution = []
-        # Place FR and FL
-        # front_color = self.cube.cubies['F'].facings['F']
-        # right_color = self.cube.cubies['R'].facings['R']
-        # left_color = self.cube.cubies['L'].facings['L']
-
-        # goal_fr_cubie = self.cube.search_by_colors(front_color, right_color)
-        # goal_fl_cubie = self.cube.search_by_colors(front_color, left_color)
-
-        # self.move("Y2", solution)
 
         # While there are pending cubies to place
         round = 0
