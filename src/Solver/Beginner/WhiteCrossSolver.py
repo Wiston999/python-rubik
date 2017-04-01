@@ -8,6 +8,7 @@ class WhiteCrossSolver(Solver):
     '''
     @staticmethod
     def first_step(white_facing, color_facing):
+        solution = []
         if white_facing == 'D':
             solution = ["%s2" % color_facing]
         elif white_facing == 'F':

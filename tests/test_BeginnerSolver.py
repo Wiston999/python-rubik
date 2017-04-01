@@ -2,6 +2,7 @@ from src.Move import Move
 from src.Cubie import Cube
 from src.Solver import Beginner
 from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
+from src.Solver.Beginner.WhiteFaceSolver import WhiteFaceSolver
 import unittest
 
 class TestWhiteCrossSolver(unittest.TestCase):
@@ -43,6 +44,48 @@ class TestWhiteCrossSolver(unittest.TestCase):
             self.assertEqual(c.cubies[place].facings['U'], 'W')
             # Weird, but works
             self.assertEqual(c.cubies[place].facings[place.replace('U', '')], 'Y')
+
+class TestWhiteFaceSolver(unittest.TestCase):
+    def test_first_step(self):
+        pass
+
+    def test_second_step(self):
+        # Case 1
+        c = Cube()
+        c.cubies['FRU'].facings['F'] = 'W'
+        c.cubies['FRU'].facings['R'] = 'Y'
+        c.cubies['FRU'].facings['U'] = 'O'
+        steps = WhiteFaceSolver.second_step('F')
+        for s in steps:
+            c.move(Move(s))
+        
+        self.assertEqual(c.cubies['DFR'].facings['D'], 'W')
+        self.assertEqual(c.cubies['DFR'].facings['F'], 'O')
+        self.assertEqual(c.cubies['DFR'].facings['R'], 'Y')
+        # Case 2
+        c = Cube()
+        c.cubies['FRU'].facings['F'] = 'O'
+        c.cubies['FRU'].facings['R'] = 'W'
+        c.cubies['FRU'].facings['U'] = 'Y'
+        steps = WhiteFaceSolver.second_step('R')
+        for s in steps:
+            c.move(Move(s))
+        
+        self.assertEqual(c.cubies['DFR'].facings['D'], 'W')
+        self.assertEqual(c.cubies['DFR'].facings['F'], 'O')
+        self.assertEqual(c.cubies['DFR'].facings['R'], 'Y')
+        # Case 3
+        c = Cube()
+        c.cubies['FRU'].facings['F'] = 'O'
+        c.cubies['FRU'].facings['R'] = 'Y'
+        c.cubies['FRU'].facings['U'] = 'W'
+        steps = WhiteFaceSolver.second_step('U')
+        for s in steps:
+            c.move(Move(s))
+        
+        self.assertEqual(c.cubies['DFR'].facings['D'], 'W')
+        self.assertEqual(c.cubies['DFR'].facings['F'], 'Y')
+        self.assertEqual(c.cubies['DFR'].facings['R'], 'O')
 
 
 class TestBeginnerSolver(unittest.TestCase):
