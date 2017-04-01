@@ -1,7 +1,7 @@
 from src.Move import Move
 from src.Cubie import Cube
 from src.Solver import Beginner
-from src.Solver.Beginner import WhiteCrossSolver
+from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
 import unittest
 
 class TestWhiteCrossSolver(unittest.TestCase):
@@ -31,6 +31,7 @@ class TestWhiteCrossSolver(unittest.TestCase):
 
         for c0, c1 in cases:
             c = Cube()
+            # Use an "imposible" edge to move, so it is not duped in the cube
             c.cubies[c._t_key(c0+c1)].facings[c0].color = 'W'
             c.cubies[c._t_key(c0+c1)].facings[c1].color = 'Y'
 
@@ -39,9 +40,8 @@ class TestWhiteCrossSolver(unittest.TestCase):
                 c.move(Move(step))
 
             place = c.search_by_colors('W', 'Y')
-
             self.assertEqual(c.cubies[place].facings['U'], 'W')
-            # Weird
+            # Weird, but works
             self.assertEqual(c.cubies[place].facings[place.replace('U', '')], 'Y')
 
 

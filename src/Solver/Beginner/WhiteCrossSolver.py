@@ -9,7 +9,7 @@ class WhiteCrossSolver(Solver):
     @staticmethod
     def first_step(white_facing, color_facing):
         if white_facing == 'D':
-            solution = "%s2" % color_facing
+            solution = ["%s2" % color_facing]
         elif white_facing == 'F':
             if color_facing == 'U':
                 solution = ["F", "R", "U'", "R'", "F'"]
@@ -48,7 +48,7 @@ class WhiteCrossSolver(Solver):
                 solution = ["B", "U'", "B'"]
         return solution
 
-        
+
     def solution(self):
         solution = []
         for color in 'RGOB':
