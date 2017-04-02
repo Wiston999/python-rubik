@@ -15,13 +15,14 @@ if __name__ == '__main__':
     p = OpenGLPrinter(c)
     tp = TtyPrinter(c, True)
     c.shuffle()
-    # nc = NaiveCube()
-    # nc.set_cube("OYOYYOGRRBRRGBWRGGWBBRRBYWBWYGOGBOWBWGWYOWYRGOBYOWOYGR")
-    # c.from_naive_cube(nc)
+    nc = NaiveCube()
+    nc.set_cube("wrobyrorbbowybgrwrbwyyrwbryoyyggygowggrboogbwybrowggwo")
+    c.from_naive_cube(nc)
     p.pprint()
     tp.pprint()
 
-    solver = KociembaSolver(c)
+    solver = BeginnerSolver(c)
+    # solver = KociembaSolver(c)
 
     while True:
         m = raw_input('Input move: ')
@@ -33,7 +34,10 @@ if __name__ == '__main__':
             c.shuffle()
         elif m.upper() == 'S':
             print "Solving"
+            start = time.time()
             solution = solver.solution()
+            end = time.time()
+            print "Solved in", (end - start), "seconds"
             print "Solution:", ' '.join(str(m) for m in solution)
             for m in solution:
                 # time.sleep(1)

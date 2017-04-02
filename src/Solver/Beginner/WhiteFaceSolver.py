@@ -63,13 +63,16 @@ class WhiteFaceSolver(Solver):
             
             for move in step_solution:
                 self.cube.move(Move(move))
-            # Cubie is at FRU, place it at DRU with correct orientation
-            solution.extend(step_solution)
-            step_solution = WhiteFaceSolver.second_step(self.cube.cubies['FRU'].color_facing('W'))
 
-            for move in step_solution:
-                self.cube.move(Move(move))
-            solution.extend(step_solution)
+            # If corner is not already well placed and oriented, continue
+            if len(step_solution) > 0 or goal_cubie != 'DFR':
+                # Cubie is at FRU, place it at DRU with correct orientation
+                solution.extend(step_solution)
+                step_solution = WhiteFaceSolver.second_step(self.cube.cubies['FRU'].color_facing('W'))
+
+                for move in step_solution:
+                    self.cube.move(Move(move))
+                solution.extend(step_solution)
             # Cubie is placed, move to next
 
             solution.append('Y')

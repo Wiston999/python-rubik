@@ -29,7 +29,6 @@ class YellowCrossSolver(Solver):
                 self.apply_algorithm(solution)
             # Rotate until line is at RU - LU
             while not (self.cube.cubies['RU'].color_facing('Y') == 'U' and self.cube.cubies['LU'].color_facing('Y') == 'U'):
-                print "while 2"
                 self.move("U", solution)
             # Line position
             self.apply_algorithm(solution)
