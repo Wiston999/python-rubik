@@ -126,7 +126,7 @@ class Search(object):
         Search.flip[0] = c.flip
         Search.twist[0] = c.twist
         Search.parity[0] = c.parity
-        Search.slice[0] = c.FRtoBR / 24
+        Search.slice[0] = int(c.FRtoBR) // 24
         Search.URFtoDLF[0] = c.URFtoDLF
         Search.FRtoBR[0] = c.FRtoBR
         Search.URtoUL[0] = c.URtoUL
@@ -189,9 +189,8 @@ class Search(object):
             # if minDistPhase1 =0, the H subgroup is reached
             mv = 3 * Search.ax[n] + Search.po[n] - 1
             Search.flip[n + 1] = CoordCube.CoordCube.flipMove[Search.flip[n]][mv]
-            Search.twist[n +
-                         1] = CoordCube.CoordCube.twistMove[Search.twist[n]][mv]
-            Search.slice[n + 1] = CoordCube.CoordCube.FRtoBR_Move[Search.slice[n] * 24][mv] / 24
+            Search.twist[n + 1] = CoordCube.CoordCube.twistMove[Search.twist[n]][mv]
+            Search.slice[n + 1] = CoordCube.CoordCube.FRtoBR_Move[Search.slice[n] * 24][mv] // 24
             Search.minDistPhase1[n + 1] = max(
                 CoordCube.CoordCube.getPruning(
                     CoordCube.CoordCube.Slice_Flip_Prun, CoordCube.CoordCube.N_SLICE1 * Search.flip[n + 1] + Search.slice[n + 1]),
@@ -219,12 +218,9 @@ class Search(object):
         maxDepthPhase2 = min(10, maxDepth - depthPhase1)
         for i in range(depthPhase1):
             mv = 3 * Search.ax[i] + Search.po[i] - 1
-            Search.URFtoDLF[i +
-                            1] = CoordCube.CoordCube.URFtoDLF_Move[Search.URFtoDLF[i]][mv]
-            Search.FRtoBR[i +
-                          1] = CoordCube.CoordCube.FRtoBR_Move[Search.FRtoBR[i]][mv]
-            Search.parity[i +
-                          1] = CoordCube.CoordCube.parityMove[Search.parity[i]][mv]
+            Search.URFtoDLF[i + 1] = CoordCube.CoordCube.URFtoDLF_Move[Search.URFtoDLF[i]][mv]
+            Search.FRtoBR[i + 1] = CoordCube.CoordCube.FRtoBR_Move[Search.FRtoBR[i]][mv]
+            Search.parity[i + 1] = CoordCube.CoordCube.parityMove[Search.parity[i]][mv]
 
         d1 = CoordCube.CoordCube.getPruning(
             CoordCube.CoordCube.Slice_URFtoDLF_Parity_Prun,

@@ -94,12 +94,12 @@ class CubieCube(object):
 		'''n choose k'''
 		if n < k:
 			return 0
-		if k > (n / 2):
+		if k > (n // 2):
 			k = n - k
 		s, i, j = 1, n, 1
 		while i != (n - k):
 			s *= i
-			s /= j
+			s //= j
 			
 			i -= 1
 			j += 1
@@ -220,7 +220,7 @@ class CubieCube(object):
 		for i in range(Corner.DRB - 1, Corner.URF - 1, -1):
 			self.co[i] = (twist % 3)
 			twistParity += self.co[i]
-			twist /= 3
+			twist //= 3
 		self.co[Corner.DRB] = (3 - (twistParity % 3)) % 3
 	
 	def getFlip(self):
@@ -236,7 +236,7 @@ class CubieCube(object):
 		for i in range(Edge.BR - 1, Edge.UR - 1, -1):
 			self.eo[i] = (flip % 2)
 			flipParity += self.eo[i]
-			flip /= 2
+			flip //= 2
 		self.eo[Edge.BR] = (2 - (flipParity % 2)) % 2
 		
 	def cornerParity(self):

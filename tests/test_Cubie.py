@@ -29,10 +29,30 @@ class TestSticker(unittest.TestCase):
     def test_eq(self):
         for c in self.allowed_chars:
             s = Cubie.Sticker(c)
-            self.assertEqual(cmp(s, c), cmp(s.color, c)) 
-            self.assertEqual(cmp(c, s), cmp(c, s.color))
-            self.assertEqual(cmp(s, Cubie.Sticker(c.upper())), cmp(s.color, Cubie.Sticker(c.upper()).color))
-            self.assertRaises(TypeError, s.__cmp__, 1)
+            self.assertEqual(s < c, s.color < c)
+            self.assertEqual(s <= c, s.color <= c)
+            self.assertEqual(s > c, s.color > c)
+            self.assertEqual(s >= c, s.color >= c)
+            self.assertEqual(c < s, c < s.color)
+            self.assertEqual(c <= s, c <= s.color)
+            self.assertEqual(c > s, c > s.color)
+            self.assertEqual(c >= s, c >= s.color)
+            self.assertEqual(s < Cubie.Sticker(c.upper()), s.color < Cubie.Sticker(c.upper()).color)
+            self.assertEqual(s <= Cubie.Sticker(c.upper()), s.color <= Cubie.Sticker(c.upper()).color)
+            self.assertEqual(s > Cubie.Sticker(c.upper()), s.color > Cubie.Sticker(c.upper()).color)
+            self.assertEqual(s >= Cubie.Sticker(c.upper()), s.color >= Cubie.Sticker(c.upper()).color)
+
+            with self.assertRaises(TypeError):
+                s < 1
+
+            with self.assertRaises(TypeError):
+                s > 1
+
+            with self.assertRaises(TypeError):
+                s <= 1
+
+            with self.assertRaises(TypeError):
+                s >= 1
 
 class TestCubie(unittest.TestCase):
     allowed_chars = 'bdflru'
@@ -49,9 +69,9 @@ class TestCubie(unittest.TestCase):
 
         for c in self.allowed_chars:
             s = Cubie.Cubie(**{c: 'r'})
-            self.assertEqual(s.facings[c], 'r')
+            self.assertEqual(s.facings[c.upper()], 'r')
             s1 = Cubie.Cubie(**{c.upper(): 'r'})
-            self.assertEqual(s.facings[c], 'r')
+            self.assertEqual(s.facings[c.upper()], 'r')
 
     def test_faces(self):
         c = Cubie.Cubie(F = 'r', B = 'r', U = 'r', D = 'r', L = 'r', R = 'r')

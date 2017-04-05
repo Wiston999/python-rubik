@@ -52,17 +52,17 @@ class TtyPrinter(Printer):
         self.print_down()
 
     def print_upper(self):
-        for i in xrange(self.cube.size * 2 + 1):
+        for i in range(self.cube.size * 2 + 1):
             print(' ' * (self.cube.size * 6), end = '')
             if (i % 2) == 0:
-                for j in xrange(self.cube.size * 2):
+                for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
                         print('|', end = '')
                     else:
                         print('---', end = '')
                 print('|')
             else:
-                for j in xrange(self.cube.size * 2):
+                for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
                         print('|', end = '')
                     else:
@@ -71,16 +71,16 @@ class TtyPrinter(Printer):
                 print('|')
 
     def print_center(self):
-        for i in xrange(self.cube.size * 2 + 1):
+        for i in range(self.cube.size * 2 + 1):
             for face in ['L', 'F', 'R', 'B']:
                 if (i % 2) == 0:
-                    for j in xrange(self.cube.size * 2):
+                    for j in range(self.cube.size * 2):
                         if (j % 2) == 0:
                             print('|', end = '')
                         else:
                             print('---', end = '')
                 else:
-                    for j in xrange(self.cube.size * 2):
+                    for j in range(self.cube.size * 2):
                         if (j % 2) == 0:
                             print('|', end = '')
                         else:
@@ -90,17 +90,17 @@ class TtyPrinter(Printer):
             print()
 
     def print_down(self):
-        for i in xrange(self.cube.size * 2 + 1):
+        for i in range(self.cube.size * 2 + 1):
             print(' ' * (self.cube.size * 6), end = '')
             if (i % 2) == 0:
-                for j in xrange(self.cube.size * 2):
+                for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
                         print('|', end = '')
                     else:
                         print('---', end = '')
                 print('|')
             else:
-                for j in xrange(self.cube.size * 2):
+                for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
                         print('|', end = '')
                     else:

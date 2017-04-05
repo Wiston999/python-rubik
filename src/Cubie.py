@@ -1,7 +1,8 @@
 '''
-Cubie: Implements a Cube and movements at Cubie level
+Implements a Cube and movements at Cubie level
 '''
 import random
+from past.builtins import basestring
 from copy import deepcopy
 from src.Move import Move
 from src.NaiveCube import NaiveCube
@@ -23,14 +24,28 @@ class Sticker(object):
     def __str__(self):
         return self.__repr__()
 
-    def __cmp__(self, o):
+    def __lt__(self, o):
         if isinstance(o, basestring):
-            return cmp(self.color.upper(), o.upper())
+            return self.color.upper() < o.upper()
         elif isinstance(o, Sticker):
-            return cmp(self.color.upper(), o.color.upper())
+            return self.color.upper() < o.color.upper()
         else:
             raise TypeError("Don't know how to compare Sticker with %s" % o.__class__.__name__)
-    
+
+    def __gt__(self, o):
+        if isinstance(o, basestring):
+            return self.color.upper() > o.upper()
+        elif isinstance(o, Sticker):
+            return self.color.upper() > o.color.upper()
+        else:
+            raise TypeError("Don't know how to compare Sticker with %s" % o.__class__.__name__)
+
+    def __le__(self, o):
+        return (self < o) or (self == o)
+
+    def __ge__(self, o):
+        return (self > o) or (self == o)
+
     def __eq__(self, o):
         if isinstance(o, basestring):
             return o.upper() == self.color.upper()
@@ -47,15 +62,14 @@ class Cubie(object):
     COLORS = 'ROGBYW'
 
     def __init__(self, **kwargs):
+        self.facings = {}
         for key, value in kwargs.items():
             key = key.upper()
             if key not in self.FACINGS:
                 raise ValueError("Face %s is not one of %s" %
                                  (key, ', '.join(list(self.FACINGS))))
 
-            kwargs[key] = Sticker(value)
-
-        self.facings = deepcopy(kwargs)
+            self.facings[key] = Sticker(value)
 
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, ', '.join(['%s: %s' % (k, v) for k, v in self.facings.items()]))

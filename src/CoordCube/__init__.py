@@ -29,10 +29,10 @@ class CoordCube(object):
 	# UBtoDF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_UBtoDF )]
 	# MergeURtoULandUBtoDF = [[0 for _ in range(336)] for _ in range( 336 )]
 
-	Slice_URFtoDLF_Parity_Prun = [-1] * (N_SLICE2 * N_URFtoDLF * N_PARITY / 2)
-	Slice_URtoDF_Parity_Prun = [-1] * (N_SLICE2 * N_URtoDF * N_PARITY / 2)
-	Slice_Twist_Prun = [-1] * (N_SLICE1 * N_TWIST / 2 + 1)
-	Slice_Flip_Prun = [-1] * (N_SLICE1 * N_FLIP / 2)
+	Slice_URFtoDLF_Parity_Prun = [-1] * (N_SLICE2 * N_URFtoDLF * N_PARITY // 2)
+	Slice_URtoDF_Parity_Prun = [-1] * (N_SLICE2 * N_URtoDF * N_PARITY // 2)
+	Slice_Twist_Prun = [-1] * (N_SLICE1 * N_TWIST // 2 + 1)
+	Slice_Flip_Prun = [-1] * (N_SLICE1 * N_FLIP // 2)
 	
 	## Parity of the corner permutation. This is the same as the parity for the edge permutation of a valid cube.
 	## parity has values 0 and 1
@@ -44,16 +44,16 @@ class CoordCube(object):
 	@staticmethod
 	def setPruning(table, index, value):
 		if (index & 1) == 0:
-			table[index / 2] &= (0xf0 | value)
+			table[index // 2] &= (0xf0 | value)
 		else:
-			table[index / 2] &= (0x0f | (value << 4))
+			table[index // 2] &= (0x0f | (value << 4))
 			
 	@staticmethod
 	def getPruning(table, index):
 		if (index & 1) == 0:
-			return table[index / 2] & 0x0f
+			return table[index // 2] & 0x0f
 		else:
-			return (table[index / 2] & 0xf0)  >> 4
+			return (table[index // 2] & 0xf0)  >> 4
 	
 	def __init__(self, c):
 		''' c is a CubieCube instance'''
@@ -85,7 +85,7 @@ class CoordCube(object):
 def read_or_func_list(file_name, func):
 	abspath = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
 	if os.path.exists(abspath):
-		return map(int, map(str.strip, open(abspath).read().split(',')))
+		return list(map(int, list(map(str.strip, open(abspath).read().split(',')))))
 	else:
 		ret = func()
 		open(abspath, 'w').write(','.join(str(c) for c in ret))
@@ -94,7 +94,7 @@ def read_or_func_list(file_name, func):
 def read_or_func_matrix(file_name, func):
 	abspath = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
 	if os.path.exists(abspath):
-		return [map(int, map(str.strip, l.split(','))) for l in open(abspath)]
+		return [list(map(int, list(map(str.strip, l.split(','))))) for l in open(abspath)]
 	else:
 		ret = func()
 		open(abspath, 'w').write('\n'.join(','.join(str(c) for c in l) for l in ret))
@@ -198,8 +198,8 @@ def build_slice_urf_to_dlf_parity_prun():
 	while done < CoordCube.N_SLICE2 * CoordCube.N_URFtoDLF * CoordCube.N_PARITY:
 		for i in range(CoordCube.N_SLICE2 * CoordCube.N_URFtoDLF * CoordCube.N_PARITY):
 			parity = i % 2
-			URFtoDLF = (i / 2) / CoordCube.N_SLICE2
-			slice = (i / 2) % CoordCube.N_SLICE2
+			URFtoDLF = (i // 2) // CoordCube.N_SLICE2
+			slice = (i // 2) % CoordCube.N_SLICE2
 			if CoordCube.getPruning(slice_urf_to_dlf_parity_prun, i) == depth:
 				for j in [0, 1, 2, 4, 7, 9, 10, 11, 13, 16]:
 					newSlice = CoordCube.FRtoBR_Move[slice][j]
@@ -219,8 +219,8 @@ def build_slice_ur_to_df_parity_prun():
 	while done != (CoordCube.N_SLICE2 * CoordCube.N_URtoDF * CoordCube.N_PARITY):
 		for i in range(CoordCube.N_SLICE2 * CoordCube.N_URtoDF * CoordCube.N_PARITY):
 			parity = i % 2
-			URtoDF = (i / 2) / CoordCube.N_SLICE2
-			slice = (i / 2) % CoordCube.N_SLICE2
+			URtoDF = (i // 2) // CoordCube.N_SLICE2
+			slice = (i // 2) % CoordCube.N_SLICE2
 			if depth == CoordCube.getPruning(slice_ur_to_df_parity_prun, i):
 				for j in [0, 1, 2, 4, 7, 9, 10, 11, 13, 16]:
 					newSlice = CoordCube.FRtoBR_Move[slice][j]
@@ -238,11 +238,11 @@ def build_slice_twist_prun():
 	done, depth = 1, 0
 	while done < (CoordCube.N_SLICE1 * CoordCube.N_TWIST):
 		for i in range(CoordCube.N_SLICE1 * CoordCube.N_TWIST):
-			twist = i / CoordCube.N_SLICE1
+			twist = i // CoordCube.N_SLICE1
 			slice = i % CoordCube.N_SLICE1
 			if CoordCube.getPruning(slice_twist_prun, i) == depth:
 				for j in range(18):
-					newSlice = CoordCube.FRtoBR_Move[slice * 24][j] / 24
+					newSlice = CoordCube.FRtoBR_Move[slice * 24][j] // 24
 					newTwist = CoordCube.twistMove[twist][j]
 					if CoordCube.getPruning(slice_twist_prun, CoordCube.N_SLICE1 * newTwist + newSlice) == 0x0f:
 						CoordCube.setPruning(slice_twist_prun, CoordCube.N_SLICE1 * newTwist + newSlice, depth + 1)
@@ -256,11 +256,11 @@ def build_slice_flip_prun():
 	done, depth = 1, 0
 	while done < (CoordCube.N_SLICE1 * CoordCube.N_FLIP):
 		for i in range(CoordCube.N_SLICE1 * CoordCube.N_FLIP):
-			flip = i / CoordCube.N_SLICE1
+			flip = i // CoordCube.N_SLICE1
 			slice = i % CoordCube.N_SLICE1
 			if CoordCube.getPruning(slice_flip_prun, i) == depth:
 				for j in range(18):
-					newSlice = CoordCube.FRtoBR_Move[slice * 24][j] / 24
+					newSlice = CoordCube.FRtoBR_Move[slice * 24][j] // 24
 					newFlip = CoordCube.flipMove[flip][j]
 					if CoordCube.getPruning(slice_flip_prun, CoordCube.N_SLICE1 * newFlip + newSlice) == 0x0f:
 						CoordCube.setPruning(slice_flip_prun, CoordCube.N_SLICE1 * newFlip + newSlice, depth + 1)
