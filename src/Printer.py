@@ -53,18 +53,18 @@ class TtyPrinter(Printer):
 
     def print_upper(self):
         for i in range(self.cube.size * 2 + 1):
-            print(' ' * (self.cube.size * 6), end = '')
+            print(' ' * (self.cube.size * 6), end = ' ')
             if (i % 2) == 0:
                 for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print('|', end = '')
+                        print('|', end = ' ')
                     else:
-                        print('---', end = '')
+                        print('---', end = ' ')
                 print('|')
             else:
                 for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print('|', end = '')
+                        print('|', end = ' ')
                     else:
                         self.print_square(
                             int(i / 2), int(j / 2), self.cube.faces['U'].get_colour(int(i / 2), int(j / 2)))
@@ -76,33 +76,33 @@ class TtyPrinter(Printer):
                 if (i % 2) == 0:
                     for j in range(self.cube.size * 2):
                         if (j % 2) == 0:
-                            print('|', end = '')
+                            print('|', end = ' ')
                         else:
-                            print('---', end = '')
+                            print('---', end = ' ')
                 else:
                     for j in range(self.cube.size * 2):
                         if (j % 2) == 0:
-                            print('|', end = '')
+                            print('|', end = ' ')
                         else:
                             self.print_square(
                                 int(i / 2), int(j / 2), self.cube.faces[face].get_colour(int(i / 2), int(j / 2)))
-                print('|', end = '')
+                print('|', end = ' ')
             print()
 
     def print_down(self):
         for i in range(self.cube.size * 2 + 1):
-            print(' ' * (self.cube.size * 6), end = '')
+            print(' ' * (self.cube.size * 6), end = ' ')
             if (i % 2) == 0:
                 for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print('|', end = '')
+                        print('|', end = ' ')
                     else:
-                        print('---', end = '')
+                        print('---', end = ' ')
                 print('|')
             else:
                 for j in range(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print('|', end = '')
+                        print('|', end = ' ')
                     else:
                         self.print_square(
                             int(i / 2), int(j / 2), self.cube.faces['D'].get_colour(int(i / 2), int(j / 2)))
@@ -111,20 +111,20 @@ class TtyPrinter(Printer):
     def print_square(self, x, y, c):
         if self.colours:
             if c == 'w':
-                print(bcolors.WHITE, end = '')
+                print(bcolors.WHITE, end = ' ')
             elif c == 'b':
-                print(bcolors.BLUE, end = '')
+                print(bcolors.BLUE, end = ' ')
             elif c == 'g':
-                print(bcolors.GREEN, end = '')
+                print(bcolors.GREEN, end = ' ')
             elif c == 'r':
-                print(bcolors.RED,)
+                print(bcolors.RED, end = ' ')
             elif c == 'y':
-                print(bcolors.YELLOW, end = '')
+                print(bcolors.YELLOW, end = ' ')
             elif c == 'o':
-                print(bcolors.ORANGE, end = '')
-            print(' ', bcolors.ENDC, end = '')
+                print(bcolors.ORANGE, end = ' ')
+            print(' ', bcolors.ENDC, end = ' ')
         else:
-            print(c.upper(), end = '')
+            print(c.upper(), end = ' ')
 
 
 class OpenGLPrinter(Printer):
