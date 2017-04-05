@@ -158,7 +158,7 @@ class TestBeginnerSolver(unittest.TestCase):
             c = Cube()
             cr = Cube()
             c.shuffle(i)
-            print "Solving", i, "of 100", c.to_naive_cube().get_cube()
+            print("Solving", i, "of 100", c.to_naive_cube().get_cube())
             solution = self._test_solution(c)
             for s in solution:
                 c.move(s)

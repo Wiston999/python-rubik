@@ -1,6 +1,6 @@
 from src.Move import Move
 from src.NaiveCube import NaiveCube
-from src.Cubie import Cube
+from src.Cubie imort Cube
 from src.Solver import Kociemba
 import timeout_decorator
 import unittest

@@ -82,7 +82,6 @@ class TestMove(unittest.TestCase):
         
         m.double = True
         m1 = m.reverse()
-        print m1.raw
         self.assertFalse(m1.clockwise)
         self.assertFalse(m1.counterclockwise)
         self.assertTrue(m1.double)

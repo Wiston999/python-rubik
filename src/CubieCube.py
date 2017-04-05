@@ -628,18 +628,3 @@ CubieCube.moveCube[5].ep = CubieCube.epB[:]
 CubieCube.moveCube[5].eo = CubieCube.eoB[:]
 
 import FaceCube
-
-if __name__ == '__main__':
-	cube = CubieCube()
-
-	print "CPB", cube.epB
-	print "CPD", cube.epD
-	print "CPF", cube.epF
-	print "CPL", cube.epL
-	print "CPR", cube.epR
-	print "CPU", cube.epU
-
-	print cube.co
-	print cube.eo
-	print vars(cube)
-	

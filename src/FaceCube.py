@@ -115,9 +115,3 @@ class FaceCube(object):
 					break
 		return ccRet
 		
-if __name__ == '__main__':
-	cube = FaceCube("RDRDULBBFUUDBRBBRLRURRFLBFDULLDDFDUFDBUFLUFLLBRFRBDUFL")
-	cc = cube.toCubieCube()
-	print cc.co
-	print cc.eo
-	print vars(cube)

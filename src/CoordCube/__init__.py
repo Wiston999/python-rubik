@@ -291,8 +291,3 @@ CoordCube.Slice_URtoDF_Parity_Prun = read_or_func_list('slice_ur_to_df_parity_pr
 CoordCube.Slice_Twist_Prun = read_or_func_list('slice_twist_prun.csv', build_slice_twist_prun)
 
 CoordCube.Slice_Flip_Prun = read_or_func_list('slice_flip_prun.csv', build_slice_flip_prun)
-
-if __name__ == '__main__':
-	c = CubieCube()
-	cube = CoordCube(c)
-	print vars(cube)

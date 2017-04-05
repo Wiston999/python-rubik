@@ -342,13 +342,3 @@ class Search(object):
                 break
 
         return depthPhase1 + depthPhase2
-
-
-if __name__ == '__main__':
-    print 'obbwyyrgo wywbbgrro wwryogbyr oywogbgyr grborbygw ogbrwygwo'.replace('w', 'D').replace('y', 'U').replace('g', 'R').replace('o', 'F').replace('r', 'B').replace('b', 'L')
-    print Search.solution(
-        "RDRDULBBFUUDBRBBRLRURRFLBFDULLDDFDUFDBUFLUFLLBRFRBDUFL",
-        30,
-        100,
-        True
-    )

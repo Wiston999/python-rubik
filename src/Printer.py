@@ -5,7 +5,7 @@ try:
     OPENGLENABLED = True
 except ImportError as e:
     OPENGLENABLED = False
-    print "Unable to open OpenGL, OpenGLPrinter won't be available:", e
+    print("Unable to open OpenGL, OpenGLPrinter won't be available:", e)
 
 import time
 import math
@@ -52,22 +52,22 @@ class TtyPrinter(Printer):
 
     def print_upper(self):
         for i in xrange(self.cube.size * 2 + 1):
-            print ' ' * (self.cube.size * 6),
+            print(' ' * (self.cube.size * 6), end = '')
             if (i % 2) == 0:
                 for j in xrange(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print '|',
+                        print('|', end = '')
                     else:
-                        print '---',
-                print '|'
+                        print('---', end = '')
+                print('|')
             else:
                 for j in xrange(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print '|',
+                        print('|', end = '')
                     else:
                         self.print_square(
                             int(i / 2), int(j / 2), self.cube.faces['U'].get_colour(int(i / 2), int(j / 2)))
-                print '|'
+                print('|')
 
     def print_center(self):
         for i in xrange(self.cube.size * 2 + 1):
@@ -75,55 +75,55 @@ class TtyPrinter(Printer):
                 if (i % 2) == 0:
                     for j in xrange(self.cube.size * 2):
                         if (j % 2) == 0:
-                            print '|',
+                            print('|', end = '')
                         else:
-                            print '---',
+                            print('---', end = '')
                 else:
                     for j in xrange(self.cube.size * 2):
                         if (j % 2) == 0:
-                            print '|',
+                            print('|', end = '')
                         else:
                             self.print_square(
                                 int(i / 2), int(j / 2), self.cube.faces[face].get_colour(int(i / 2), int(j / 2)))
-                print '|',
-            print
+                print('|', end = '')
+            print()
 
     def print_down(self):
         for i in xrange(self.cube.size * 2 + 1):
-            print ' ' * (self.cube.size * 6),
+            print(' ' * (self.cube.size * 6), end = '')
             if (i % 2) == 0:
                 for j in xrange(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print '|',
+                        print('|', end = '')
                     else:
-                        print '---',
-                print '|'
+                        print('---', end = '')
+                print('|')
             else:
                 for j in xrange(self.cube.size * 2):
                     if (j % 2) == 0:
-                        print '|',
+                        print('|', end = '')
                     else:
                         self.print_square(
                             int(i / 2), int(j / 2), self.cube.faces['D'].get_colour(int(i / 2), int(j / 2)))
-                print '|'
+                print('|')
 
     def print_square(self, x, y, c):
         if self.colours:
             if c == 'w':
-                print bcolors.WHITE,
+                print(bcolors.WHITE, end = '')
             elif c == 'b':
-                print bcolors.BLUE,
+                print(bcolors.BLUE, end = '')
             elif c == 'g':
-                print bcolors.GREEN,
+                print(bcolors.GREEN, end = '')
             elif c == 'r':
-                print bcolors.RED,
+                print(bcolors.RED,)
             elif c == 'y':
-                print bcolors.YELLOW,
+                print(bcolors.YELLOW, end = '')
             elif c == 'o':
-                print bcolors.ORANGE,
-            print ' ', bcolors.ENDC,
+                print(bcolors.ORANGE, end = '')
+            print(' ', bcolors.ENDC, end = '')
         else:
-            print c.upper(),
+            print(c.upper(), end = '')
 
 
 class OpenGLPrinter(Printer):
