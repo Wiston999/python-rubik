@@ -1,4 +1,5 @@
 from src.Move import Move
+from src.NaiveCube import NaiveCube
 from src.Cubie import Cube
 from src.Solver import Kociemba
 import timeout_decorator
@@ -6,7 +7,7 @@ import unittest
 
 
 class TestKociembaSolver(unittest.TestCase):
-    @timeout_decorator.timeout(10)
+    @timeout_decorator.timeout(300)
     def _test_solution(self, c):
         solver = Kociemba.KociembaSolver(c)
         return solver.solution()
@@ -16,7 +17,6 @@ class TestKociembaSolver(unittest.TestCase):
             c = Cube()
             cr = Cube()
             c.shuffle(i)
-            print "Solving", i, "of 100", c.to_naive_cube().get_cube()
             solution = self._test_solution(c)
             for s in solution:
                 c.move(s)
@@ -27,3 +27,12 @@ class TestKociembaSolver(unittest.TestCase):
             for cubie in cr.cubies:
                 for facing in cr.cubies[cubie].facings:
                     self.assertEqual(cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing])
+
+    def test_timeout(self):
+        c = Cube()
+        nc = NaiveCube()
+        nc.set_cube("orgyyybbbwgobbbyrywowwrwrwyrorogboogwygyorrwobrggwgbgy")
+        c.from_naive_cube(nc)
+        with self.assertRaises(Kociemba.Search.TimeoutError):
+            solver = Kociemba.KociembaSolver(c)
+            solver.solution(timeOut = 1)

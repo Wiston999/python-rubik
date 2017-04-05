@@ -15,14 +15,11 @@ if __name__ == '__main__':
     p = OpenGLPrinter(c)
     tp = TtyPrinter(c, True)
     c.shuffle()
-    nc = NaiveCube()
-    nc.set_cube("wrobyrorbbowybgrwrbwyyrwbryoyyggygowggrboogbwybrowggwo")
-    c.from_naive_cube(nc)
     p.pprint()
     tp.pprint()
 
     solver = BeginnerSolver(c)
-    # solver = KociembaSolver(c)
+    solver = KociembaSolver(c)
 
     while True:
         m = raw_input('Input move: ')
