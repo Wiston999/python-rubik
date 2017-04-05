@@ -147,5 +147,5 @@ class TestMove(unittest.TestCase):
         self.assertEqual(Move("f'") * 2, Move("f2"))
         self.assertEqual(Move("f'") * 3, Move("f"))
 
-        self.assertEqual(Move("f2") * 2, Move("f"))
-        self.assertEqual(Move("f2") * 4, Move("f'"))
+        self.assertIsNone(Move("f2") * 2)
+        self.assertIsNone(Move("f2") * 4)

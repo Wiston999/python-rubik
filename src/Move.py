@@ -70,6 +70,8 @@ class Move(object):
     def __add__(self, move):
         if isinstance(move, (str, unicode)):
             return self + Move(move)
+        elif move is None:
+            return self
         elif isinstance(move, Move):
             if self.face != move.face:
                 raise ValueError("Only same faces can be added")
@@ -83,6 +85,7 @@ class Move(object):
                 (self.clockwise + (self.double * 2) + (self.counterclockwise * 3)) +
                 (move.clockwise + (move.double * 2) + (move.counterclockwise * 3))
             ) % 4
+
             if offset == 0:
                 return None
 
@@ -91,10 +94,10 @@ class Move(object):
             raise ValueError("Unable to add %s and %s" %(self.raw, str(move)))
 
     def __mul__(self, times):
-        if (times % 4) == 0:
-            return None
         move = Move(self.raw)
-        for _ in range((times % 4)-1):
-            move += Move(self.raw)
+        offset = ((self.clockwise + (self.double * 2) + (self.counterclockwise * 3)) * times % 4)
 
-        return move
+        if offset == 0:
+            return None
+
+        return Move(self.face + [None, "", "2", "'"][offset])

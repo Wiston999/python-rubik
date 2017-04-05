@@ -20,14 +20,14 @@ class CoordCube(object):
 	
 	N_MOVE = 18
 
-	twistMove = [[0 for _ in range(N_MOVE)] for _ in range( N_TWIST )]	## CUIDADO CON LAS REFERENCIAS
-	flipMove = [[0 for _ in range(N_MOVE)] for _ in range( N_FLIP )]
-	FRtoBR_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_FRtoBR )]
-	URFtoDLF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_URFtoDLF )]
-	URtoDF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_URtoDF )]
-	URtoUL_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_URtoUL )]
-	UBtoDF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_UBtoDF )]
-	MergeURtoULandUBtoDF = [[0 for _ in range(336)] for _ in range( 336 )]
+	# twistMove = [[0 for _ in range(N_MOVE)] for _ in range( N_TWIST )]	## CUIDADO CON LAS REFERENCIAS
+	# flipMove = [[0 for _ in range(N_MOVE)] for _ in range( N_FLIP )]
+	# FRtoBR_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_FRtoBR )]
+	# URFtoDLF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_URFtoDLF )]
+	# URtoDF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_URtoDF )]
+	# URtoUL_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_URtoUL )]
+	# UBtoDF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_UBtoDF )]
+	# MergeURtoULandUBtoDF = [[0 for _ in range(336)] for _ in range( 336 )]
 
 	Slice_URFtoDLF_Parity_Prun = [-1] * (N_SLICE2 * N_URFtoDLF * N_PARITY / 2)
 	Slice_URtoDF_Parity_Prun = [-1] * (N_SLICE2 * N_URtoDF * N_PARITY / 2)
