@@ -6,7 +6,6 @@ try:
     OPENGLENABLED = True
 except ImportError as e:
     OPENGLENABLED = False
-    print("Unable to open OpenGL, OpenGLPrinter won't be available:", e)
 
 import time
 import math
