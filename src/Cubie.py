@@ -223,8 +223,17 @@ class Cube(object):
         ],
         'Z': [
 
+        ],
+        'M': [
+
+        ],
+        'E': [
+
+        ],
+        'S': [
+
         ]
-    }
+}
 
     def __init__(self, size=3):
         self.__reset_cube()
@@ -351,5 +360,16 @@ Cube.MOVES['Z'].extend([
     ('L', 'U'),
 ])
 
+Cube.MOVES['M'].extend(Cube.move_changes(Move("X'")))
+Cube.MOVES['M'].extend(Cube.move_changes(Move("R")))
+Cube.MOVES['M'].extend(Cube.move_changes(Move("L'")))
+
+Cube.MOVES['E'].extend(Cube.move_changes(Move("Y'")))
+Cube.MOVES['E'].extend(Cube.move_changes(Move("U")))
+Cube.MOVES['E'].extend(Cube.move_changes(Move("D'")))
+
+Cube.MOVES['S'].extend(Cube.move_changes(Move("Z")))
+Cube.MOVES['S'].extend(Cube.move_changes(Move("F'")))
+Cube.MOVES['S'].extend(Cube.move_changes(Move("B")))
 
 
