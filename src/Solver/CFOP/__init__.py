@@ -12,5 +12,5 @@ class CFOPSolver(Solver):
         solution = WhiteCrossSolver.WhiteCrossSolver(cube).solution()
         solution += F2LSolver.F2LSolver(cube).solution()
         # solution += OLLSolver.OLLSolver(cube).solution()
-        # solution *= PLLSolver.PLLSolver(cube).solution()
+        # solution += PLLSolver.PLLSolver(cube).solution()
         return [Move(m) for m in solution]

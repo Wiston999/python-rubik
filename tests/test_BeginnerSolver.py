@@ -69,7 +69,7 @@ class TestWhiteFaceSolver(unittest.TestCase):
                 c.cubies[goal].facings[goal[(i + 1) % 3]] = 'Y'
                 c.cubies[goal].facings[goal[(i + 2) % 3]] = 'O'
             
-                steps = solver.first_step(goal)
+                steps = WhiteFaceSolver.first_step(goal, goal[i % 3])
                 
                 for s in steps:
                     c.move(Move(s))

@@ -74,6 +74,10 @@ class F2LSolver(Solver):
         print ("Searching for", corner, edge)
         return F2LSolver.STEPS[corner][edge]
 
+    def move(self, s, solution):
+        self.cube.move(Move(s))
+        solution.append(s)
+
     def solution(self):
         solution = []
         for _ in range(4):
@@ -91,7 +95,30 @@ class F2LSolver(Solver):
             for s in step_solution:
                 self.cube.move(Move(s))
             pprint.pprint()
+            edge = self.cube.search_by_colors(front_color, right_color)
+
+            # If edge is in BL or BR, WAF!, this case is not expected in any manual
+            if edge == 'BL':
+                # Extract edge from BL
+                self.move("B'", solution)
+                self.move("U'", solution)
+                self.move("B", solution)
+            elif edge == 'BR':
+                self.move("B", solution)
+                self.move("U", solution)
+                self.move("B'", solution)
+            elif edge == 'LF':
+                self.move("L'", solution)
+                self.move("U'", solution)
+                self.move("L", solution)
+
             corner = self.cube.search_by_colors(front_color, right_color, 'W')
+            #Place corner in FRU if needed
+            if 'U' in corner:
+                while corner != 'FRU':
+                    self.move("U", solution)
+                    corner = self.cube.search_by_colors(front_color, right_color, 'W')
+
             edge = self.cube.search_by_colors(front_color, right_color)
 
             corner_facings = ''.join([
