@@ -5,6 +5,7 @@ import time
 from src.Move import Move
 from src.Printer import TtyPrinter, OpenGLPrinter
 from src.Solver.Kociemba import KociembaSolver
+from src.Solver.CFOP import CFOPSolver
 from src.Solver.Beginner import BeginnerSolver
 from src.Cubie import Cube
 from src.Move import Move
@@ -18,7 +19,7 @@ def select_solver(s, cube):
     if s == 'Beginner':
        solver = BeginnerSolver(cube)
     elif s == 'CFOP':
-        pass
+        solver = CFOPSolver(cube)
     elif s == 'Kociemba':
         solver = KociembaSolver(cube)
     else:

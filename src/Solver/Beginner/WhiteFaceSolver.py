@@ -6,28 +6,28 @@ class WhiteFaceSolver(Solver):
     '''
     This solves the down face with the white color
     '''
-    def first_step(self, goal_cubie):
+    @staticmethod
+    def first_step(goal_cubie, white_facing):
         solution = []
-        goal_cubie_obj = self.cube.cubies[goal_cubie]
         if goal_cubie == 'DFR':
-            if goal_cubie_obj.color_facing('W') == 'F':
+            if white_facing == 'F':
                 solution = ["R", "U'", "R'"]
-            elif goal_cubie_obj.color_facing('W') == 'R':
+            elif white_facing == 'R':
                 solution = ["R", "U", "R'", "U'"]
         elif goal_cubie == 'DFL':
-            if goal_cubie_obj.color_facing('W') == 'F':
+            if white_facing == 'F':
                 solution = ["L'", "U", "L", "U'"]
-            elif goal_cubie_obj.color_facing('W') in ['L', 'D']:
+            elif white_facing in ['L', 'D']:
                 solution = ["L'", "U'", "L"]
         elif goal_cubie == 'BDL':
-            if goal_cubie_obj.color_facing('W') in ['B', 'D']:
+            if white_facing in ['B', 'D']:
                 solution = ["B'", "U2", "B"]
-            elif goal_cubie_obj.color_facing('W') == 'L':
+            elif white_facing == 'L':
                 solution = ["B'", "U", "B", "U2"]
         elif goal_cubie == 'BDR':
-            if goal_cubie_obj.color_facing('W') in ['B', 'D']:
+            if white_facing in ['B', 'D']:
                 solution = ["B", "U", "B'"]
-            elif goal_cubie_obj.color_facing('W') == 'R':
+            elif white_facing == 'R':
                 solution = ["B", "U'", "B'", "U"]
         # Cubie is in upper face, place it on FRU
         elif goal_cubie == 'BRU':
@@ -58,9 +58,10 @@ class WhiteFaceSolver(Solver):
             right_color = self.cube.cubies['R'].facings['R']
 
             goal_cubie = self.cube.search_by_colors('W', front_color, right_color)
+            goal_cubie_obj = self.cube.cubies[goal_cubie]
 
-            step_solution = self.first_step(goal_cubie)
-            
+            step_solution = WhiteFaceSolver.first_step(goal_cubie, goal_cubie_obj.color_facing('W'))
+
             for move in step_solution:
                 self.cube.move(Move(move))
 
