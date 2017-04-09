@@ -3,7 +3,7 @@ import string
 import unittest
 
 class TestMove(unittest.TestCase):
-    allowed_moves = 'fblrudxyz'
+    allowed_moves = 'fblrudxyzmse'
     def test_init(self):
         for c in string.ascii_lowercase:
             if c in self.allowed_moves:

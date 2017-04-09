@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     while True:
         m = raw_input('Input move: ')
-        if re.match("[RLBFUDXYZ]'?2?", m, re.I):
+        if re.match("[RLBFUDXYZMSE]'?2?$", m, re.I):
             c.move(Move(m))
             tp.pprint()
         elif m.upper().startswith('CH'):
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         elif m.upper() == 'SH':
             print("Shuffling")
             c.shuffle()
-        elif m.upper() == 'S':
+        elif m.upper() == 'SO':
             print("Solving with", solver.__class__.__name__, "solver") 
             start = time.time()
             solution = solver.solution()

@@ -77,7 +77,6 @@ class F2LSolver(Solver):
             3rd letter: where the bottom color (cubie B, usually white) is facing in the corner to move
         The same applies with the edge variable
         '''
-        print ("Searching for", corner, edge)
         return F2LSolver.STEPS[corner][edge]
 
     def move(self, s, solution):

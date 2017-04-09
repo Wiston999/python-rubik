@@ -191,7 +191,7 @@ class TestCube(unittest.TestCase):
                 or_cubie = cr.cubies[Cubie.Cube._t_key(orig)]
                 dest_cubie = c.cubies[Cubie.Cube._t_key(dest)]
                 for i in range(len(dest)):
-                    self.assertEqual(or_cubie.facings[orig[i]], dest_cubie.facings[dest[i]])
+                    self.assertEqual(or_cubie.facings[orig[i]], dest_cubie.facings[dest[i]], msg = "Fail in move %s" % m)
             
             # Check the rest of cubies aren't moved
             for cubie in Cubie.Cube.CUBIES:

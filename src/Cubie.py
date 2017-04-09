@@ -319,37 +319,29 @@ class Cube(object):
                 return key
         return None
 
-
-# Build Cube Axis MOVES
-Cube.MOVES['X'].extend(Cube.move_changes(Move("R")))
-Cube.MOVES['X'].extend(Cube.move_changes(Move("L'")))
-Cube.MOVES['X'].extend([
-    ('FU', 'UB'),
-    ('UB', 'BD'),
-    ('BD', 'DF'),
-    ('DF', 'FU'),
-    ('F', 'U'),
-    ('U', 'B'),
-    ('B', 'D'),
-    ('D', 'F'),
+Cube.MOVES['M'].extend([
+    ('UB', 'FU'),
+    ('BD', 'UB'),
+    ('DF', 'BD'),
+    ('FU', 'DF'),
+    ('U', 'F'),
+    ('B', 'U'),
+    ('D', 'B'),
+    ('F', 'D'),
 ])
 
-Cube.MOVES['Y'].extend(Cube.move_changes(Move("U")))
-Cube.MOVES['Y'].extend(Cube.move_changes(Move("D'")))
-Cube.MOVES['Y'].extend([
-    ('FR', 'LF'),
-    ('LF', 'BL'),
-    ('BL', 'RB'),
-    ('RB', 'FR'),
-    ('F', 'L'),
-    ('L', 'B'),
-    ('B', 'R'),
-    ('R', 'F'),
+Cube.MOVES['E'].extend([
+    ('LF', 'FR'),
+    ('BL', 'LF'),
+    ('RB', 'BL'),
+    ('FR', 'RB'),
+    ('L', 'F'),
+    ('B', 'L'),
+    ('R', 'B'),
+    ('F', 'R'),
 ])
 
-Cube.MOVES['Z'].extend(Cube.move_changes(Move("F")))
-Cube.MOVES['Z'].extend(Cube.move_changes(Move("B'")))
-Cube.MOVES['Z'].extend([
+Cube.MOVES['S'].extend([
     ('UL', 'RU'),
     ('RU', 'DR'),
     ('DR', 'LD'),
@@ -360,16 +352,16 @@ Cube.MOVES['Z'].extend([
     ('L', 'U'),
 ])
 
-Cube.MOVES['M'].extend(Cube.move_changes(Move("X'")))
-Cube.MOVES['M'].extend(Cube.move_changes(Move("R")))
-Cube.MOVES['M'].extend(Cube.move_changes(Move("L'")))
 
-Cube.MOVES['E'].extend(Cube.move_changes(Move("Y'")))
-Cube.MOVES['E'].extend(Cube.move_changes(Move("U")))
-Cube.MOVES['E'].extend(Cube.move_changes(Move("D'")))
+# Build Cube Axis MOVES
+Cube.MOVES['X'].extend(Cube.move_changes(Move("R")))
+Cube.MOVES['X'].extend(Cube.move_changes(Move("L'")))
+Cube.MOVES['X'].extend(Cube.move_changes(Move("M'")))
 
-Cube.MOVES['S'].extend(Cube.move_changes(Move("Z")))
-Cube.MOVES['S'].extend(Cube.move_changes(Move("F'")))
-Cube.MOVES['S'].extend(Cube.move_changes(Move("B")))
+Cube.MOVES['Y'].extend(Cube.move_changes(Move("U")))
+Cube.MOVES['Y'].extend(Cube.move_changes(Move("D'")))
+Cube.MOVES['Y'].extend(Cube.move_changes(Move("E'")))
 
-
+Cube.MOVES['Z'].extend(Cube.move_changes(Move("F")))
+Cube.MOVES['Z'].extend(Cube.move_changes(Move("B'")))
+Cube.MOVES['Z'].extend(Cube.move_changes(Move("S")))

@@ -2,6 +2,7 @@ from src.Move import Move
 from src.Cubie import Cube
 from src.Solver import CFOP
 from src.Solver.CFOP.F2LSolver import F2LSolver
+from src.Solver.CFOP.OLLSolver import OLLSolver
 from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
 import timeout_decorator
 import unittest
@@ -51,7 +52,7 @@ class TestF2LSolver(unittest.TestCase):
         return solver.solution()
 
     def test_solution(self):
-        for i in range(500):
+        for i in range(1):
             c = Cube()
             cr = Cube()
             c.shuffle(i)
@@ -67,6 +68,30 @@ class TestF2LSolver(unittest.TestCase):
                     if 'U' not in cubie:
                         self.assertEqual(cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing])
 
+class TestOLLSolver(unittest.TestCase):
+    def test_steps(self):
+        for orientation, steps in OLLSolver.STEPS.items():
+            c = Cube()
+            for i, cubie in enumerate(['BLU', 'BU', 'BRU', 'LU', 'U', 'RU', 'FLU', 'FU', 'FRU']):
+                for facing in cubie:
+                    if facing == orientation[i]:
+                        c.cubies[cubie].facings[facing].color = 'Y'
+                    else:
+                        c.cubies[cubie].facings[facing].color = 'W'
+
+            for s in steps:
+                c.move(Move(s))
+            from src.Printer import TtyPrinter
+            pprint = TtyPrinter(c, True)
+            pprint.pprint()
+
+            for i, cubie in enumerate(['BLU', 'BU', 'BRU', 'LU', 'U', 'RU', 'FLU', 'FU', 'FRU']):
+                self.assertEqual(c.cubies[cubie].facings['U'].color, 'Y', msg = '%s != %s -> Fail OLL with %s orientation on cubie %s' % (
+                    c.cubies[cubie].facings['U'],
+                    'Y',
+                    orientation,
+                    cubie
+                ))
 
 class TestCFOPSolver(unittest.TestCase):
     @timeout_decorator.timeout(300)
