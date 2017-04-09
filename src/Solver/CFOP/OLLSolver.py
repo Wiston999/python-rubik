@@ -77,11 +77,7 @@ class OLLSolver(Solver):
         ])
     @staticmethod
     def get_step(cube):
-        for _ in range(4):
-            orientation = OLLSolver.get_orientations(cube)
-            if orientation in OLLSolver.STEPS:
-                return OLLSolver.STEPS[orientation]
-        return None
+        return OLLSolver.STEPS[orientation]
 
     def move(self, s, solution):
         self.cube.move(Move(s))
@@ -89,4 +85,9 @@ class OLLSolver(Solver):
 
     def solution(self):
         solution = []
-        return solution
+        for _ in range(4):
+            orientation = OLLSolver.get_orientations(self.cube)
+            if orientation in OLLSolver.STEPS:
+                solution.extend(OLLSolver.STEPS[orientation])
+            self.move("Y", solution)
+        return solution 
