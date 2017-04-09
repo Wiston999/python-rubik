@@ -91,5 +91,6 @@ class OLLSolver(Solver):
                 step_solution = OLLSolver.STEPS[orientation]
                 for s in step_solution:
                     self.move(s, solution)
+                break
             self.move("Y", solution)
         return solution 
