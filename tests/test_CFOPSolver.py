@@ -52,7 +52,7 @@ class TestF2LSolver(unittest.TestCase):
         return solver.solution()
 
     def test_solution(self):
-        for i in range(1):
+        for i in range(500):
             c = Cube()
             cr = Cube()
             c.shuffle(i)
