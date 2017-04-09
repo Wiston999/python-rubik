@@ -88,6 +88,8 @@ class OLLSolver(Solver):
         for _ in range(4):
             orientation = OLLSolver.get_orientations(self.cube)
             if orientation in OLLSolver.STEPS:
-                solution.extend(OLLSolver.STEPS[orientation])
+                step_solution = OLLSolver.STEPS[orientation]
+                for s in step_solution:
+                    self.move(s, solution)
             self.move("Y", solution)
         return solution 
