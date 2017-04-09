@@ -81,9 +81,6 @@ class TestOLLSolver(unittest.TestCase):
 
             for s in steps:
                 c.move(Move(s))
-            from src.Printer import TtyPrinter
-            pprint = TtyPrinter(c, True)
-            pprint.pprint()
 
             for i, cubie in enumerate(['BLU', 'BU', 'BRU', 'LU', 'U', 'RU', 'FLU', 'FU', 'FRU']):
                 self.assertEqual(c.cubies[cubie].facings['U'].color, 'Y', msg = '%s != %s -> Fail OLL with %s orientation on cubie %s' % (
