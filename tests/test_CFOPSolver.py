@@ -1,8 +1,10 @@
 from src.Move import Move
 from src.Cubie import Cube
+from src.Cubie import Cubie
 from src.Solver import CFOP
 from src.Solver.CFOP.F2LSolver import F2LSolver
 from src.Solver.CFOP.OLLSolver import OLLSolver
+from src.Solver.CFOP.PLLSolver import PLLSolver
 from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
 import timeout_decorator
 import unittest
@@ -86,6 +88,42 @@ class TestOLLSolver(unittest.TestCase):
                 self.assertEqual(c.cubies[cubie].facings['U'].color, 'Y', msg = '%s != %s -> Fail OLL with %s orientation on cubie %s' % (
                     c.cubies[cubie].facings['U'],
                     'Y',
+                    orientation,
+                    cubie
+                ))
+
+class TestPLLSolver(unittest.TestCase):
+    def test_steps(self):
+        cubies = ['BLU', 'BU', 'BRU', 'LU', 'U', 'RU', 'FLU', 'FU', 'FRU']
+        orientations = {
+            2: {'1': 'BU', '3': 'LU', '5': 'RU', '7': 'FU'},
+            3: {'0': 'BLU', '2': 'RBU', '6': 'LFU', '8': 'FRU'}
+        }
+        cr = Cube()
+        for orientation, steps in PLLSolver.STEPS.items():
+            c = Cube()
+            for i, oriented in enumerate(orientation):
+                if i != 4: # The center cubie doesn't need to be relocated
+                    cubie_or = cubies[i]
+                    cubie_dest = cubies[int(oriented)]
+                    orient_or = orientations[len(cubie_or)][str(i)]
+                    orient_dest = orientations[len(cubie_or)][oriented]
+                    kwargs = {}
+                    for j, orient in enumerate(orient_or):
+                        kwargs[orient_dest[j]] = cr.cubies[cubie_or].facings[orient].color
+                    c.cubies[cubie_dest] = Cubie(**kwargs)
+
+            for s in steps:
+                c.move(Move(s))
+
+            while cr.cubies['F'].facings['F'] != c.cubies['F'].facings['F']:
+                c.move(Move('Y'))
+
+            for cubie in cr.cubies:
+                for facing in cr.cubies[cubie].facings:
+                    self.assertEqual(cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing], msg = '%s != %s -> Fail PLL with %s orientation on cubie %s' % (
+                    cr.cubies[cubie].facings[facing].color,
+                    c.cubies[cubie].facings[facing].color,
                     orientation,
                     cubie
                 ))
