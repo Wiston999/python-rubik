@@ -312,7 +312,7 @@ class Cube(object):
         return sequence
 
     def search_by_colors(self, *args):
-        args = tuple(sorted(map(str.upper, map(str, args))))
+        args = tuple(sorted(set(map(str.upper, map(str, args)))))
         for key, cubie in self.cubies.items():
             cubie_colors = tuple(sorted([str(c).upper() for c in cubie.facings.values()]))
             if args == cubie_colors:
