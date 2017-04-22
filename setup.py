@@ -15,10 +15,12 @@ install_reqs = [str(r.req) for r in parse_requirements('requirements.txt', sessi
 
 setup(
     name='rubik_solver',
-    version='0.0.1',
+    author='Victor Cabezas',
+    author_email='wiston666@gmail.com',
+    version='0.0.2',
     description='Rubik solver algorithms',
     long_description=long_description,
-    url='',
+    url='https://github.com/Wiston999/python-rubik',
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -33,8 +35,11 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6'
     ],
 
     # You can just specify the packages manually here if your project is
