@@ -46,14 +46,18 @@ class PLLSolver(Solver):
 
     def solution(self):
         solution = []
-        for i in range(4):
-            self.move('U', solution)
-            for j in range(4):
-                self.move('Y', solution)
-                orientation = PLLSolver.get_orientations(self.cube)
+        while True:
+            for i in range(4):
+                self.move('U', solution)
+                for j in range(4):
+                    self.move('Y', solution)
+                    orientation = PLLSolver.get_orientations(self.cube)
 
-                if orientation in PLLSolver.STEPS:
-                    for s in PLLSolver.STEPS[orientation]:
-                        self.move(s, solution)
-                    return solution
+                    if orientation in PLLSolver.STEPS:
+                        for s in PLLSolver.STEPS[orientation]:
+                            self.move(s, solution)
+                        return solution
+            # Apply shortest and expect to be solvable after that
+            for s in PLLSolver.STEPS["072543618"]:
+                self.move(s, solution)
         return []
