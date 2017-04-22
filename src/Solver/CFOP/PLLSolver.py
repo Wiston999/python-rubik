@@ -32,7 +32,6 @@ class PLLSolver(Solver):
         orientation = []
         for cubie in cubies:
             o = PLLSolver.get_correct_cubie(cube, cubie)
-            print ("Busca", o)
             orientation.append(str(cubies.index(o)))
         return ''.join(orientation)
 
@@ -43,41 +42,18 @@ class PLLSolver(Solver):
     @staticmethod
     def get_correct_cubie(cube, cubie):
         colors = [cube.cubies[c].facings[c].color for c in cubie.replace('U', '')]
-        print ("Busco", colors)
         return cube.search_by_colors('Y', *colors)
-
-    def is_solved(self):
-        return PLLSolver.get_orientations(self.cube) == '012345678'
-
-    @staticmethod
-    def count_well_placed(cube, position):
-        result = []
-        cube_orientation = PLLSolver.get_orientations(cube)
-        for i, step in enumerate(position):
-            if i == int(step) and i == int(cube_orientation[i]):
-                result.append(i)
-
-        return result
-
-    def get_next_step(self):
-        for position in PLLSolver.STEPS:
-            max_well_placed = max([len(PLLSolver.count_well_placed(self.cube, orientation)) for orientation in PLLSolver.STEPS])
-            if max_well_placed == 9:
-                raise StopIteration()
-            yield min(
-                [steps for key, steps in PLLSolver.STEPS.items() if len(PLLSolver.count_well_placed(self.cube, key)) == max_well_placed],
-                key = len)
-        raise StopIteration()
 
     def solution(self):
         solution = []
-        for step_solution in self.get_next_step():
-            from src.Printer import TtyPrinter
-            pprint = TtyPrinter(self.cube, True)
-            pprint.pprint()
-            print (step_solution)
-            for s in step_solution:
-                self.move(s, solution)
-                if self.is_solved():
-                    break
-        return solution
+        for i in range(4):
+            self.move('U', solution)
+            for j in range(4):
+                self.move('Y', solution)
+                orientation = PLLSolver.get_orientations(self.cube)
+
+                if orientation in PLLSolver.STEPS:
+                    for s in PLLSolver.STEPS[orientation]:
+                        self.move(s, solution)
+                    return solution
+        return []

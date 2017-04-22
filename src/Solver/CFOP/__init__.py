@@ -13,4 +13,7 @@ class CFOPSolver(Solver):
         solution += F2LSolver.F2LSolver(cube).solution()
         solution += OLLSolver.OLLSolver(cube).solution()
         solution += PLLSolver.PLLSolver(cube).solution()
+        # Align top layer
+        while cube.cubies['F'].facings['F'] != cube.cubies['FU'].facings['F']:
+            cube.move(Move('U'))
         return [Move(m) for m in solution]

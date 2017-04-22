@@ -145,8 +145,10 @@ class TestCFOPSolver(unittest.TestCase):
             # Align faces
             while cr.cubies['F'].facings['F'] != c.cubies['F'].facings['F']:
                 c.move(Move('Y'))
-
             for cubie in cr.cubies:
                 for facing in cr.cubies[cubie].facings:
-                    self.assertEqual(cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing])
-
+                    self.assertEqual(
+                        cr.cubies[cubie].facings[facing],
+                        c.cubies[cubie].facings[facing],
+                        msg = 'Invalid solution at cubie %s --> %s != %s' %(cubie, cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing])
+                    )
