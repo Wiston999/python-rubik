@@ -5,8 +5,12 @@ python:
 - '3.4'
 - '3.5'
 - '3.6'
-install: python setup.py install
-script: nosetests
+install:
+  - python setup.py install
+  - pip install nose coverage coveralls
+script: nosetests --with-coverage --cover-package pypiview
+after_success: coveralls
+
 deploy:
   provider: pypi
   user: wiston666
