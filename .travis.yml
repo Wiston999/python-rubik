@@ -9,3 +9,12 @@ python:
 install: "pip install -r requirements.txt"
 # command to run tests
 script: nosetests
+
+deploy:
+  provider: pypi
+    user: "wiston666"
+    password:
+      secure: "LvSrB0KL+1kpSFj2Nu8huErBkmoyahOIAavWGmEqA/zcfOAMgPqJwv/J8PPKNHHiP9i+S6LUS5A+MN4t1U+bFVeHyxg2S11CIZLPNBwF50yjyIkWsRR9AZvYrRw2TS5rURG8YciQwFJVSfBbtRlT9rhtJ7rA/IlEvO33Rbk6MFg1Bhl3NyulIPq9jByr423QJ3ShwYa91HS458uO8OL2yHcUXf7M+LEvDikz+LOqY+OKrdO2W/mY+wcHIExU1xma9ENT8jc8X2xXdZRGsH513cSsLMOVpHxVxj3TaqAcTqnrEL5NA0U50WvNcHU7yqYzJMP0mhoxpsA2vRaL5p0e6E/jf4cCxEsOrTNi/7acjftNfpLNn6D5ll+fotTBXiwJJivZdrFxXcm3IE17Sadp/KkY7P9P+CZDauGwvwIYbt1Xgf8bvGOWYR+e+aheebFKnr1gzc/et8QirFirkVhnuzgWzVSD3VdSwR1hOagNVrVcHTbkQ7zVVGFK4P8Yd9eQpDtN4epntgWZehkGn/7Sl9dHGF/08dZGe9SJCAFSqMdGz429FRyo9LDl1XAzqKG2ZCAAfO8ekfb7lwhayw596V4oiFtOp2s1VW2glT1qFnhClI4nWyPuBYsdaNE9Tkc+JcXE+zMmJo8VqGzoKuUrN9tcGlL/8Cp3mVL/AH1ZnDc="
+    on:
+      tags: true
+      branch: "feature/travis2pypi" 
