@@ -69,7 +69,7 @@ class TestWhiteFaceSolver(unittest.TestCase):
                 c.cubies[goal].facings[goal[(i + 1) % 3]] = 'Y'
                 c.cubies[goal].facings[goal[(i + 2) % 3]] = 'O'
             
-                steps = solver.first_step(goal)
+                steps = WhiteFaceSolver.first_step(goal, goal[i % 3])
                 
                 for s in steps:
                     c.move(Move(s))
@@ -158,7 +158,6 @@ class TestBeginnerSolver(unittest.TestCase):
             c = Cube()
             cr = Cube()
             c.shuffle(i)
-            print("Solving", i, "of 100", c.to_naive_cube().get_cube())
             solution = self._test_solution(c)
             for s in solution:
                 c.move(s)

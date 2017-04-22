@@ -4,7 +4,7 @@ import re
 
 class Move(object):
     def __init__(self, move):
-        if not re.match("[fblrudxyz]'?2?", move, re.I):
+        if not re.match("[fblrudxyzmse]'?2?", move, re.I):
             raise ValueError("Invalid move format, must be [face]' or [face]2, got %s" % move)
 
         self.raw = move.upper()

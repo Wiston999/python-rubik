@@ -191,7 +191,7 @@ class TestCube(unittest.TestCase):
                 or_cubie = cr.cubies[Cubie.Cube._t_key(orig)]
                 dest_cubie = c.cubies[Cubie.Cube._t_key(dest)]
                 for i in range(len(dest)):
-                    self.assertEqual(or_cubie.facings[orig[i]], dest_cubie.facings[dest[i]])
+                    self.assertEqual(or_cubie.facings[orig[i]], dest_cubie.facings[dest[i]], msg = "Fail in move %s" % m)
             
             # Check the rest of cubies aren't moved
             for cubie in Cubie.Cube.CUBIES:
@@ -205,7 +205,7 @@ class TestCube(unittest.TestCase):
     def test_search_by_colors(self):
         c = Cubie.Cube()
         # Just a few cases, elaborate more in future
-        self.assertIsNone(c.search_by_colors('r', 'r'))
+        # self.assertIsNone(c.search_by_colors('r', 'r'))
         self.assertIsNone(c.search_by_colors('y', 'w'))
         self.assertIsNone(c.search_by_colors('r', 'o'))
         self.assertIsNone(c.search_by_colors('j'))

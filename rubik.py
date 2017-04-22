@@ -5,6 +5,7 @@ import time
 from src.Move import Move
 from src.Printer import TtyPrinter, OpenGLPrinter
 from src.Solver.Kociemba import KociembaSolver
+from src.Solver.CFOP import CFOPSolver
 from src.Solver.Beginner import BeginnerSolver
 from src.Cubie import Cube
 from src.Move import Move
@@ -18,7 +19,7 @@ def select_solver(s, cube):
     if s == 'Beginner':
        solver = BeginnerSolver(cube)
     elif s == 'CFOP':
-        pass
+        solver = CFOPSolver(cube)
     elif s == 'Kociemba':
         solver = KociembaSolver(cube)
     else:
@@ -39,7 +40,7 @@ if __name__ == '__main__':
 
     while True:
         m = raw_input('Input move: ')
-        if re.match("[RLBFUDXYZ]'?2?", m, re.I):
+        if re.match("[RLBFUDXYZMSE]'?2?$", m, re.I):
             c.move(Move(m))
             tp.pprint()
         elif m.upper().startswith('CH'):
@@ -51,7 +52,7 @@ if __name__ == '__main__':
         elif m.upper() == 'SH':
             print("Shuffling")
             c.shuffle()
-        elif m.upper() == 'S':
+        elif m.upper() == 'SO':
             print("Solving with", solver.__class__.__name__, "solver") 
             start = time.time()
             solution = solver.solution()
