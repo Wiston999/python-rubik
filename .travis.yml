@@ -15,6 +15,7 @@ deploy:
   provider: pypi
   user: wiston666
   on:
-    branch: feature/travis2pypi
+    branch: master
+    tags: true
   password:
     secure: QKUDSEowEsXB6fhgon29EveiU9j5CPJhBgFpolrobEz2fROInF6miG56qK4FcutjG1VwA3Nn93KKiqmg7mvjRMu8zWaWNNxVsU5fYl//H366ERus+jjkwau7xhKFsm+4ywK23S2w9pDLv1fd5PICNPt4zjKkGRlBbTQcSdhGDfdAg4hsplkiHb3U2iF2HvGh/VHBntvqCJqBs9azlrFopWXrAM1YcUiXWl3fyYQMfeQebDISHSyxCq7htPQTlaovPNuUBhV3SZT7iV0LZfdKKhvuRkCYhPjlHE4p/HODsF60G+TXphuPlBWnyiMFne3DMGMg8BMmzd8kstAYfXo2qwq5a6xjGgh/nGh8gfbIxLdx85EEk+vseVhhEpednjkUPRiAT/shwVls/LDgktX5t14/0mbLmf2H+OdFzpk6wiIEYVMnr8gRzv+Twe5J5FZbWGC8mlWNC60xQkqsS2KZA+sreOHasF/MoHSOVjafKPhzRz/7WVWMIqYyFQ+PDkQhEj4+l0NcMDMULGD6CPxpYh2SnHi0FMiCtFUVMXYDMoZBzluMasnWd7f87mOvtrlPpeCZL9lISkBO5C8/XqkzVFM2EZ9OQiNRuYkyldyXgK8AJYAWdyfnapD7RzPUEjJigGAf1RFeJMyOJU96T3j5F78bmlmN8rpffo/xNXt9VRs=
