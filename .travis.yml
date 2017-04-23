@@ -8,7 +8,7 @@ python:
 install:
   - python setup.py install
   - pip install nose coverage coveralls
-script: python setup.py nosetests --with-coverage --cover-package python-rubik
+script: python setup.py nosetests --with-coverage --cover-package rubik_solver 
 after_success: coveralls
 
 deploy:
