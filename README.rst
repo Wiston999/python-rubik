@@ -2,7 +2,7 @@ Python Rubik Solver
 ===================
 
 .. image:: https://badge.fury.io/py/rubik_solver.svg
-    :target: https://badge.fury.io/py/rubik_solver
+   :target: https://badge.fury.io/py/rubik_solver
 
 .. image:: https://landscape.io/github/Wiston999/python-rubik/develop/landscape.svg?style=flat
    :target: https://landscape.io/github/Wiston999/python-rubik/develop
@@ -18,6 +18,7 @@ Python Rubik Solver
    :target: https://rubik-solver.readthedocs.io/en/latest/
 
 Different algorithms and OpenGL representation of Rubik Cube
+
 TODO
 ----
 -  Improve documentation
