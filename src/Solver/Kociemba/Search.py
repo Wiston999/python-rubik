@@ -69,34 +69,34 @@ class Search(object):
 
     @staticmethod
     def solution(facelets, maxDepth, timeOut, useSeparator=False):
-    '''
-     * Computes the solver string for a given cube.
-     *
-     * @param facelets
-     *          is the cube definition string, see {@link Facelet} for the format.
-     *
-     * @param maxDepth
-     *          defines the maximal allowed maneuver length. For random cubes, a maxDepth of 21 usually will return a
-     *          solution in less than 0.5 seconds. With a maxDepth of 20 it takes a few seconds on average to find a
-     *          solution, but it may take much longer for specific cubes.
-     *
-     *@param timeOut
-     *          defines the maximum computing time of the method in seconds. If it does not return with a solution, it returns with
-     *          an error code.
-     *
-     * @param useSeparator
-     *          determines if a " . " separates the phase1 and phase2 parts of the solver string like in F' R B R L2 F .
-     *          U2 U D for example.<br>
-     * @return The solution string or an error code:<br>
-     *         Error 1: There is not exactly one facelet of each colour<br>
-     *         Error 2: Not all 12 edges exist exactly once<br>
-     *         Error 3: Flip error: One edge has to be flipped<br>
-     *         Error 4: Not all corners exist exactly once<br>
-     *         Error 5: Twist error: One corner has to be twisted<br>
-     *         Error 6: Parity error: Two corners or two edges have to be exchanged<br>
-     *         Error 7: No solution exists for the given maxDepth<br>
-     *         Error 8: Timeout, no solution within given time
-     '''
+        '''
+        * Computes the solver string for a given cube.
+        *
+        * @param facelets
+        *          is the cube definition string, see {@link Facelet} for the format.
+        *
+        * @param maxDepth
+        *          defines the maximal allowed maneuver length. For random cubes, a maxDepth of 21 usually will return a
+        *          solution in less than 0.5 seconds. With a maxDepth of 20 it takes a few seconds on average to find a
+        *          solution, but it may take much longer for specific cubes.
+        *
+        *@param timeOut
+        *          defines the maximum computing time of the method in seconds. If it does not return with a solution, it returns with
+        *          an error code.
+        *
+        * @param useSeparator
+        *          determines if a " . " separates the phase1 and phase2 parts of the solver string like in F' R B R L2 F .
+        *          U2 U D for example.<br>
+        * @return The solution string or an error code:<br>
+        *         Error 1: There is not exactly one facelet of each colour<br>
+        *         Error 2: Not all 12 edges exist exactly once<br>
+        *         Error 3: Flip error: One edge has to be flipped<br>
+        *         Error 4: Not all corners exist exactly once<br>
+        *         Error 5: Twist error: One corner has to be twisted<br>
+        *         Error 6: Parity error: Two corners or two edges have to be exchanged<br>
+        *         Error 7: No solution exists for the given maxDepth<br>
+        *         Error 8: Timeout, no solution within given time
+        '''
         # +++++++++++++++++++++check for wrong input ++++++++++++++++++++++++++
         count = [0] * 6
         try:

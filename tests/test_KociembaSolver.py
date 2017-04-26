@@ -13,7 +13,7 @@ class TestKociembaSolver(unittest.TestCase):
         return solver.solution()
 
     def test_solution(self):
-        for i in range(100):
+        for i in range(10):
             c = Cube()
             cr = Cube()
             c.shuffle(i)
