@@ -209,12 +209,13 @@ class Search(object):
 
     @staticmethod
     def totalDepthPhase2(depthPhase1, depthPhase2, maxDepthPhase2, n):
+        busy = False
         while True:
             Search.ax[n] += 1
             if Search.ax[n] > 5:
                 if n == depthPhase1:
                     if depthPhase2 >= maxDepthPhase2:
-                        return -1
+                        return False, busy, n, depthPhase2
                     else:
                         depthPhase2 += 1
                         Search.ax[n] = 0
@@ -233,7 +234,7 @@ class Search(object):
                 busy = False
             if not (n != depthPhase1 and (Search.ax[n - 1] == Search.ax[n] or (Search.ax[n - 1]) - 3 == Search.ax[n])):
                 break
-        return busy, n, depthPhase2
+        return True, busy, n, depthPhase2
 
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # Apply phase2 of algorithm and return the combined phase1 and phase2 depth. In phase2, only the moves
@@ -310,7 +311,9 @@ class Search(object):
                             execWhile = True
 
                     if execWhile:
-                        busy, n, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2, maxDepthPhase2, n)
+                        keep_working, busy, n, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2, maxDepthPhase2, n)
+                        if not keep_working:
+                            return -1
                     else:
                         busy = False
                 if not busy:
