@@ -9,63 +9,63 @@ from src.Solver.CFOP import CFOPSolver
 from src.Solver.Beginner import BeginnerSolver
 from src.Cubie import Cube
 
-parser = argparse.ArgumentParser(description = 'python-rubik tool')
-parser.add_argument('-o', '--opengl', dest = 'opengl', action = 'store_true', help = 'Print cube with openGL printer')
-parser.add_argument('-c', '--colors', dest = 'colors', action = 'store_true', help = 'Use colors with TtyPrinter')
-parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', choices = ['Beginner', 'CFOP', 'Kociemba'], help = 'Default solver to use')
+arg_parser = argparse.ArgumentParser(description = 'python-rubik tool')
+arg_parser.add_argument('-o', '--opengl', dest = 'opengl', action = 'store_true', help = 'Print cube with openGL printer')
+arg_parser.add_argument('-c', '--colors', dest = 'colors', action = 'store_true', help = 'Use colors with TtyPrinter')
+arg_parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', choices = ['Beginner', 'CFOP', 'Kociemba'], help = 'Default solver to use')
 
-def select_solver(s, cube):
-    if s == 'Beginner':
+def select_solver(solver_name, cube):
+    if solver_name == 'Beginner':
         solver = BeginnerSolver(cube)
-    elif s == 'CFOP':
+    elif solver_name == 'CFOP':
         solver = CFOPSolver(cube)
-    elif s == 'Kociemba':
+    elif solver_name == 'Kociemba':
         solver = KociembaSolver(cube)
     else:
         raise ValueError('Invalid Solver')
     return solver
 
 if __name__ == '__main__':
-    args = parser.parse_args()
-    c = Cube(3)
-    tp = TtyPrinter(c, args.colors)
-    c.shuffle()
-    tp.pprint()
+    args = arg_parser.parse_args()
+    cube = Cube(3)
+    ttyprinter = TtyPrinter(cube, args.colors)
+    cube.shuffle()
+    ttyprinter.pprint()
     if args.opengl:
-        p = OpenGLPrinter(c)
-        p.pprint()
+        oglprinter = OpenGLPrinter(cube)
+        oglprinter.pprint()
 
-    solver = select_solver(args.solver, c)
+    solver = select_solver(args.solver, cube)
 
     while True:
-        m = raw_input('Input move: ')
-        if re.match("[RLBFUDXYZMSE]'?2?$", m, re.I):
-            c.move(Move(m))
-            tp.pprint()
-        elif m.upper().startswith('CH'):
-            s = m.split()[-1]
+        move = raw_input('Input move: ')
+        if re.match("[RLBFUDXYZMSE]'?2?$", move, re.I):
+            cube.move(Move(move))
+            ttyprinter.pprint()
+        elif move.upper().startswith('CH'):
+            input_solver = move.split()[-1]
             try:
-                solver = select_solver(s, c)
+                solver = select_solver(input_solver, cube)
             except Exception as e:
                 print("Unrecognized solver")
-        elif m.upper() == 'SH':
+        elif move.upper() == 'SH':
             print("Shuffling")
-            c.shuffle()
-        elif m.upper() == 'SO':
+            cube.shuffle()
+        elif move.upper() == 'SO':
             print("Solving with", solver.__class__.__name__, "solver")
             start = time.time()
             solution = solver.solution()
             end = time.time()
             print("Solved in", (end - start), "seconds")
             print("Solution:", ' '.join(str(m) for m in solution))
-            for m in solution:
-                c.move(m)
-            tp.pprint()
+            for move in solution:
+                cube.move(move)
+            ttyprinter.pprint()
             print("SOLVED!")
-        elif m.upper() == 'Q':
+        elif move.upper() == 'Q':
             print("Bye")
             if args.opengl:
-                p.stop()
+                oglprinter.stop()
             break
         else:
             print("Invalid action, try one of R, L, B, F, U, D, X, Y, Z, SH, CH, S")
