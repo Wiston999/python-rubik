@@ -210,7 +210,7 @@ class Search(object):
                             return Search.solutionToString(s, depthPhase1 if useSeparator else -1)
 
     @staticmethod
-    def totalDepthPhase2(depthPhase1, depthPhase2):
+    def totalDepthPhase2(depthPhase1, depthPhase2, n):
         while True:
             Search.ax[n] += 1
             if Search.ax[n] > 5:
@@ -235,7 +235,7 @@ class Search(object):
                 busy = False
             if not (n != depthPhase1 and (Search.ax[n - 1] == Search.ax[n] or (Search.ax[n - 1]) - 3 == Search.ax[n])):
                 break
-        return busy, depthPhase2
+        return busy, n, depthPhase2
 
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # Apply phase2 of algorithm and return the combined phase1 and phase2 depth. In phase2, only the moves
@@ -312,7 +312,7 @@ class Search(object):
                             execWhile = True
 
                     if execWhile:
-                        busy, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2)
+                        busy, n, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2, n)
                     else:
                         busy = False
                 if not busy:
