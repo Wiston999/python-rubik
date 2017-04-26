@@ -38,7 +38,7 @@ class Search(object):
     minDistPhase1 = [0] * 31  # IDA* distance do goal estimations
     minDistPhase2 = [0] * 31
 
-    # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # generate the solution string from the array data
     @staticmethod
     def solutionToString(length, depthPhase1=- 1):
@@ -205,7 +205,8 @@ class Search(object):
                 if n == (depthPhase1 - 1):
                     s = Search.totalDepth(depthPhase1, maxDepth)
                     if s >= 0:
-                        if s == depthPhase1 or (Search.ax[depthPhase1 - 1] != Search.ax[depthPhase1] and Search.ax[depthPhase1 - 1] != Search.ax[depthPhase1] + 3):
+                        if s == depthPhase1 or (Search.ax[depthPhase1 - 1] != Search.ax[depthPhase1] and
+                          Search.ax[depthPhase1 - 1] != Search.ax[depthPhase1] + 3):
                             return Search.solutionToString(s, depthPhase1 if useSeparator else -1)
 
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
