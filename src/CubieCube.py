@@ -564,7 +564,7 @@ class CubieCube(object):
 		-5: Twist error: One corner has to be twisted
 		-6: Parity error: Two corners or two edges have to be exchanged
 		'''
-		sum = 0
+		suma = 0
 		edgeCount = [0] * 12
 		for e in Edge.reverse_mapping.keys():
 			edgeCount[self.ep[e]] += 1
@@ -573,8 +573,8 @@ class CubieCube(object):
 				raise DupedEdge("Not all 12 edges exist exactly once")
 
 		for i in range(12):
-			sum += self.eo[i]
-		if sum % 2 != 0:
+			suma += self.eo[i]
+		if suma % 2 != 0:
 			raise FlipError("One edge has to be flipped")
 
 		cornerCount = [0] * 8
@@ -584,10 +584,10 @@ class CubieCube(object):
 			if cornerCount[i] != 1:
 				raise DupedCorner("Not all corners exist exactly once")
 
-		sum = 0
+		suma = 0
 		for i in range(8):
-			sum += self.co[i]
-		if sum % 3 != 0:
+			suma += self.co[i]
+		if suma % 3 != 0:
 			raise TwistError("One corner has to be twisted")
 
 		if (self.edgeParity() ^ self.cornerParity()) != 0:
