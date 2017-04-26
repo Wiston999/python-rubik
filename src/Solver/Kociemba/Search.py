@@ -209,6 +209,34 @@ class Search(object):
                           Search.ax[depthPhase1 - 1] != Search.ax[depthPhase1] + 3):
                             return Search.solutionToString(s, depthPhase1 if useSeparator else -1)
 
+    @staticmethod
+    def totalDepthPhase2(depthPhase1, depthPhase2):
+        while True:
+            Search.ax[n] += 1
+            if Search.ax[n] > 5:
+                if n == depthPhase1:
+                    if depthPhase2 >= maxDepthPhase2:
+                        return -1
+                    else:
+                        depthPhase2 += 1
+                        Search.ax[n] = 0
+                        Search.po[n] = 1
+                        busy = False
+                        break
+                else:
+                    n -= 1
+                    busy = True
+                    break
+            else:
+                if Search.ax[n] == 0 or Search.ax[n] == 3:
+                    Search.po[n] = 1
+                else:
+                    Search.po[n] = 2
+                busy = False
+            if not (n != depthPhase1 and (Search.ax[n - 1] == Search.ax[n] or (Search.ax[n - 1]) - 3 == Search.ax[n])):
+                break
+        return busy, depthPhase2
+
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # Apply phase2 of algorithm and return the combined phase1 and phase2 depth. In phase2, only the moves
     # U,D,R2,F2,L2 and B2 are allowed.
@@ -284,30 +312,7 @@ class Search(object):
                             execWhile = True
 
                     if execWhile:
-                        while True:
-                            Search.ax[n] += 1
-                            if Search.ax[n] > 5:
-                                if n == depthPhase1:
-                                    if depthPhase2 >= maxDepthPhase2:
-                                        return -1
-                                    else:
-                                        depthPhase2 += 1
-                                        Search.ax[n] = 0
-                                        Search.po[n] = 1
-                                        busy = False
-                                        break
-                                else:
-                                    n -= 1
-                                    busy = True
-                                    break
-                            else:
-                                if Search.ax[n] == 0 or Search.ax[n] == 3:
-                                    Search.po[n] = 1
-                                else:
-                                    Search.po[n] = 2
-                                busy = False
-                            if not (n != depthPhase1 and (Search.ax[n - 1] == Search.ax[n] or (Search.ax[n - 1]) - 3 == Search.ax[n])):
-                                break
+                        busy, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2)
                     else:
                         busy = False
                 if not busy:
