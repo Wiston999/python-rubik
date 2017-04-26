@@ -50,7 +50,7 @@ class SecondLayerSolver(Solver):
                 elif correct_face == 'B':
                     self.move("U2", solution)
                     self.move("Y2", solution)
-                
+
                 # Right now we are able to use the F2L or F2R algorithms
                 if self.cube.cubies['FU'].facings['U'] == self.cube.cubies['R'].facings['R']:
                     # F2R: U R U' R' U' F' U F

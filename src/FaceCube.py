@@ -8,6 +8,7 @@ class FaceCube(object):
 	'''Map the corner positions to facelet positions. cornerFacelet[URF.ordinal()][0] e.g. gives the position of the
 	facelet in the URF corner position, which defines the orientation.<br>
 	cornerFacelet[URF.ordinal()][1] and cornerFacelet[URF.ordinal()][2] give the position of the other two facelets'''
+
 	cornerFacelet = [
 		[Facelet.U9, Facelet.R1, Facelet.F3],
 		[Facelet.U7, Facelet.F1, Facelet.L3],

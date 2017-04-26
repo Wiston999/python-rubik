@@ -67,6 +67,8 @@ class Search(object):
             s.append(step)
         return s
 
+    @staticmethod
+    def solution(facelets, maxDepth, timeOut, useSeparator=False):
     '''
      * Computes the solver string for a given cube.
      *
@@ -95,9 +97,6 @@ class Search(object):
      *         Error 7: No solution exists for the given maxDepth<br>
      *         Error 8: Timeout, no solution within given time
      '''
-
-    @staticmethod
-    def solution(facelets, maxDepth, timeOut, useSeparator=False):
         # +++++++++++++++++++++check for wrong input ++++++++++++++++++++++++++
         count = [0] * 6
         try:
