@@ -111,8 +111,7 @@ class Search(object):
             if count[i] != 9:
                 raise DupedEdge("Not all 12 edges exist exactly once")
 
-        fc = FaceCube.FaceCube(facelets)
-        cc = fc.toCubieCube()
+        cc = FaceCube.FaceCube(facelets).toCubieCube()
         try:
             s = cc.verify()
         except Exception as e:
@@ -148,7 +147,7 @@ class Search(object):
                         Search.ax[n] = 1
                     else:
                         n += 1
-                        Search.ax[++n] = 0
+                        Search.ax[n] = 0
                     Search.po[n] = 1
                 else:
                     Search.po[n] += 1
@@ -210,7 +209,7 @@ class Search(object):
                             return Search.solutionToString(s, depthPhase1 if useSeparator else -1)
 
     @staticmethod
-    def totalDepthPhase2(depthPhase1, depthPhase2, n):
+    def totalDepthPhase2(depthPhase1, depthPhase2, maxDepthPhase2, n):
         while True:
             Search.ax[n] += 1
             if Search.ax[n] > 5:
@@ -312,7 +311,7 @@ class Search(object):
                             execWhile = True
 
                     if execWhile:
-                        busy, n, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2, n)
+                        busy, n, depthPhase2 = Search.totalDepthPhase2(depthPhase1, depthPhase2, maxDepthPhase2, n)
                     else:
                         busy = False
                 if not busy:
