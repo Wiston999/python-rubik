@@ -71,7 +71,7 @@ class YellowFaceSolver(Solver):
                 self.apply_corner_place_algorithm(solution)
         
         # Orient corners
-        for i in range(4):
+        for _ in range(4):
             # Get corner at FRU
             corner = self.cube.cubies['FRU']
             while corner.facings['U'] != 'Y':
