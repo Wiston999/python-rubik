@@ -17,7 +17,7 @@ parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', cho
 
 def select_solver(s, cube):
     if s == 'Beginner':
-       solver = BeginnerSolver(cube)
+        solver = BeginnerSolver(cube)
     elif s == 'CFOP':
         solver = CFOPSolver(cube)
     elif s == 'Kociemba':
@@ -53,7 +53,7 @@ if __name__ == '__main__':
             print("Shuffling")
             c.shuffle()
         elif m.upper() == 'SO':
-            print("Solving with", solver.__class__.__name__, "solver") 
+            print("Solving with", solver.__class__.__name__, "solver")
             start = time.time()
             solution = solver.solution()
             end = time.time()
