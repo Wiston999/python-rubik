@@ -94,7 +94,6 @@ class Move(object):
             raise ValueError("Unable to add %s and %s" %(self.raw, str(move)))
 
     def __mul__(self, times):
-        move = Move(self.raw)
         offset = ((self.clockwise + (self.double * 2) + (self.counterclockwise * 3)) * times % 4)
 
         if offset == 0:

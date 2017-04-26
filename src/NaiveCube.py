@@ -16,7 +16,7 @@ class NaiveCube(object):
 
     def set_cube(self, configuration):
         c = 0
-        for f, face in enumerate('ULFRBD'):
+        for face in 'ULFRBD':
             for i in range(self.size):
                 for j in range(self.size):
                     self.faces[face].set_colour(i, j, configuration[c].lower())
@@ -37,7 +37,7 @@ class NaiveCube(object):
     def from_face_cube(self, fc):
         configuration = self._from_facelet_to_color(fc.to_String())
         c = 0
-        for f, face in enumerate('URFDLB'):
+        for face in 'URFDLB':
             for i in range(self.size):
                 for j in range(self.size):
                     self.faces[face].set_colour(i, j, configuration[c])

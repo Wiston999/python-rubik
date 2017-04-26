@@ -45,12 +45,6 @@ class YellowFaceSolver(Solver):
 
     def solution(self):
         solution = []
-        # Place edges in their place
-        front_color = self.cube.cubies['F'].facings['F']
-        back_color = self.cube.cubies['B'].facings['B']
-        left_color = self.cube.cubies['L'].facings['L']
-        right_color = self.cube.cubies['R'].facings['R']
-
         # Locate edge with front_color
         turns = 0
         while not self.edges_are_placed():

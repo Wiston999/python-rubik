@@ -8,7 +8,6 @@ from src.Solver.Kociemba import KociembaSolver
 from src.Solver.CFOP import CFOPSolver
 from src.Solver.Beginner import BeginnerSolver
 from src.Cubie import Cube
-from src.Move import Move
 
 parser = argparse.ArgumentParser(description = 'python-rubik tool')
 parser.add_argument('-o', '--opengl', dest = 'opengl', action = 'store_true', help = 'Print cube with openGL printer')
@@ -47,7 +46,7 @@ if __name__ == '__main__':
             s = m.split()[-1]
             try:
                 solver = select_solver(s, c)
-            except:
+            except Exception as e:
                 print("Unrecognized solver")
         elif m.upper() == 'SH':
             print("Shuffling")

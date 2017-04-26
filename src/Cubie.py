@@ -304,7 +304,7 @@ class Cube(object):
         self.__reset_cube()
         random.seed(seed)
         sequence = []
-        for i in range(random.randint(100, 150)):
+        for _ in range(random.randint(100, 150)):
             m = Move(random.choice(Cubie.FACINGS) + random.choice(" 2'"))
             sequence.append(m)
             self.move(m)

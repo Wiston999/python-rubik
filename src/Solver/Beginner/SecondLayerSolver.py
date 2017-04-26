@@ -1,6 +1,5 @@
 from .. import Solver
 from src.Move import Move
-from src.Cubie import Sticker
 
 class SecondLayerSolver(Solver):
     def is_solved(self):
@@ -25,20 +24,20 @@ class SecondLayerSolver(Solver):
         solution = []
 
         # While there are pending cubies to place
-        round = 0
+        step = 0
         while True:
             if self.is_solved():
                 break
 
-            if round > 6:
-                # We have made a full round to the cube and haven't found a well cubie to place 
+            if step > 6:
+                # We have made a full step to the cube and haven't found a well cubie to place 
                 # and cube isn't solved yet
                 break
             current_cubie = self.cube.cubies['FU']
             # If not yellow on FL, we place it
-            round += 1
+            step += 1
             if current_cubie.color_facing('Y') is None:
-                round = 0
+                step = 0
                 front_color = current_cubie.facings['F']
                 correct_face = self.cube.search_by_colors(front_color)
 
