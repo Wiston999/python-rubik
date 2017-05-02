@@ -4,8 +4,8 @@ Python Rubik Solver
 .. image:: https://badge.fury.io/py/rubik_solver.svg
    :target: https://badge.fury.io/py/rubik_solver
 
-.. image:: https://landscape.io/github/Wiston999/python-rubik/develop/landscape.svg?style=flat
-   :target: https://landscape.io/github/Wiston999/python-rubik/develop
+.. image:: https://landscape.io/github/Wiston999/python-rubik/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/Wiston999/python-rubik/master
    :alt: Code Health
 
 .. image:: https://coveralls.io/repos/github/Wiston999/python-rubik/badge.svg?branch=master
