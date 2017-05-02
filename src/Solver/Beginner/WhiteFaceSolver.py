@@ -6,48 +6,62 @@ class WhiteFaceSolver(Solver):
     '''
     This solves the down face with the white color
     '''
+    FIRST_STEP = {
+        'DFR': {
+            'F': ["R", "U'", "R'"],
+            'R': ["R", "U", "R'", "U'"]
+        },
+        'DFL': {
+            'F': ["L'", "U", "L", "U'"],
+            'L': ["L'", "U'", "L"],
+            'D': ["L'", "U'", "L"]
+        },
+        'BDL': {
+            'B': ["B'", "U2", "B"],
+            'D': ["B'", "U2", "B"],
+            'L': ["B'", "U", "B", "U2"]
+        },
+        'BDR': {
+            'B': ["B", "U", "B'"],
+            'D': ["B", "U", "B'"],
+            'R': ["B", "U'", "B'", "U"]
+        },
+        'BRU': {
+            'B': ["U"],
+            'R': ["U"],
+            'U': ["U"],
+        },
+        'BLU': {
+            'B': ["U2"],
+            'L': ["U2"],
+            'U': ["U2"],
+        },
+        'FLU': {
+            'F': ["U"],
+            'L': ["U"],
+            'U': ["U"],
+        }
+    }
+
+    SECOND_STEP = {
+        'F': ["F'", "U'", "F"],
+        'R': ["R", "U", "R'"],
+        'U': ["R", "U2", "R'", "U'", "R", "U", "R'"]
+    }
     @staticmethod
     def first_step(goal_cubie, white_facing):
-        solution = []
-        if goal_cubie == 'DFR':
-            if white_facing == 'F':
-                solution = ["R", "U'", "R'"]
-            elif white_facing == 'R':
-                solution = ["R", "U", "R'", "U'"]
-        elif goal_cubie == 'DFL':
-            if white_facing == 'F':
-                solution = ["L'", "U", "L", "U'"]
-            elif white_facing in ['L', 'D']:
-                solution = ["L'", "U'", "L"]
-        elif goal_cubie == 'BDL':
-            if white_facing in ['B', 'D']:
-                solution = ["B'", "U2", "B"]
-            elif white_facing == 'L':
-                solution = ["B'", "U", "B", "U2"]
-        elif goal_cubie == 'BDR':
-            if white_facing in ['B', 'D']:
-                solution = ["B", "U", "B'"]
-            elif white_facing == 'R':
-                solution = ["B", "U'", "B'", "U"]
-        # Cubie is in upper face, place it on FRU
-        elif goal_cubie == 'BRU':
-            solution = ["U"]
-        elif goal_cubie == 'BLU':
-            solution = ["U2"]
-        elif goal_cubie == 'FLU':
-            solution = ["U'"]
+        try:
+            solution = WhiteFaceSolver.FIRST_STEP[goal_cubie][white_facing]
+        except KeyError:
+            solution = []
         return solution
 
     @staticmethod
     def second_step(white_facing):
-        solution = []
-        if white_facing == 'F':
-            solution = ["F'", "U'", "F"]
-        elif white_facing == 'R':
-            solution = ["R", "U", "R'"]
-        elif white_facing == 'U':
-            solution = ["R", "U2", "R'", "U'", "R", "U", "R'"]
-        
+        try:
+            solution = WhiteFaceSolver.SECOND_STEP[goal_cubie][white_facing]
+        except KeyError:
+            solution = []
         return solution
 
     def solution(self):
