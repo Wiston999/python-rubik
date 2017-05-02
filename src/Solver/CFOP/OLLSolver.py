@@ -75,9 +75,6 @@ class OLLSolver(Solver):
             cube.cubies['FU'].color_facing(color),
             cube.cubies['FRU'].color_facing(color)
         ])
-    @staticmethod
-    def get_step(cube):
-        return OLLSolver.STEPS[orientation]
 
     def move(self, s, solution):
         self.cube.move(Move(s))
