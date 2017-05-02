@@ -37,9 +37,9 @@ class WhiteFaceSolver(Solver):
             'U': ["U2"],
         },
         'FLU': {
-            'F': ["U"],
-            'L': ["U"],
-            'U': ["U"],
+            'F': ["U'"],
+            'L': ["U'"],
+            'U': ["U'"],
         }
     }
 
