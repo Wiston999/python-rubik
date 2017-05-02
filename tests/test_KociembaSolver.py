@@ -33,6 +33,6 @@ class TestKociembaSolver(unittest.TestCase):
         nc = NaiveCube()
         nc.set_cube("orgyyybbbwgobbbyrywowwrwrwyrorogboogwygyorrwobrggwgbgy")
         c.from_naive_cube(nc)
-        with self.assertRaises(TimeoutError):
+        with self.assertRaises(Kociemba.Search.SolverTimeoutError):
             solver = Kociemba.KociembaSolver(c)
             solver.solution(timeOut = 1)

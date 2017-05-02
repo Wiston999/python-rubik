@@ -16,6 +16,9 @@ class NoSolution(Exception):
     pass
 
 
+class SolverTimeoutError(Exception):
+    pass
+
 class Search(object):
     ax = [0] * 31  # The axis of the move
     po = [0] * 31  # The power of the move
@@ -151,7 +154,7 @@ class Search(object):
                             Search.ax[n] += 1
                             if Search.ax[n] > 5:
                                 if time.time() - tStart > timeOut:
-                                    raise TimeoutError(
+                                    raise SolverTimeoutError(
                                         "Timeout, no solution within given time")
 
                                 if n == 0:
