@@ -47,9 +47,9 @@ class PLLSolver(Solver):
     def solution(self):
         solution = []
         while True:
-            for i in range(4):
+            for _ in range(4):
                 self.move('U', solution)
-                for j in range(4):
+                for _ in range(4):
                     self.move('Y', solution)
                     orientation = PLLSolver.get_orientations(self.cube)
 
