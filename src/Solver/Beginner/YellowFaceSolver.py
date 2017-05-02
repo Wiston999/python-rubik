@@ -69,7 +69,7 @@ class YellowFaceSolver(Solver):
             # If no placed corners, perform algorithm and 1 corner will be placed
             else:
                 self.apply_corner_place_algorithm(solution)
-        
+
         # Orient corners
         for _ in range(4):
             # Get corner at FRU
@@ -78,7 +78,7 @@ class YellowFaceSolver(Solver):
                 # Apply corner orientation algorithm
                 self.apply_corner_orient_algorithm(solution)
             self.move("U", solution)
-        
+
         # Finally, align the top layer
         while self.cube.cubies['F'].facings['F'] != self.cube.cubies['FU'].facings['F']:
             self.move("U", solution)
