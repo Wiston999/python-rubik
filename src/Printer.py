@@ -65,8 +65,7 @@ class TtyPrinter(Printer):
                     if (j % 2) == 0:
                         print('|', end = ' ')
                     else:
-                        self.print_square(
-                            int(i / 2), int(j / 2), self.cube.faces['U'].get_colour(int(i / 2), int(j / 2)))
+                        self.print_square(self.cube.faces['U'].get_colour(int(i / 2), int(j / 2)))
                 print('|')
 
     def print_center(self):
@@ -83,8 +82,7 @@ class TtyPrinter(Printer):
                         if (j % 2) == 0:
                             print('|', end = ' ')
                         else:
-                            self.print_square(
-                                int(i / 2), int(j / 2), self.cube.faces[face].get_colour(int(i / 2), int(j / 2)))
+                            self.print_square(self.cube.faces[face].get_colour(int(i / 2), int(j / 2)))
                 print('|', end = ' ')
             print()
 
@@ -103,11 +101,10 @@ class TtyPrinter(Printer):
                     if (j % 2) == 0:
                         print('|', end = ' ')
                     else:
-                        self.print_square(
-                            int(i / 2), int(j / 2), self.cube.faces['D'].get_colour(int(i / 2), int(j / 2)))
+                        self.print_square(self.cube.faces['D'].get_colour(int(i / 2), int(j / 2)))
                 print('|')
 
-    def print_square(self, x, y, c):
+    def print_square(self, c):
         if self.colours:
             if c == 'w':
                 print(bcolors.WHITE, end = ' ')
