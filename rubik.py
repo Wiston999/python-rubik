@@ -14,6 +14,12 @@ arg_parser.add_argument('-o', '--opengl', dest = 'opengl', action = 'store_true'
 arg_parser.add_argument('-c', '--colors', dest = 'colors', action = 'store_true', help = 'Use colors with TtyPrinter')
 arg_parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', choices = ['Beginner', 'CFOP', 'Kociemba'], help = 'Default solver to use')
 
+# Python 2/3 compatible
+try:
+    input = raw_input
+except NameError:
+    pass
+
 def select_solver(solver_name, cube):
     if solver_name == 'Beginner':
         solver = BeginnerSolver(cube)
@@ -38,7 +44,7 @@ if __name__ == '__main__':
     solver = select_solver(args.solver, cube)
 
     while True:
-        move = raw_input('Input move: ')
+        move = input('Input move: ')
         if re.match("[RLBFUDXYZMSE]'?2?$", move, re.I):
             cube.move(Move(move))
             ttyprinter.pprint()
