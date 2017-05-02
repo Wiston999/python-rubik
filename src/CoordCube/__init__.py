@@ -199,10 +199,10 @@ def build_slice_urf_to_dlf_parity_prun():
 		for i in range(CoordCube.N_SLICE2 * CoordCube.N_URFtoDLF * CoordCube.N_PARITY):
 			parity = i % 2
 			URFtoDLF = (i // 2) // CoordCube.N_SLICE2
-			slice = (i // 2) % CoordCube.N_SLICE2
+			slicing = (i // 2) % CoordCube.N_SLICE2
 			if CoordCube.getPruning(slice_urf_to_dlf_parity_prun, i) == depth:
 				for j in [0, 1, 2, 4, 7, 9, 10, 11, 13, 16]:
-					newSlice = CoordCube.FRtoBR_Move[slice][j]
+					newSlice = CoordCube.FRtoBR_Move[slicing][j]
 					newURFtoDLF = CoordCube.URFtoDLF_Move[URFtoDLF][j]
 					newParity = CoordCube.parityMove[parity][j]
 					if CoordCube.getPruning(slice_urf_to_dlf_parity_prun, ((CoordCube.N_SLICE2 * newURFtoDLF) + newSlice) * 2 + newParity) == 0x0f:
@@ -257,10 +257,10 @@ def build_slice_flip_prun():
 	while done < (CoordCube.N_SLICE1 * CoordCube.N_FLIP):
 		for i in range(CoordCube.N_SLICE1 * CoordCube.N_FLIP):
 			flip = i // CoordCube.N_SLICE1
-			slice = i % CoordCube.N_SLICE1
+			slicing = i % CoordCube.N_SLICE1
 			if CoordCube.getPruning(slice_flip_prun, i) == depth:
 				for j in range(18):
-					newSlice = CoordCube.FRtoBR_Move[slice * 24][j] // 24
+					newSlice = CoordCube.FRtoBR_Move[slicing * 24][j] // 24
 					newFlip = CoordCube.flipMove[flip][j]
 					if CoordCube.getPruning(slice_flip_prun, CoordCube.N_SLICE1 * newFlip + newSlice) == 0x0f:
 						CoordCube.setPruning(slice_flip_prun, CoordCube.N_SLICE1 * newFlip + newSlice, depth + 1)
