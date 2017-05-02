@@ -59,7 +59,7 @@ class WhiteFaceSolver(Solver):
     @staticmethod
     def second_step(white_facing):
         try:
-            solution = WhiteFaceSolver.SECOND_STEP[goal_cubie][white_facing]
+            solution = WhiteFaceSolver.SECOND_STEP[white_facing]
         except KeyError:
             solution = []
         return solution
