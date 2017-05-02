@@ -6,55 +6,54 @@ class WhiteCrossSolver(Solver):
     '''
     This class solves the white cross on the down face
     '''
+    STEPS = {
+        'U': {
+            'R': [],
+            'L': [],
+            'F': [],
+            'B': [],
+        },
+        'D': {
+            'R': ['R2'],
+            'L': ['L2'],
+            'F': ['F2'],
+            'B': ['B2']
+        },
+        'F': {
+            'U': ["F", "R", "U'", "R'", "F'"],
+            'D': ["F'", "R", "U'", "R'"],
+            'R': ["R", "U", "R'"],
+            'L': ["L'", "U'", "L"],
+        },
+        'B': {
+            'U': ["B", "L", "U'", "L'", "B'"],
+            'D': ["B", "R'", "U", "R"],
+            'R': ["R'", "U", "R"],
+            'L': ["L", "U'", "L'"],
+        },
+        'L': {
+            'U': ["L", "F", "U'", "F'", "L'"],
+            'D': ["L'", "F", "U'", "F'"],
+            'F': ["F", "U'", "F'"],
+            'B': ["B'", "U", "B"],
+        },
+        'R': {
+            'U': ["R'", "F'", "U", "F", "R"],
+            'D': ["R", "F'", "U", "F"],
+            'F': ["F'", "U", "F"],
+            'B': ["B", "U'", "B'"],
+        }
+    }
     @staticmethod
     def first_step(white_facing, color_facing):
-        solution = []
-        if white_facing == 'D':
-            solution = ["%s2" % color_facing]
-        elif white_facing == 'F':
-            if color_facing == 'U':
-                solution = ["F", "R", "U'", "R'", "F'"]
-            elif color_facing == 'D':
-                solution = ["F'", "R", "U'", "R'"]
-            elif color_facing == 'R':
-                solution = ["R", "U", "R'"]
-            elif color_facing == 'L':
-                solution = ["L'", "U'", "L"]
-        elif white_facing == 'B':
-            if color_facing == 'U':
-                solution = ["B", "L", "U'", "L'", "B'"]
-            elif color_facing == 'D':
-                solution = ["B", "R'", "U", "R"]
-            elif color_facing == 'R':
-                solution = ["R'", "U", "R"]
-            elif color_facing == 'L':
-                solution = ["L", "U'", "L'"]
-        elif white_facing == 'L':
-            if color_facing == 'U':
-                solution = ["L", "F", "U'", "F'", "L'"]
-            elif color_facing == 'D':
-                solution = ["L'", "F", "U'", "F'"]
-            elif color_facing == 'F':
-                solution = ["F", "U'", "F'"]
-            elif color_facing == 'B':
-                solution = ["B'", "U", "B"]
-        elif white_facing == 'R':
-            if color_facing == 'U':
-                solution = ["R'", "F'", "U", "F", "R"]
-            elif color_facing == 'D':
-                solution = ["R", "F'", "U", "F"]
-            elif color_facing == 'F':
-                solution = ["F'", "U", "F"]
-            elif color_facing == 'B':
-                solution = ["B", "U'", "B'"]
-        return solution
+        return WhiteCrossSolver.STEPS[white_facing.upper()][color_facing.upper()]
 
 
     def solution(self):
         solution = []
         for color in 'RGOB':
             cubie_position = self.cube.search_by_colors('W', color)
-            
+
             orig_cubie = self.cube.cubies[cubie_position]
             white_facing = orig_cubie.color_facing('W')
             color_facing = orig_cubie.color_facing(color)
