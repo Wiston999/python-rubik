@@ -16,10 +16,6 @@ class NoSolution(Exception):
     pass
 
 
-class TimeoutError(Exception):
-    pass
-
-
 class Search(object):
     ax = [0] * 31  # The axis of the move
     po = [0] * 31  # The power of the move
