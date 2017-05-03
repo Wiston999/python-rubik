@@ -1,4 +1,4 @@
-from Enums import Corner, Edge
+from .Enums import Corner, Edge
 
 class DupedEdge(Exception): pass
 class FlipError(Exception): pass
@@ -627,4 +627,4 @@ CubieCube.moveCube[5].co = CubieCube.coB[:]
 CubieCube.moveCube[5].ep = CubieCube.epB[:]
 CubieCube.moveCube[5].eo = CubieCube.eoB[:]
 
-import FaceCube
+from . import FaceCube
