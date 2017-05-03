@@ -67,7 +67,7 @@ class WhiteFaceSolver(Solver):
     def solution(self):
         solution = []
         # There are 4 down-corners
-        for i in range(4):
+        for _ in range(4):
             front_color = self.cube.cubies['F'].facings['F']
             right_color = self.cube.cubies['R'].facings['R']
 
