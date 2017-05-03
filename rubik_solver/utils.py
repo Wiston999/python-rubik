@@ -1,6 +1,7 @@
 __author__ = 'Victor Cabezas'
 
 from past.builtins import basestring
+from .Solver import Solver
 from .Solver import Beginner
 from .Solver import CFOP
 from .Solver import Kociemba
@@ -28,7 +29,7 @@ def _check_valid_cube(cube):
     return cube
 
 def solve(cube, method = Beginner.BeginnerSolver, *args, **kwargs):
-    if not isinstance(method, Solver):
+    if not issubclass(method, Solver):
         raise ValueError('Method %s is not a valid Solver subclass' %
             method.__class__.__name__
         )
