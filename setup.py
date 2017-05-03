@@ -56,5 +56,4 @@ setup(
             'rubik_solver=rubik_solver.utils:main'
         ]
     },
-    scripts=['rubik.py']
 )
