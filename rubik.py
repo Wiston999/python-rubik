@@ -3,14 +3,13 @@ import argparse
 import re
 import time
 from rubik_solver.Move import Move
-from rubik_solver.Printer import TtyPrinter, OpenGLPrinter
+from rubik_solver.Printer import TtyPrinter
 from rubik_solver.Solver.Kociemba import KociembaSolver
 from rubik_solver.Solver.CFOP import CFOPSolver
 from rubik_solver.Solver.Beginner import BeginnerSolver
 from rubik_solver.Cubie import Cube
 
 arg_parser = argparse.ArgumentParser(description = 'python-rubik tool')
-arg_parser.add_argument('-o', '--opengl', dest = 'opengl', action = 'store_true', help = 'Print cube with openGL printer')
 arg_parser.add_argument('-c', '--colors', dest = 'colors', action = 'store_true', help = 'Use colors with TtyPrinter')
 arg_parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', choices = ['Beginner', 'CFOP', 'Kociemba'], help = 'Default solver to use')
 
@@ -37,9 +36,6 @@ if __name__ == '__main__':
     ttyprinter = TtyPrinter(cube, args.colors)
     cube.shuffle()
     ttyprinter.pprint()
-    if args.opengl:
-        oglprinter = OpenGLPrinter(cube)
-        oglprinter.pprint()
 
     solver = select_solver(args.solver, cube)
 
@@ -70,8 +66,6 @@ if __name__ == '__main__':
             print("SOLVED!")
         elif move.upper() == 'Q':
             print("Bye")
-            if args.opengl:
-                oglprinter.stop()
             break
         else:
             print("Invalid action, try one of R, L, B, F, U, D, X, Y, Z, SH, CH, S")
