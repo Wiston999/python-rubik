@@ -86,7 +86,7 @@ class FaceCube(object):
 		ccRet = CubieCube()
 		for i in range(8):
 			ccRet.cp[i] = Corner.URF # invalidate corners
-		for i in range(12):			
+		for i in range(12):
 			ccRet.ep[i] = Edge.UR # and edges
 
 		for i in Corner.reverse_mapping.keys():
@@ -116,4 +116,4 @@ class FaceCube(object):
 					ccRet.eo[i] = 1
 					break
 		return ccRet
-		
+

@@ -71,21 +71,21 @@ class CubieCube(object):
 			cp = [
 				Corner.URF, Corner.UFL, Corner.ULB, Corner.UBR, Corner.DFR, Corner.DLF, Corner.DBL, Corner.DRB
 			]
-			
+
 			## corner orientation
 			co = [0] * 8
-			
+
 			## edge permutation
 			ep = [
 				Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DR, Edge.DF, Edge.DL, Edge.DB, Edge.FR, Edge.FL, Edge.BL, Edge.BR 
 			]
-			
+
 			## edge orientation
 			eo = [0] * 12
-		
+
 		self.cp = cp
 		self.co = co
-		
+
 		self.ep = ep
 		self.eo = eo
 
@@ -100,12 +100,12 @@ class CubieCube(object):
 		while i != (n - k):
 			s *= i
 			s //= j
-			
+
 			i -= 1
 			j += 1
-		
+
 		return s
-		
+
 	@staticmethod
 	def rotateLeft(arr, l, r):
 		'''Left rotation of all array elements between l and r'''
@@ -113,7 +113,7 @@ class CubieCube(object):
 		for i in range(l, r):
 			arr[i] = arr[i + 1]
 		arr[r] = tmp
-		
+
 	@staticmethod
 	def rotateRight(arr, l, r):
 		'''Right rotation of all array elements between l and r'''
@@ -121,22 +121,6 @@ class CubieCube(object):
 		for i in range(r, l, -1):
 			arr[i] = arr[i - 1]
 		arr[l] = tmp
-		
-	def toFaceCube(self):
-		'''return cube in facelet representation'''
-		fcRet = FaceCube.FaceCube()
-		for i in Corner.reverse_mapping.keys():
-			j = self.cp[i]
-			ori = self.co[i]
-			for n in [0, 1, 2]:
-				fcRet.f[FaceCube.FaceCube.cornerFacelet[i][( n + ori ) % 3]] = FaceCube.FaceCube.cornerColor[j][n]
-				
-		for i in Edge.reverse_mapping.keys():
-			j = self.ep[i]
-			ori = self.eo[i]
-			for n in [0, 1]:
-				fcRet.f[FaceCube.FaceCube.edgeFacelet[i][( n + ori ) % 2]] = FaceCube.FaceCube.edgeColor[j][n]
-		return fcRet
 
 	def cornerMultiply(self, b):
 		''' Multiply this CubieCube with another cubiecube b, restricted to the corners.<br>
@@ -150,10 +134,10 @@ class CubieCube(object):
 		'''
 		cPerm = [0] * 8
 		cOri = [0] * 8
-		
+
 		for corn in Corner.reverse_mapping.keys():
 			cPerm[corn] = self.cp[b.cp[corn]]
-			
+
 			oriA = self.co[b.cp[corn]]
 			oriB = b.co[corn]
 			ori = 0
@@ -170,26 +154,26 @@ class CubieCube(object):
 				if ori < 0:
 					ori += 3
 			cOri[corn] = ori
-			
+
 		self.cp = cPerm
 		self.co = cOri
-	
+
 	def edgeMultiply(self, b):
 		'''Multiply this CubieCube with another cubiecube b, restricted to the edges.'''
 		ePerm = [0] * 12
 		eOri = [0] * 12
-		
+
 		for edge in Edge.reverse_mapping.keys():
 			ePerm[edge] = self.ep[b.ep[edge]]
 			eOri[edge] = (b.eo[edge] + self.eo[b.ep[edge]]) % 2
 
 		self.ep = ePerm
 		self.eo = eOri
-			
+
 	def multiply(self, b):
 		'''Multiply this CubieCube with another CubieCube b.'''
 		self.cornerMultiply(b)
-		
+
 	def invCubieCube(self, c):
 		'''Compute the inverse CubieCube'''
 		for edge in Edge.reverse_mapping.keys():
@@ -206,15 +190,15 @@ class CubieCube(object):
 				c.co[corn] = -ori
 				if c.co[corn] < 0:
 					c.co[corn] += 3
-					
+
 	def getTwist(self):
 		'''return the twist of the 8 corners. 0 <= twist < 3^7'''
 		ret = 0
 		for i in range(Corner.URF, Corner.DRB):
 			ret = (3 * ret) + self.co[i]
-			
+
 		return ret
-	
+
 	def setTwist(self, twist):
 		twistParity = 0
 		for i in range(Corner.DRB - 1, Corner.URF - 1, -1):
@@ -222,15 +206,15 @@ class CubieCube(object):
 			twistParity += self.co[i]
 			twist //= 3
 		self.co[Corner.DRB] = (3 - (twistParity % 3)) % 3
-	
+
 	def getFlip(self):
 		'''return the flip of the 12 edges. 0 <= flip < 2^11'''
 		ret = 0
 		for i in range(Edge.UR, Edge.BR):
 			ret = (2 * ret) + self.eo[i]
-			
+
 		return ret
-		
+
 	def setFlip(self, flip):
 		flipParity = 0
 		for i in range(Edge.BR - 1, Edge.UR - 1, -1):
@@ -238,7 +222,7 @@ class CubieCube(object):
 			flipParity += self.eo[i]
 			flip //= 2
 		self.eo[Edge.BR] = (2 - (flipParity % 2)) % 2
-		
+
 	def cornerParity(self):
 		'''Parity of the corner permutation'''
 		s = 0
@@ -247,7 +231,7 @@ class CubieCube(object):
 				if self.cp[j] > self.cp[i]:
 					s += 1
 		return s % 2
-		
+
 	def edgeParity(self):
 		'''Parity of the edges permutation. Parity of corners and edges are the same if the cube is solvable.'''
 		s = 0
@@ -626,5 +610,3 @@ CubieCube.moveCube[5].cp = CubieCube.cpB[:]
 CubieCube.moveCube[5].co = CubieCube.coB[:]
 CubieCube.moveCube[5].ep = CubieCube.epB[:]
 CubieCube.moveCube[5].eo = CubieCube.eoB[:]
-
-from . import FaceCube

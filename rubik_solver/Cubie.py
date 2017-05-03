@@ -53,7 +53,7 @@ class Sticker(object):
             return o.color.upper() == self.color.upper()
         else:
             raise TypeError("Don't know how to compare Sticker with %s" % o.__class__.__name__)
-    
+
     def __ne__(self, o):
         return not(o == self)
 
