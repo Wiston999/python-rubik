@@ -1,5 +1,6 @@
 __author__ = 'Victor Cabezas'
-
+import argparse
+from __future__ import print_function
 from past.builtins import basestring
 from .Solver import Solver
 from .Solver import Beginner
@@ -8,6 +9,12 @@ from .Solver import Kociemba
 from .NaiveCube import NaiveCube
 from .Cubie import Cube
 from .Printer import TtyPrinter
+
+METHODS = {
+    'Beginner': Beginner.BeginnerSolver,
+    'CFOP': CFOP.CFOPSolver,
+    'Kociemba': Kociemba.KociembaSolver
+}
 
 def _check_valid_cube(cube):
     '''Checks if cube is one of str, NaiveCube or Cubie.Cube and returns
@@ -29,6 +36,13 @@ def _check_valid_cube(cube):
     return cube
 
 def solve(cube, method = Beginner.BeginnerSolver, *args, **kwargs):
+    if isinstance(method, basestring):
+        if not method in METHODS:
+            raise ValueError('Invalid method name, must be one of (%s)' %
+                ', '.join(METHODS.keys())
+            )
+        method = METHODS[method]
+
     if not issubclass(method, Solver):
         raise ValueError('Method %s is not a valid Solver subclass' %
             method.__class__.__name__
@@ -44,3 +58,15 @@ def pprint(cube, color = True):
     cube = _check_valid_cube(cube)
     printer = TtyPrinter(cube, color)
     printer.pprint()
+
+def main():
+    arg_parser = argparse.ArgumentParser(description = 'rubik_solver command line tool')
+    arg_parser.add_argument('-i', '--cube', dest = 'cube', required = True, help = 'Cube definition string')
+    arg_parser.add_argument('-c', '--color', dest = 'color', action = 'store_false', help = 'Disable use of colors with TtyPrinter')
+    arg_parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', choices = METHODS.keys(), help = 'Solver method to use')
+
+    cube = args.cube.lower()
+    print ("Read cube", cube)
+    pprint(cube, args.colors)
+
+    print ("Solution", ', '.join(solve(cube, METHODS[args.solver])))
