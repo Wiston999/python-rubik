@@ -69,6 +69,6 @@ def main():
 
     cube = args.cube.lower()
     print ("Read cube", cube)
-    pprint(cube, args.colors)
+    pprint(cube, args.color)
 
     print ("Solution", ', '.join(solve(cube, METHODS[args.solver])))
