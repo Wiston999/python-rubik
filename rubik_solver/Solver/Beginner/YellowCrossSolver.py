@@ -1,5 +1,5 @@
 from .. import Solver
-from src.Move import Move
+from rubik_solver.Move import Move
 
 class YellowCrossSolver(Solver):
     def apply_algorithm(self, solution):
@@ -14,7 +14,7 @@ class YellowCrossSolver(Solver):
         solution = []
         # Apply F R U R' U' F' once, twice or thrice
         up_yellows = [edge for edge in ['FU', 'RU', 'LU', 'BU'] if self.cube.cubies[edge].color_facing('Y') == 'U']
-        
+
         if len(up_yellows) == 0:
             self.apply_algorithm(solution)
             self.move("U2", solution)

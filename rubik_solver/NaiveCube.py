@@ -1,5 +1,5 @@
-from src.Face import Face
-from src.FaceCube import FaceCube
+from Face import Face
+from FaceCube import FaceCube
 
 
 class NaiveCube(object):

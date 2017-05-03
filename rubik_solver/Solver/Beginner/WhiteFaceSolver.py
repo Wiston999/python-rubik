@@ -1,5 +1,5 @@
 from .. import Solver
-from src.Move import Move
+from rubik_solver.Move import Move
 
 
 class WhiteFaceSolver(Solver):

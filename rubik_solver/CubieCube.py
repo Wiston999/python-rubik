@@ -1,4 +1,4 @@
-from src.Enums import Corner, Edge
+from Enums import Corner, Edge
 
 class DupedEdge(Exception): pass
 class FlipError(Exception): pass

@@ -2,10 +2,10 @@ __author__ = 'Victor'
 
 import time
 
-from src.Enums import Color
-import src.FaceCube as FaceCube
-import src.CoordCube as CoordCube
-from src.CubieCube import DupedEdge
+from rubik_solver.Enums import Color
+import rubik_solver.FaceCube as FaceCube
+import rubik_solver.CoordCube as CoordCube
+from rubik_solver.CubieCube import DupedEdge
 
 
 class DupedFacelet(Exception):

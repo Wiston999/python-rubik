@@ -1,6 +1,6 @@
 import os
 
-from src.CubieCube import CubieCube
+from ..CubieCube import CubieCube
 
 class CoordCube(object):
 	'''Representation of the cube on the coordinate level'''

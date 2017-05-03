@@ -1,5 +1,5 @@
 import copy
-from src.Move import Move
+from rubik_solver.Move import Move
 from .. import Solver
 from ..Beginner import WhiteCrossSolver
 from . import F2LSolver

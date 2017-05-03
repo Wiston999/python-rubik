@@ -1,5 +1,5 @@
-from src.Enums import Facelet, Color, Edge, Corner
-from src.CubieCube import CubieCube
+from Enums import Facelet, Color, Edge, Corner
+from CubieCube import CubieCube
 
 class FaceCube(object):
 	'''Cube on the facelet level'''
