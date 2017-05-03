@@ -1,10 +1,10 @@
-from src.Move import Move
-from src.Cubie import Cube
-from src.Solver import Beginner
-from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
-from src.Solver.Beginner.WhiteFaceSolver import WhiteFaceSolver
-from src.Solver.Beginner.SecondLayerSolver import SecondLayerSolver
-from src.Solver.Beginner.YellowFaceSolver import YellowFaceSolver
+from rubik_solver.Move import Move
+from rubik_solver.Cubie import Cube
+from rubik_solver.Solver import Beginner
+from rubik_solver.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
+from rubik_solver.Solver.Beginner.WhiteFaceSolver import WhiteFaceSolver
+from rubik_solver.Solver.Beginner.SecondLayerSolver import SecondLayerSolver
+from rubik_solver.Solver.Beginner.YellowFaceSolver import YellowFaceSolver
 import timeout_decorator
 import unittest
 

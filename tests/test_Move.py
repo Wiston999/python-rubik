@@ -1,4 +1,4 @@
-from src.Move import Move
+from rubik_solver.Move import Move
 import string
 import unittest
 

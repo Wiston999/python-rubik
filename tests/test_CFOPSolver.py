@@ -1,11 +1,11 @@
-from src.Move import Move
-from src.Cubie import Cube
-from src.Cubie import Cubie
-from src.Solver import CFOP
-from src.Solver.CFOP.F2LSolver import F2LSolver
-from src.Solver.CFOP.OLLSolver import OLLSolver
-from src.Solver.CFOP.PLLSolver import PLLSolver
-from src.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
+from rubik_solver.Move import Move
+from rubik_solver.Cubie import Cube
+from rubik_solver.Cubie import Cubie
+from rubik_solver.Solver import CFOP
+from rubik_solver.Solver.CFOP.F2LSolver import F2LSolver
+from rubik_solver.Solver.CFOP.OLLSolver import OLLSolver
+from rubik_solver.Solver.CFOP.PLLSolver import PLLSolver
+from rubik_solver.Solver.Beginner.WhiteCrossSolver import WhiteCrossSolver
 import timeout_decorator
 import unittest
 

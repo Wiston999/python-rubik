@@ -1,7 +1,7 @@
-from src.Move import Move
-from src.NaiveCube import NaiveCube
-from src.Cubie import Cube
-from src.Solver import Kociemba
+from rubik_solver.Move import Move
+from rubik_solver.NaiveCube import NaiveCube
+from rubik_solver.Cubie import Cube
+from rubik_solver.Solver import Kociemba
 import timeout_decorator
 import unittest
 

@@ -1,5 +1,5 @@
-import src.Cubie as Cubie
-import src.Move as Move
+import rubik_solver.Cubie as Cubie
+import rubik_solver.Move as Move
 import unittest
 
 class TestSticker(unittest.TestCase):
