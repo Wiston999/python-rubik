@@ -2,12 +2,12 @@ from __future__ import print_function
 import argparse
 import re
 import time
-from src.Move import Move
-from src.Printer import TtyPrinter, OpenGLPrinter
-from src.Solver.Kociemba import KociembaSolver
-from src.Solver.CFOP import CFOPSolver
-from src.Solver.Beginner import BeginnerSolver
-from src.Cubie import Cube
+from rubik_solver.Move import Move
+from rubik_solver.Printer import TtyPrinter, OpenGLPrinter
+from rubik_solver.Solver.Kociemba import KociembaSolver
+from rubik_solver.Solver.CFOP import CFOPSolver
+from rubik_solver.Solver.Beginner import BeginnerSolver
+from rubik_solver.Cubie import Cube
 
 arg_parser = argparse.ArgumentParser(description = 'python-rubik tool')
 arg_parser.add_argument('-o', '--opengl', dest = 'opengl', action = 'store_true', help = 'Print cube with openGL printer')
