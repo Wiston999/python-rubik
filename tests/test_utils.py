@@ -4,6 +4,7 @@ import timeout_decorator
 import unittest
 from rubik_solver.Solver import Beginner, CFOP, Kociemba
 
+class MockSolver(object): pass
 
 class TestUtils(unittest.TestCase):
     solve_methods = [
@@ -16,6 +17,12 @@ class TestUtils(unittest.TestCase):
         c = Cube()
         with self.assertRaises(TypeError):
             utils.solve(c, None)
+
+        with self.assertRaises(ValueError):
+            utils.solve(None, "INVALID SOLVER")
+
+        with self.assertRaises(ValueError):
+            utils.solve(None, MockSolver)
 
         with self.assertRaises(ValueError):
             utils.solve(None, self.solve_methods[0])
@@ -47,7 +54,7 @@ class TestUtils(unittest.TestCase):
     def test_pprint(self):
         c = Cube()
         with self.assertRaises(ValueError):
-            utils.solve(None)
+            utils.pprint(None)
 
         with self.assertRaises(ValueError):
-            utils.solve(1)
+            utils.pprint(1)
