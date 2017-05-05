@@ -23,4 +23,3 @@ TODO
 ----
 -  Improve documentation
 -  Improve Kociemba Solver tests
--  Hardening rest of tests
