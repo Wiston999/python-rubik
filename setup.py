@@ -21,7 +21,7 @@ setup(
     name='rubik_solver',
     author='Victor Cabezas',
     author_email='wiston666@gmail.com',
-    version='0.1.0',
+    version='0.1.1',
     description='Rubik solver algorithms',
     long_description=long_description,
     url='https://github.com/Wiston999/python-rubik',
