@@ -12,8 +12,6 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 install_reqs = [
-    'wheel==0.24.0',
-    'timeout-decorator==0.3.3',
     'future==0.16.0',
 ]
 
