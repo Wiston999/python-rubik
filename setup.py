@@ -11,7 +11,11 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
-install_reqs = [str(r.req) for r in parse_requirements('requirements.txt', session='hack')]
+install_reqs = [
+    'wheel==0.24.0',
+    'timeout-decorator==0.3.3',
+    'future==0.16.0',
+]
 
 setup(
     name='rubik_solver',
