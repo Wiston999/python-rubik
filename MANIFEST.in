@@ -1,1 +1,2 @@
-include requirements.txt rubik_solver/CoordCube/*.csv
+include requirements.txt
+recursive-include rubik_solver/CoordCube *.csv

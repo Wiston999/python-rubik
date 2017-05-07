@@ -1,3 +1,5 @@
+import sys
+import StringIO
 from rubik_solver.Cubie import Cube
 from rubik_solver import utils
 import timeout_decorator
@@ -60,3 +62,30 @@ class TestUtils(unittest.TestCase):
             utils.pprint(1)
         # Just call it and wait not to fail
         utils.pprint(Cube())
+
+    def test_main(self):
+        stdout, stderr = sys.stdout, sys.stderr
+        sys.stdout, sys.stderr = StringIO.StringIO(), StringIO.StringIO()
+
+        with self.assertRaises(SystemExit):
+            utils.main([])
+
+        with self.assertRaises(SystemExit):
+            utils.main(['-c'])
+
+        with self.assertRaises(SystemExit):
+            utils.main(['-h'])
+
+        with self.assertRaises(SystemExit):
+            utils.main(['-i'])
+
+        # Discard stdout
+        sys.stdout = StringIO.StringIO()
+        for method in self.solve_methods:
+            for i in range(10):
+                c = Cube()
+                ref_solution = method(c).solution()
+                utils.main(['--cube', c.to_naive_cube().get_cube()])
+                utils.main(['-i',     c.to_naive_cube().get_cube()])
+        # Restore stdout and stderr
+        sys.stdout, sys.stderr = stdout, stderr
