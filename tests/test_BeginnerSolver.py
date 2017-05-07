@@ -68,9 +68,9 @@ class TestWhiteFaceSolver(unittest.TestCase):
                 c.cubies[goal].facings[goal[i % 3]] = 'W'
                 c.cubies[goal].facings[goal[(i + 1) % 3]] = 'Y'
                 c.cubies[goal].facings[goal[(i + 2) % 3]] = 'O'
-            
+
                 steps = WhiteFaceSolver.first_step(goal, goal[i % 3])
-                
+
                 for s in steps:
                     c.move(Move(s))
 
@@ -87,7 +87,7 @@ class TestWhiteFaceSolver(unittest.TestCase):
         steps = WhiteFaceSolver.second_step('F')
         for s in steps:
             c.move(Move(s))
-        
+
         self.assertEqual(c.cubies['DFR'].facings['D'], 'W')
         self.assertEqual(c.cubies['DFR'].facings['F'], 'O')
         self.assertEqual(c.cubies['DFR'].facings['R'], 'Y')
@@ -99,7 +99,7 @@ class TestWhiteFaceSolver(unittest.TestCase):
         steps = WhiteFaceSolver.second_step('R')
         for s in steps:
             c.move(Move(s))
-        
+
         self.assertEqual(c.cubies['DFR'].facings['D'], 'W')
         self.assertEqual(c.cubies['DFR'].facings['F'], 'O')
         self.assertEqual(c.cubies['DFR'].facings['R'], 'Y')
@@ -111,7 +111,7 @@ class TestWhiteFaceSolver(unittest.TestCase):
         steps = WhiteFaceSolver.second_step('U')
         for s in steps:
             c.move(Move(s))
-        
+
         self.assertEqual(c.cubies['DFR'].facings['D'], 'W')
         self.assertEqual(c.cubies['DFR'].facings['F'], 'Y')
         self.assertEqual(c.cubies['DFR'].facings['R'], 'O')
@@ -121,7 +121,7 @@ class TestSecondLayerSolver(unittest.TestCase):
         c = Cube()
         solver = SecondLayerSolver(c)
         self.assertTrue(solver.is_solved())
-    
+
     # Dunno how to test the solution function
 
 class TestYellowFaceSolver(unittest.TestCase):
@@ -153,18 +153,27 @@ class TestBeginnerSolver(unittest.TestCase):
         solver = Beginner.BeginnerSolver(c)
         return solver.solution()
 
+    def test_solved_solution(self):
+        '''Try to solve an already solved cube'''
+        c = Cube()
+        solution = self._test_solution(c)
+        self._check_solution(c, solution)
+
     def test_solution(self):
         for i in range(100):
             c = Cube()
-            cr = Cube()
             c.shuffle(i)
             solution = self._test_solution(c)
-            for s in solution:
-                c.move(s)
-            # Align faces
-            while cr.cubies['F'].facings['F'] != c.cubies['F'].facings['F']:
-                c.move(Move('Y'))
+            self._check_solution(c, solution)
 
-            for cubie in cr.cubies:
-                for facing in cr.cubies[cubie].facings:
-                    self.assertEqual(cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing])
+    def _check_solution(self, c, solution):
+        cr = Cube()
+        for s in solution:
+            c.move(s)
+        # Align faces
+        while cr.cubies['F'].facings['F'] != c.cubies['F'].facings['F']:
+            c.move(Move('Y'))
+
+        for cubie in cr.cubies:
+            for facing in cr.cubies[cubie].facings:
+                self.assertEqual(cr.cubies[cubie].facings[facing], c.cubies[cubie].facings[facing])
