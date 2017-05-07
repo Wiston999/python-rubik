@@ -6,6 +6,11 @@ import timeout_decorator
 import unittest
 from rubik_solver.Solver import Beginner, CFOP, Kociemba
 
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 class MockSolver(object): pass
 
 class TestUtils(unittest.TestCase):
@@ -65,7 +70,7 @@ class TestUtils(unittest.TestCase):
 
     def test_main(self):
         stdout, stderr = sys.stdout, sys.stderr
-        sys.stdout, sys.stderr = StringIO.StringIO(), StringIO.StringIO()
+        sys.stdout, sys.stderr = StringIO(), StringIO()
 
         with self.assertRaises(SystemExit):
             utils.main([])
@@ -80,7 +85,7 @@ class TestUtils(unittest.TestCase):
             utils.main(['-i'])
 
         # Discard stdout
-        sys.stdout = StringIO.StringIO()
+        sys.stdout = StringIO()
         for method in self.solve_methods:
             for i in range(10):
                 c = Cube()
