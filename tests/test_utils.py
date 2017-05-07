@@ -58,3 +58,5 @@ class TestUtils(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             utils.pprint(1)
+        # Just call it and wait not to fail
+        utils.pprint(Cube())

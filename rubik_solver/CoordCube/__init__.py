@@ -14,10 +14,10 @@ class CoordCube(object):
     N_URtoUL = 1320 # 12!/(12-3)! permutation of UR,UF,UL edges
     N_UBtoDF = 1320 # 12!/(12-3)! permutation of UB,DR,DF edges
     N_URtoDF = 20160 # 8!/(8-6)! permutation of UR,UF,UL,UB,DR,DF edges in phase2
-    
+
     N_URFtoDLB = 40320 # 8! permutations of the corners
     N_URtoBR = 479001600 # 8! permutations of the corners
-    
+
     N_MOVE = 18
 
     # twistMove = [[0 for _ in range(N_MOVE)] for _ in range( N_TWIST )]	## CUIDADO CON LAS REFERENCIAS
@@ -29,32 +29,32 @@ class CoordCube(object):
     # UBtoDF_Move = [[0 for _ in range(N_MOVE)] for _ in range( N_UBtoDF )]
     # MergeURtoULandUBtoDF = [[0 for _ in range(336)] for _ in range( 336 )]
 
-    Slice_URFtoDLF_Parity_Prun = [-1] * (N_SLICE2 * N_URFtoDLF * N_PARITY // 2)
-    Slice_URtoDF_Parity_Prun = [-1] * (N_SLICE2 * N_URtoDF * N_PARITY // 2)
-    Slice_Twist_Prun = [-1] * (N_SLICE1 * N_TWIST // 2 + 1)
-    Slice_Flip_Prun = [-1] * (N_SLICE1 * N_FLIP // 2)
-    
+    # Slice_URFtoDLF_Parity_Prun = [-1] * (N_SLICE2 * N_URFtoDLF * N_PARITY // 2)
+    # Slice_URtoDF_Parity_Prun = [-1] * (N_SLICE2 * N_URtoDF * N_PARITY // 2)
+    # Slice_Twist_Prun = [-1] * (N_SLICE1 * N_TWIST // 2 + 1)
+    # Slice_Flip_Prun = [-1] * (N_SLICE1 * N_FLIP // 2)
+
     ## Parity of the corner permutation. This is the same as the parity for the edge permutation of a valid cube.
     ## parity has values 0 and 1
     parityMove = [
         [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
         [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0]
     ]
-    
+
     @staticmethod
     def setPruning(table, index, value):
         if (index & 1) == 0:
             table[index // 2] &= (0xf0 | value)
         else:
             table[index // 2] &= (0x0f | (value << 4))
-            
+
     @staticmethod
     def getPruning(table, index):
         if (index & 1) == 0:
             return table[index // 2] & 0x0f
         else:
             return (table[index // 2] & 0xf0)  >> 4
-    
+
     def __init__(self, c):
         ''' c is a CubieCube instance'''
         if not isinstance(c, CubieCube):
@@ -67,7 +67,7 @@ class CoordCube(object):
         self.URtoUL = c.getURtoUL()
         self.UBtoDF = c.getUBtoDF()
         self.URtoDF = c.getURtoDF() # only needed in phase2
-        
+
     def move(self, m):
         '''A move on the coordinate level'''
         self.twist    = self.twistMove[self.twist][m]
@@ -80,7 +80,7 @@ class CoordCube(object):
         if self.URtoUL < 336 and self.UBtoDF < 336: #  updated only if UR,UF,UL,UB,DR,DF
             # are not in UD-slice
             self.URtoDF = self.MergeURtoULandUBtoDF[self.URtoUL][self.UBtoDF]
-    
+
 ## Init more static values of class CubieCube
 def read_or_func_list(file_name, func):
     abspath = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
@@ -101,7 +101,7 @@ def read_or_func_matrix(file_name, func):
         return ret
 
 def build_twist_move():
-    twist_move = CoordCube.twistMove
+    twist_move = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_TWIST )]
     a = CubieCube()
     for i in range(CoordCube.N_TWIST):
         a.setTwist(i)
@@ -113,7 +113,7 @@ def build_twist_move():
     return twist_move
 
 def build_flip_move():
-    flip_move = CoordCube.flipMove
+    flip_move = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_FLIP )]
     a = CubieCube()
     for i in range(CoordCube.N_FLIP):
         a.setFlip(i)
@@ -125,7 +125,7 @@ def build_flip_move():
     return flip_move
 
 def build_urf_to_dlf():
-    urf_to_dlf = CoordCube.URFtoDLF_Move
+    urf_to_dlf = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_URFtoDLF )]
     a = CubieCube()
     for i in range(CoordCube.N_URFtoDLF):
         a.setURFtoDLF(i)
@@ -137,7 +137,7 @@ def build_urf_to_dlf():
     return urf_to_dlf
 
 def build_fr_to_br():
-    fr_to_br = CoordCube.FRtoBR_Move
+    fr_to_br = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_FRtoBR )]
     a = CubieCube()
     for i in range(CoordCube.N_FRtoBR):
         a.setFRtoBR(i)
@@ -149,7 +149,7 @@ def build_fr_to_br():
     return fr_to_br
 
 def build_ur_to_df():
-    ur_to_df = CoordCube.URtoDF_Move
+    ur_to_df = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_URtoDF )]
     a = CubieCube()
     for i in range(CoordCube.N_URtoDF):
         a.setURtoDF(i)
@@ -161,7 +161,7 @@ def build_ur_to_df():
     return ur_to_df
 
 def build_ur_to_ul():
-    ur_to_ul = CoordCube.URtoUL_Move
+    ur_to_ul = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_URtoUL )]
     a = CubieCube()
     for i in range(CoordCube.N_URtoUL):
         a.setURtoUL(i)
@@ -173,7 +173,7 @@ def build_ur_to_ul():
     return ur_to_ul
 
 def build_ub_to_df():
-    ub_to_df = CoordCube.UBtoDF_Move
+    ub_to_df = [[0 for _ in range(CoordCube.N_MOVE)] for _ in range( CoordCube.N_UBtoDF )]
     a = CubieCube()
     for i in range(CoordCube.N_URtoUL):
         a.setUBtoDF(i)
@@ -185,14 +185,14 @@ def build_ub_to_df():
     return ub_to_df
 
 def build_merge_ur_to_ul_and_ub_to_df():
-    merge_ur_to_ul_and_ub_to_df = CoordCube.MergeURtoULandUBtoDF
+    merge_ur_to_ul_and_ub_to_df = [[0 for _ in range(336)] for _ in range( 336 )]
     for uRtoUL in range(336):
         for uBtoDF in range(336):
             merge_ur_to_ul_and_ub_to_df[uRtoUL][uBtoDF] = CubieCube.getURtoDFs(uRtoUL, uBtoDF)
     return merge_ur_to_ul_and_ub_to_df
 
 def build_slice_urf_to_dlf_parity_prun():
-    slice_urf_to_dlf_parity_prun = CoordCube.Slice_URFtoDLF_Parity_Prun
+    slice_urf_to_dlf_parity_prun = [-1] * (CoordCube.N_SLICE2 * CoordCube.N_URFtoDLF * CoordCube.N_PARITY // 2)
     CoordCube.setPruning(slice_urf_to_dlf_parity_prun, 0, 0)
     done, depth = 1, 0
     while done < CoordCube.N_SLICE2 * CoordCube.N_URFtoDLF * CoordCube.N_PARITY:
@@ -213,7 +213,7 @@ def build_slice_urf_to_dlf_parity_prun():
     return slice_urf_to_dlf_parity_prun
 
 def build_slice_ur_to_df_parity_prun():
-    slice_ur_to_df_parity_prun = CoordCube.Slice_URtoDF_Parity_Prun
+    slice_ur_to_df_parity_prun = [-1] * (CoordCube.N_SLICE2 * CoordCube.N_URtoDF * CoordCube.N_PARITY // 2)
     CoordCube.setPruning(slice_ur_to_df_parity_prun, 0, 0)
     done, depth = 1, 0
     while done != (CoordCube.N_SLICE2 * CoordCube.N_URtoDF * CoordCube.N_PARITY):
@@ -233,7 +233,7 @@ def build_slice_ur_to_df_parity_prun():
     return slice_ur_to_df_parity_prun
 
 def build_slice_twist_prun():
-    slice_twist_prun = CoordCube.Slice_Twist_Prun
+    slice_twist_prun = [-1] * (CoordCube.N_SLICE1 * CoordCube.N_TWIST // 2 + 1)
     CoordCube.setPruning(slice_twist_prun, 0, 0)
     done, depth = 1, 0
     while done < (CoordCube.N_SLICE1 * CoordCube.N_TWIST):
@@ -251,7 +251,7 @@ def build_slice_twist_prun():
     return slice_twist_prun
 
 def build_slice_flip_prun():
-    slice_flip_prun = CoordCube.Slice_Flip_Prun
+    slice_flip_prun = [-1] * (CoordCube.N_SLICE1 * CoordCube.N_FLIP // 2)
     CoordCube.setPruning(slice_flip_prun, 0, 0)
     done, depth = 1, 0
     while done < (CoordCube.N_SLICE1 * CoordCube.N_FLIP):
