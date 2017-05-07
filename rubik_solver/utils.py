@@ -1,5 +1,6 @@
 from __future__ import print_function
 import argparse
+import time
 from past.builtins import basestring
 from .Solver import Solver
 from .Solver import Beginner
@@ -71,4 +72,6 @@ def main():
     print ("Read cube", cube)
     pprint(cube, args.color)
 
-    print ("Solution", ', '.join(solve(cube, METHODS[args.solver])))
+    start = time.time()
+    print ("Solution", ', '.join(map(str, solve(cube, METHODS[args.solver]))))
+    print ("Solved in", time.time() - start, "seconds")
