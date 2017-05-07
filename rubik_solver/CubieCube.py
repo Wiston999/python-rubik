@@ -8,7 +8,7 @@ class ParityError(Exception): pass
 
 class CubieCube(object):
     '''Cube on the cubie level'''
-    
+
     ## moves on the cubie level
     cpU = [
         Corner.UBR, Corner.URF, Corner.UFL, Corner.ULB, Corner.DFR, Corner.DLF, Corner.DBL, Corner.DRB
@@ -18,7 +18,7 @@ class CubieCube(object):
         Edge.UB, Edge.UR, Edge.UF, Edge.UL, Edge.DR, Edge.DF, Edge.DL, Edge.DB, Edge.FR, Edge.FL, Edge.BL, Edge.BR
     ]
     eoU = [0] * 12
-    
+
     cpR = [
         Corner.DFR, Corner.UFL, Corner.ULB, Corner.URF, Corner.DRB, Corner.DLF, Corner.DBL, Corner.UBR
     ]
@@ -27,7 +27,7 @@ class CubieCube(object):
         Edge.FR, Edge.UF, Edge.UL, Edge.UB, Edge.BR, Edge.DF, Edge.DL, Edge.DB, Edge.DR, Edge.FL, Edge.BL, Edge.UR
     ]
     eoR = [0] * 12
-    
+
     cpF = [
         Corner.UFL, Corner.DLF, Corner.ULB, Corner.UBR, Corner.URF, Corner.DFR, Corner.DBL, Corner.DRB
     ]
@@ -36,7 +36,7 @@ class CubieCube(object):
         Edge.UR, Edge.FL, Edge.UL, Edge.UB, Edge.DR, Edge.FR, Edge.DL, Edge.DB, Edge.UF, Edge.DF, Edge.BL, Edge.BR
     ]
     eoF = [0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0]
-    
+
     cpD = [
         Corner.URF, Corner.UFL, Corner.ULB, Corner.UBR, Corner.DLF, Corner.DBL, Corner.DRB, Corner.DFR
     ]
@@ -45,7 +45,7 @@ class CubieCube(object):
         Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DF, Edge.DL, Edge.DB, Edge.DR, Edge.FR, Edge.FL, Edge.BL, Edge.BR
     ]
     eoD = [0] * 12
-    
+
     cpL = [
         Corner.URF, Corner.ULB, Corner.DBL, Corner.UBR, Corner.DFR, Corner.UFL, Corner.DLF, Corner.DRB
     ]
@@ -54,7 +54,7 @@ class CubieCube(object):
         Edge.UR, Edge.UF, Edge.BL, Edge.UB, Edge.DR, Edge.DF, Edge.FL, Edge.DB, Edge.FR, Edge.UL, Edge.DL, Edge.BR
     ]
     eoL = [0] * 12
-    
+
     cpB = [
         Corner.URF, Corner.UFL, Corner.UBR, Corner.DRB, Corner.DFR, Corner.DLF, Corner.ULB, Corner.DBL
     ]
@@ -63,9 +63,9 @@ class CubieCube(object):
         Edge.UR, Edge.UF, Edge.UL, Edge.BR, Edge.DR, Edge.DF, Edge.DL, Edge.BL, Edge.FR, Edge.FL, Edge.UB, Edge.DB
     ]
     eoB = [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1]
-    
+
     def __init__(self, cp = None, co = None, ep = None, eo = None):
-        
+
         if cp is None or co is None or ep is None or eo is None:
             ## corner permutation
             cp = [
@@ -77,7 +77,7 @@ class CubieCube(object):
 
             ## edge permutation
             ep = [
-                Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DR, Edge.DF, Edge.DL, Edge.DB, Edge.FR, Edge.FL, Edge.BL, Edge.BR 
+                Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DR, Edge.DF, Edge.DL, Edge.DB, Edge.FR, Edge.FL, Edge.BL, Edge.BR
             ]
 
             ## edge orientation
@@ -240,7 +240,7 @@ class CubieCube(object):
                 if self.ep[j] > self.ep[i]:
                     s += 1
         return s % 2
-        
+
     def getFRtoBR(self):
         '''permutation of the UD-slice edges FR,FL,BL and BR'''
         a, x = 0, 0
@@ -250,7 +250,7 @@ class CubieCube(object):
                 a += CubieCube.Cnk(11 - j, x + 1)
                 edge4[3 - x] = self.ep[j]
                 x += 1
-                
+
         b = 0
         for j in [3, 2, 1]:
             k = 0
@@ -258,22 +258,22 @@ class CubieCube(object):
                 CubieCube.rotateLeft(edge4, 0, j)
                 k += 1
             b = ((j + 1) * b) + k
-            
+
         return (24 * a) + b
-        
+
     def setFRtoBR(self, idx):
         x = 0
         sliceEdge = [Edge.FR, Edge.FL, Edge.BL, Edge.BR]
         otherEdge = [Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DR, Edge.DF, Edge.DL, Edge.DB]
         b = idx % 24
-        a = idx / 24
-        
+        a = idx // 24
+
         for e in Edge.reverse_mapping.keys():
             self.ep[e] = Edge.DB
-            
+
         for j in [1, 2, 3]:
             k = b % (j + 1)
-            b /= j + 1
+            b //= j + 1
             while k > 0:
                 CubieCube.rotateRight(sliceEdge, 0, j)
                 k -= 1
@@ -283,13 +283,13 @@ class CubieCube(object):
                 self.ep[j] = sliceEdge[3 - x]
                 a -= CubieCube.Cnk(11 - j, x + 1)
                 x -= 1
-                
+
         x = 0
         for j in range(Edge.UR, Edge.BR + 1):
             if self.ep[j] == Edge.DB:
                 self.ep[j] = otherEdge[x]
                 x += 1
-                
+
     def getURFtoDLF(self):
         '''Permutation of all corners except DBL and DRB'''
         a, x = 0, 0
@@ -299,7 +299,7 @@ class CubieCube(object):
                 a += CubieCube.Cnk(j, x + 1)
                 corner6[x] = self.cp[j]
                 x += 1
-                
+
         b = 0
         for j in [5, 4, 3, 2, 1]:
             k = 0
@@ -308,23 +308,23 @@ class CubieCube(object):
                 k += 1
             b = (j + 1) * b + k
         return 720 * a + b
-        
+
     def setURFtoDLF(self, idx):
         corner6 = [Corner.URF, Corner.UFL, Corner.ULB, Corner.UBR, Corner.DFR, Corner.DLF]
         otherCorner = [Corner.DBL, Corner.DRB]
         b = idx % 720
-        a = idx / 720
-        
+        a = idx // 720
+
         for c in Corner.reverse_mapping.keys():
             self.cp[c] = Corner.DRB
-            
+
         for j in [1, 2, 3, 4, 5]:
             k = b % (j + 1)
-            b /= j + 1
+            b //= j + 1
             while k > 0:
                 k -= 1
                 CubieCube.rotateRight(corner6, 0, j)
-        
+
         x = 5
         for j in range(Corner.DRB, -1, -1):
             if (a - CubieCube.Cnk(j, x + 1)) >= 0:
@@ -336,7 +336,7 @@ class CubieCube(object):
             if self.cp[j] == Corner.DRB:
                 self.cp[j] = otherCorner[x]
                 x += 1
-                
+
     def getURtoDF(self):
         '''Permutation of the six edges UR,UF,UL,UB,DR,DF.'''
         a, b, x = 0, 0, 0
@@ -354,18 +354,18 @@ class CubieCube(object):
                 k += 1
             b = (j + 1) * b + k
         return 720 * a + b
-        
+
     def setURtoDF(self, idx):
         edge6 = [Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DR, Edge.DF]
         otherEdge = [Edge.DL, Edge.DB, Edge.FR, Edge.FL, Edge.BL, Edge.BR]
         b = idx % 720 # Permutation
-        a = idx / 720 # Combination
+        a = idx // 720 # Combination
         for e in Edge.reverse_mapping.keys():
             self.ep[e] = Edge.BR # Use BR to invalidate all edges
 
         for j in [1, 2, 3, 4, 5]:
             k = b % (j + 1)
-            b /= j + 1
+            b //= j + 1
             while k > 0:
                 k -= 1
                 CubieCube.rotateRight(edge6, 0, j)
@@ -375,13 +375,13 @@ class CubieCube(object):
                 self.ep[j] = edge6[x]
                 a -= CubieCube.Cnk(j, x + 1)
                 x -= 1
-            
+
         x = 0
         for j in range(Edge.UR, Edge.BR + 1):
             if self.ep[j] == Edge.BR:
                 self.ep[j] = otherEdge[x]
                 x += 1
-    
+
     @staticmethod
     def getURtoDFs(idx1, idx2):
         '''Permutation of the six edges UR,UF,UL,UB,DR,DF'''
@@ -396,7 +396,7 @@ class CubieCube(object):
                 else:
                     b.ep[i] = a.ep[i]
         return b.getURtoDF()
-    
+
     def getURtoUL(self):
         '''Permutation of the three edges UR,UF,UL'''
         x, a, = 0, 0
@@ -414,31 +414,31 @@ class CubieCube(object):
             while edge3[j] != j:
                 CubieCube.rotateLeft(edge3, 0, j)
                 k += 1
-            
+
             b = (j + 1) * b + k
         return 6 * a + b
-    
+
     def setURtoUL(self, idx):
         edge3 = [Edge.UR, Edge.UF, Edge.UL]
         b = idx % 6 # Permutation
-        a = idx / 6 # Combination
+        a = idx // 6 # Combination
         for e in Edge.reverse_mapping.keys():
             self.ep[e] = Edge.BR # Use BR to invalidate all edges
 
         for j in [1, 2]: # generate permutation from index b
             k = b % (j + 1)
-            b /= j + 1
+            b //= j + 1
             while k > 0:
                 CubieCube.rotateRight(edge3, 0, j)
                 k -= 1
-        
+
         x = 2 # generate combination and set edges
         for j in range(Edge.BR, -1, -1):
             if (a - CubieCube.Cnk(j, x + 1)) >= 0:
                 self.ep[j] = edge3[x]
                 a -= CubieCube.Cnk(j, x + 1)
                 x -= 1
-    
+
     def getUBtoDF(self):
         a, x = 0, 0
         edge3 = [0] * 3
@@ -455,56 +455,56 @@ class CubieCube(object):
             while edge3[j] != (Edge.UB + j):
                 CubieCube.rotateLeft(edge3, 0, j)
                 k += 1
-            
+
             b = (j + 1) * b + k
-        
+
         return 6 * a + b
-    
+
     def setUBtoDF(self, idx):
         edge3 = [Edge.UB, Edge.DR, Edge.DF]
         b = idx % 6 # Permutation
-        a = idx / 6 # Combination
+        a = idx // 6 # Combination
         for e in Edge.reverse_mapping.keys():
             self.ep[e] = Edge.BR # Use BR to invalidate all edges
 
         for j in [1, 2]: #generate permutation from index b
             k = b % (j + 1)
-            b /= j + 1
+            b //= j + 1
             while k > 0:
                 k-=1
                 CubieCube.rotateRight(edge3, 0, j)
-        
+
         x = 2 # generate combination and set edges
         for j in range(Edge.BR, -1, -1):
             if (a - CubieCube.Cnk(j, x + 1)) >= 0:
                 self.ep[j] = edge3[x]
                 a -= CubieCube.Cnk(j, x + 1)
                 x -= 1
-            
+
     def getURFtoDLB(self):
         perm = [0] * 8
         b = 0
         for i in range(8):
             perm[i] = self.cp[i]
-            
+
         for j in range(7, 0, -1): #compute the index b < 8! for the permutation in perm
             k = 0
             while perm[j] != j:
                 CubieCube.rotateLeft(perm, 0, j)
                 k += 1
             b = (j + 1) * b + k
-        
+
         return b
-    
+
     def setURFtoDLB(self, idx):
         perm = [ Corner.URF, Corner.UFL, Corner.ULB, Corner.UBR, Corner.DFR, Corner.DLF, Corner.DBL, Corner.DRB ]
         for j in range(1, 8):
             k = idx % (j + 1)
-            idx /= j + 1
+            idx //= j + 1
             while k > 0:
                 k -= 1
                 CubieCube.rotateRight(perm, 0, j)
-        
+
         x = 7 # set corners
         for j in range(7, -1, -1):
             self.cp[j] = perm[x]
@@ -520,7 +520,7 @@ class CubieCube(object):
             while perm[j] != j:
                 CubieCube.rotateLeft(perm, 0, j)
                 k += 1
-            
+
             b = (j + 1) * b + k
         return b
 
@@ -528,11 +528,11 @@ class CubieCube(object):
         perm = [ Edge.UR, Edge.UF, Edge.UL, Edge.UB, Edge.DR, Edge.DF, Edge.DL, Edge.DB, Edge.FR, Edge.FL, Edge.BL, Edge.BR ]
         for j in range(1, 12):
             k = idx % (j + 1)
-            idx /= j + 1
+            idx //= j + 1
             while k > 0:
                 k -= 1
                 CubieCube.rotateRight(perm, 0, j)
-        
+
         x = 11 # set edges
         for j in range(11, -1, -1):
             self.ep[j] = perm[x]
