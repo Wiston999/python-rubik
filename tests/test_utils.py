@@ -1,5 +1,4 @@
 import sys
-import StringIO
 from rubik_solver.Cubie import Cube
 from rubik_solver import utils
 import timeout_decorator
