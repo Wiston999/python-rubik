@@ -1,0 +1,6 @@
+.. _examples:
+
+Usage
+=====
+
+USAGE
