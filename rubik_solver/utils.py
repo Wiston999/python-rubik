@@ -1,5 +1,6 @@
 from __future__ import print_function
 import argparse
+import time
 from past.builtins import basestring
 from .Solver import Solver
 from .Solver import Beginner
@@ -60,15 +61,17 @@ def pprint(cube, color = True):
     printer = TtyPrinter(cube, color)
     printer.pprint()
 
-def main():
+def main(argv = None):
     arg_parser = argparse.ArgumentParser(description = 'rubik_solver command line tool')
     arg_parser.add_argument('-i', '--cube', dest = 'cube', required = True, help = 'Cube definition string')
     arg_parser.add_argument('-c', '--color', dest = 'color', default = True, action = 'store_false', help = 'Disable use of colors with TtyPrinter')
     arg_parser.add_argument('-s', '--solver', dest = 'solver', default = 'Beginner', choices = METHODS.keys(), help = 'Solver method to use')
-    args = arg_parser.parse_args()
+    args = arg_parser.parse_args(argv)
 
     cube = args.cube.lower()
     print ("Read cube", cube)
     pprint(cube, args.color)
 
-    print ("Solution", ', '.join(solve(cube, METHODS[args.solver])))
+    start = time.time()
+    print ("Solution", ', '.join(map(str, solve(cube, METHODS[args.solver]))))
+    print ("Solved in", time.time() - start, "seconds")
