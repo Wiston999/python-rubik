@@ -19,7 +19,7 @@ setup(
     name='rubik_solver',
     author='Victor Cabezas',
     author_email='wiston666@gmail.com',
-    version='0.1.4',
+    version='0.1.5',
     description='Rubik solver algorithms',
     long_description=long_description,
     url='https://github.com/Wiston999/python-rubik',
@@ -58,4 +58,5 @@ setup(
             'rubik_solver=rubik_solver.utils:main'
         ]
     },
+    include_package_data=True,
 )
