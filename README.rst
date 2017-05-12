@@ -34,8 +34,7 @@ As a command
 
 As a module
 
-.. code-block: python
-  :linenos:
+.. code:: python
 
   from rubik_solver import utils
 
