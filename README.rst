@@ -17,7 +17,30 @@ Python Rubik Solver
 .. image:: https://readthedocs.org/projects/rubik-solver/badge/?version=latest
    :target: https://rubik-solver.readthedocs.io/en/latest/
 
-Different algorithms and OpenGL representation of Rubik Cube
+Rubik Cube solving library and command line utility
+
+How to install
+--------------
+
+``pip install rubik_solver``
+
+How to use
+----------
+
+As a command
+
+.. image:: doc/_static/cmd_tty.gif
+
+
+As a module
+
+.. code-block:: python
+  :linenos:
+
+  from rubik_solver import utils
+
+  utils.solve()
+
 
 TODO
 ----
