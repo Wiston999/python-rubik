@@ -29,7 +29,7 @@ How to use
 
 As a command
 
-.. image:: doc/_static/cmd_tty.gif
+.. image:: docs/_static/cmd_tty.gif
 
 
 As a module
