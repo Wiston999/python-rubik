@@ -79,12 +79,12 @@ The configuration string of the cube corresponds to the color of the stickers ac
 So, the color at position 0, corresponds to the color of the sticker BLU, the color at 1 is BU and so on ...
 
 Colors used in the implementation are:
-* [O]range
-* [B]lue
-* [R]ed
-* [W]hite
-* [Y]ellow
-* [G]reen
+- [O]range
+- [B]lue
+- [R]ed
+- [W]hite
+- [Y]ellow
+- [G]reen
 
 TODO
 ----
