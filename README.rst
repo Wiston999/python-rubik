@@ -87,6 +87,10 @@ Colors used in the implementation are:
 -  [Y]ellow
 -  [G]reen
 
+The string *wowgybwyogygybyoggrowbrgywrborwggybrbwororbwborgowryby* represents the cube
+
+.. image:: https://rubiks3x3.com/algorithm/?fields=wowgybwyogygybyoggrowbrgywrborwggybrbwororbwrorgowryby&sett=010010&bg=FFFFFF
+
 TODO
 ----
 -  Improve documentation
