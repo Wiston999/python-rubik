@@ -90,9 +90,8 @@ Colors used in the implementation are:
 The string *wowgybwyogygybyoggrowbrgywrborwggybrbwororbwborgowryby* represents the cube
 
 .. raw:: html
-  <embed>
+
   <iframe height="270" width="300px" scrolling="no" frameborder="0" src="https://rubiks3x3.com/algorithm/?fields=wowgybwyogygybyoggrowbrgywrborwggybrbwororbwrorgowryby&sett=000000&bg=FFFFFF"></iframe>
-  </embed>
 
 TODO
 ----
