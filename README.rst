@@ -86,20 +86,18 @@ Colors used in the implementation are:
 -  [W]hite
 -  [Y]ellow
 -  [G]reen
-<<<<<<< HEAD
 
 NOTE
 ----
 
 `Kociemba` solver needs the following cubies at place:
-- **4** (Upper center): **YELLOW**
-- **13** (Left center): **BLUE**
-- **22** (Front center): **RED**
-- **31** (Right center): **GREEN**
-- **40** (Back center): **ORANGE**
-- **49** (Down center): **WHITE**
-=======
->>>>>>> master
+
+-   **4** (Upper center): **YELLOW**
+-   **13** (Left center): **BLUE**
+-   **22** (Front center): **RED**
+-   **31** (Right center): **GREEN**
+-   **40** (Back center): **ORANGE**
+-   **49** (Down center): **WHITE**
 
 TODO
 ----
