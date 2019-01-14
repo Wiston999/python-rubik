@@ -90,7 +90,7 @@ Colors used in the implementation are:
 NOTE
 ----
 
-`Kociemba` solver needs the following cubies at place:
+``Kociemba`` solver needs the following cubies at place:
 
 -   **4** (Upper center): **YELLOW**
 -   **13** (Left center): **BLUE**
