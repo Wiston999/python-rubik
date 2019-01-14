@@ -1,4 +1,3 @@
-from pip.req import parse_requirements
 from setuptools import setup, find_packages
 from os import path
 from codecs import open
@@ -10,6 +9,10 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
 
 install_reqs = [
     'future==0.16.0',
