@@ -6,6 +6,7 @@ from .Solver import Solver
 from .Solver import Beginner
 from .Solver import CFOP
 from .Solver import Kociemba
+from .Solver import Mosaic
 from .NaiveCube import NaiveCube
 from .Cubie import Cube
 from .Printer import TtyPrinter
@@ -15,7 +16,8 @@ __author__ = 'Victor Cabezas'
 METHODS = {
     'Beginner': Beginner.BeginnerSolver,
     'CFOP': CFOP.CFOPSolver,
-    'Kociemba': Kociemba.KociembaSolver
+    'Kociemba': Kociemba.KociembaSolver,
+    'Mosaic': Mosaic.MosaicSolver
 }
 
 def _check_valid_cube(cube):
@@ -50,11 +52,18 @@ def solve(cube, method = Beginner.BeginnerSolver, *args, **kwargs):
             method.__class__.__name__
         )
 
-    cube = _check_valid_cube(cube)
+    # MosaicSolver has a different signature 
+    if method != Mosaic.MosaicSolver:
+        cube = _check_valid_cube(cube)
+        solver = method(cube)
 
-    solver = method(cube)
+        return solver.solution(*args, **kwargs)
+    else:
+        c = Cube()
+        solver = method(c, cube)
 
-    return solver.solution(*args, **kwargs)
+        return solver.solution()
+
 
 def pprint(cube, color = True):
     cube = _check_valid_cube(cube)
@@ -70,7 +79,10 @@ def main(argv = None):
 
     cube = args.cube.lower()
     print ("Read cube", cube)
-    pprint(cube, args.color)
+    if args.solver != 'Mosaic':
+        pprint(cube, args.color)
+    else:
+        pprint('.' * 45 + cube, args.color)
 
     start = time.time()
     print ("Solution", ', '.join(map(str, solve(cube, METHODS[args.solver]))))

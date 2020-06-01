@@ -36,7 +36,7 @@ class TestMove(unittest.TestCase):
                 self.assertFalse(Move(c+"2").clockwise)
                 self.assertFalse(Move(c+"2").counterclockwise)
                 self.assertTrue(Move(c+"2").double)
-                
+
             else:
                 with self.assertRaises(ValueError):
                     Move(c)
