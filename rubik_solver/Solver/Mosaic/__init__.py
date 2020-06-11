@@ -2,8 +2,8 @@ import copy
 from rubik_solver.Move import Move
 from rubik_solver.Cubie import Cubie
 from .. import Solver
-from ..Beginner import WhiteCrossSolver
-from ..Beginner import WhiteFaceSolver
+from . import CrossSolver
+from . import FaceSolver
 
 class MosaicSolver(Solver):
     '''
@@ -25,25 +25,30 @@ class MosaicSolver(Solver):
 
     def solution(self):
         cube = copy.deepcopy(self.cube)
-        target_cross = '{1}{3}{5}{7}'.format(*self.target)
-        solution = self.place_target_face()
-        # solution += WhiteCrossSolver.WhiteCrossSolver(cube).solution(target_cross)
+        # Build target cross, getting the edge cubies colors and sorting them in
+        # an iterative way
+        target_cross = '{1}{5}{7}{3}'.format(*self.target)
+        target_corners = '{2}{8}{6}{0}'.format(*self.target)
+        solution = MosaicSolver.place_target_face(self.target[4])
+        if len(solution) > 0:
+            cube.move(Move(solution[0]))
+        solution += CrossSolver.CrossSolver(cube).solution(target_cross)
+        solution += FaceSolver.FaceSolver(cube).solution(target_corners)
         return [Move(m) for m in solution]
 
-    def place_target_face(self):
-        center_cubie = self.target[4]
+    @staticmethod
+    def place_target_face(target):
+        center_cubie = target
         if center_cubie == 'Y':
             solution = ["Z2"]
         elif center_cubie == 'G':
-            solution = ["X"]
-        elif center_cubie == 'B':
-            solution = ["X'"]
-        elif center_cubie == 'O':
             solution = ["Z"]
-        elif center_cubie == 'R':
+        elif center_cubie == 'B':
             solution = ["Z'"]
+        elif center_cubie == 'O':
+            solution = ["X"]
+        elif center_cubie == 'R':
+            solution = ["X'"]
         elif center_cubie == 'W':
             solution = []
-        if center_cubie != 'W':
-            self.cube.move(Move(solution[0]))
         return solution

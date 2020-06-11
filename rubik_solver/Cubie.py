@@ -107,14 +107,14 @@ class Center(Cubie):
 class Edge(Cubie):
     def __init__(self, **kwargs):
         if len(kwargs) != 2:
-            raise ValueError("Center must have only 2 Stickers")
+            raise ValueError("Edge must have only 2 Stickers")
         super(Edge, self).__init__(**kwargs)
 
 
 class Corner(Cubie):
     def __init__(self, **kwargs):
         if len(kwargs) != 3:
-            raise ValueError("Center must have only 3 Stickers")
+            raise ValueError("Corner must have only 3 Stickers")
         super(Corner, self).__init__(**kwargs)
 
 
