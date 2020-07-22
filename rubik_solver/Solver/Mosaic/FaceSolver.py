@@ -1,18 +1,76 @@
 from .. import Solver
 from rubik_solver.Move import Move
-from ..Beginner import WhiteFaceSolver
 
-class FaceSolver(WhiteFaceSolver.WhiteFaceSolver):
+class FaceSolver(Solver):
     '''
     This class solves the mosaic face (placing corners) on the down face following a target pattern
-    It inherits moving tables from Begginer.WhiteFaceSolver
     '''
+
+    # The order of corners ensures that the solver can be used to solve whiteface too
     CORNERS = [
-        'RGY', 'RBY', 'RGW', 'RBW',
-        'OGY', 'OBY', 'OGW', 'OBW',
+        'WRG', 'WGO', 'WOB', 'WBR',
+        'RGY', 'RBY', 'OGY', 'OBY',
     ]
 
-    def solution(self, target):
+    FIRST_STEP = {
+        'DFR': {
+            'F': ["R", "U'", "R'"],
+            'R': ["R", "U", "R'", "U'"]
+        },
+        'DFL': {
+            'F': ["L'", "U", "L", "U'"],
+            'L': ["L'", "U'", "L"],
+            'D': ["L'", "U'", "L"]
+        },
+        'BDL': {
+            'B': ["B'", "U2", "B"],
+            'D': ["B'", "U2", "B"],
+            'L': ["B'", "U", "B", "U2"]
+        },
+        'BDR': {
+            'B': ["B", "U", "B'"],
+            'D': ["B", "U", "B'"],
+            'R': ["B", "U'", "B'", "U"]
+        },
+        'BRU': {
+            'B': ["U"],
+            'R': ["U"],
+            'U': ["U"],
+        },
+        'BLU': {
+            'B': ["U2"],
+            'L': ["U2"],
+            'U': ["U2"],
+        },
+        'FLU': {
+            'F': ["U'"],
+            'L': ["U'"],
+            'U': ["U'"],
+        }
+    }
+
+    SECOND_STEP = {
+        'F': ["F'", "U'", "F"],
+        'R': ["R", "U", "R'"],
+        'U': ["R", "U2", "R'", "U'", "R", "U", "R'"]
+    }
+    @staticmethod
+    def first_step(goal_cubie, white_facing):
+        try:
+            solution = FaceSolver.FIRST_STEP[goal_cubie][white_facing]
+        except KeyError:
+            solution = []
+        return solution
+
+    @staticmethod
+    def second_step(white_facing):
+        try:
+            solution = FaceSolver.SECOND_STEP[white_facing]
+        except KeyError:
+            solution = []
+        return solution
+
+    def solution(self, target='WWWW'):
         solution = []
         used_cubies = set()
         # No more than 4 iterations can be done
