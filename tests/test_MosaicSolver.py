@@ -7,6 +7,7 @@ import timeout_decorator
 import unittest
 
 class TestCrossSolver(unittest.TestCase):
+    @timeout_decorator.timeout(60)
     def test_solution(self):
         cases = [
             'WWWWWWWWW',
@@ -49,6 +50,7 @@ class TestCrossSolver(unittest.TestCase):
 
 
 class TestFaceSolver(unittest.TestCase):
+    @timeout_decorator.timeout(60)
     def test_solution(self):
         cases = [
             'WWWWWWWWW',
@@ -102,6 +104,7 @@ class TestMosaicSolver(unittest.TestCase):
             Mosaic.MosaicSolver(c, True)
             Mosaic.MosaicSolver(c, 10)
 
+    @timeout_decorator.timeout(60)
     def test_solution(self):
         cases = [
             # Generated using [''.join(random.choice('RGBOYW') for i in range(9)) for _ in range(30)]

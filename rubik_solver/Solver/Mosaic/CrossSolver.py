@@ -1,16 +1,54 @@
 from .. import Solver
 from rubik_solver.Move import Move
-from ..Beginner import WhiteCrossSolver
 
-# TODO: WhiteCrossSolver should inherit from CrossSolver, as WhiteCross is 
-# a specific case where `target` is default value (RGOB) and aux_color is always White
-class CrossSolver(WhiteCrossSolver.WhiteCrossSolver):
+class CrossSolver(Solver):
     '''
-    This class solves the mosaic cross on the down face following a target pattern
-    It inherits moving tables from Begginer.WhiteCrossSolver
+    This class solves the mosaic cross on the down face following a target pattern.
+    It solves beginner white cross if no parameters are given
     '''
+    STEPS = {
+        'U': {
+            'R': [],
+            'L': [],
+            'F': [],
+            'B': [],
+        },
+        'D': {
+            'R': ['R2'],
+            'L': ['L2'],
+            'F': ['F2'],
+            'B': ['B2']
+        },
+        'F': {
+            'U': ["F", "R", "U'", "R'", "F'"],
+            'D': ["F'", "R", "U'", "R'"],
+            'R': ["R", "U", "R'"],
+            'L': ["L'", "U'", "L"],
+        },
+        'B': {
+            'U': ["B", "L", "U'", "L'", "B'"],
+            'D': ["B", "R'", "U", "R"],
+            'R': ["R'", "U", "R"],
+            'L': ["L", "U'", "L'"],
+        },
+        'L': {
+            'U': ["L", "F", "U'", "F'", "L'"],
+            'D': ["L'", "F", "U'", "F'"],
+            'F': ["F", "U'", "F'"],
+            'B': ["B'", "U", "B"],
+        },
+        'R': {
+            'U': ["R'", "F'", "U", "F", "R"],
+            'D': ["R", "F'", "U", "F"],
+            'F': ["F'", "U", "F"],
+            'B': ["B", "U'", "B'"],
+        }
+    }
+    @staticmethod
+    def first_step(white_facing, color_facing):
+        return CrossSolver.STEPS[white_facing.upper()][color_facing.upper()]
 
-    def solution(self, target='RGOB'):
+    def solution(self, target='WWWW'):
         solution = []
         used_cubies = set()
         for color in target:
@@ -27,9 +65,10 @@ class CrossSolver(WhiteCrossSolver.WhiteCrossSolver):
             used_cubies.add(''.join(sorted(aux_color + color)))
 
             orig_cubie = self.cube.cubies[cubie_position]
-            white_facing = orig_cubie.color_facing(aux_color)
-            color_facing = orig_cubie.color_facing(color)
-            step_solution = CrossSolver.first_step(color_facing, white_facing)
+            white_facing = orig_cubie.color_facing(color)
+            color_facing = orig_cubie.color_facing(aux_color)
+
+            step_solution = CrossSolver.first_step(white_facing, color_facing)
             # First goal is to put white sticker on top face
 
             for m in step_solution:
