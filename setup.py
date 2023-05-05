@@ -10,14 +10,14 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 install_reqs = [
-    'future==0.16.0',
+    'future >= 0.16.0',
 ]
 
 setup(
     name='rubik_solver',
     author='Victor Cabezas',
     author_email='wiston666@gmail.com',
-    version='0.2.0',
+    version='0.2.1',
     description='Rubik solver algorithms',
     long_description=long_description,
     url='https://github.com/Wiston999/python-rubik',
